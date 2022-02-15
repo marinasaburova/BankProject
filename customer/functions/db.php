@@ -24,7 +24,7 @@ function getBalance($acctNum)
     } else {
         $row = $result->fetch_assoc();
         $balance = $row['balance'];
-        echo $balance;
+        echo '$' . $balance;
     }
     // stuff
 }
@@ -51,6 +51,17 @@ function getTransactions($acctNum)
             echo '<td>' . $row['timeStmp'] . '</td>';
             echo "</tr>";
         }
+    }
+}
+
+function getAccountDropdown($customer)
+{
+    global $db;
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    while ($row = $result->fetch_assoc()) {
+        echo '<option value="' . $row['acctNum'] . '">' . $row['acctNum'] . '</option>';
     }
 }
 
