@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Home</title>
   </head>
+
   <body>
     <p>Pick your account:</p>
+    <form action="balance.php" method="post">
+      <select name="account" id="account">
+        <option value="1">First Account</option>
+        <option value="2">Second Account</option>
+      </select>
+      <input type="submit" name="submit" />
+    </form>
   </body>
 </html>

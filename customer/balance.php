@@ -1,5 +1,9 @@
 <?php
+// create session variables
 $customer = 1111111111;
+$acctNum = 1111111111;
+
+// include functions & files 
 include 'functions/db.php';
 ?>
 <!DOCTYPE html>
@@ -15,25 +19,20 @@ include 'functions/db.php';
 <body>
     <!-- menu -->
     <?php include '../view/menu.php'; ?>
+
+    <!-- option to view history -->
     <p><a href="statement.html">View History</a></p>
 
+    <!-- display balance -->
+    <h1>Balance: $ <?php getBalance($acctNum); ?></h1>
 
-    <h1>Balance: $ <?php echo getBalance($customer); ?></h1>
-
-    <!-- loop through data to create table -->
+    <!-- loop through data to show latest transactions -->
+    <h2>Recent Transactions: </h2>
     <table>
-        <h2>Recent Transactions</h2>
-        <tr>
-            <th>Vendor</th>
-            <th>Amount</th>
-        </tr>
-
-        <tr>
-            <td>SPOTIFY</td>
-            <td>-$5.00</td>
-        </tr>
+        <?php getTransactions($acctNum); ?>
     </table>
 
+    <!-- footer -->
     <?php include '../view/footer.php'; ?>
 
 </body>
