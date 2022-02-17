@@ -4,8 +4,8 @@ $customer = 1111111111;
 $acctNum = $_POST['account'];
 
 // include functions & files 
-include 'functions/db.php';
-?>
+include 'functions/db.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,12 +13,14 @@ include 'functions/db.php';
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css?v=<?php echo time(); ?>" />
+
     <title>Balance</title>
 </head>
 
 <body>
     <!-- menu -->
-    <?php include '../view/menu.php'; ?>
+    <?php include '../view/menu.php'; ?> <br>
 
     <!-- option to view history -->
     <p><a href="statement.html">View History</a></p>

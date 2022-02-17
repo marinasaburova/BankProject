@@ -10,7 +10,16 @@ function disconnectDB()
 {
 }
 
-
+function getAccountOptions($customer)
+{
+    global $db;
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    while ($row = $result->fetch_assoc()) {
+        echo '<option value="' . $row['acctNum'] . '">' . $row['acctNum'] . '</option>';
+    }
+}
 
 function getBalance($acctNum)
 {
@@ -54,16 +63,6 @@ function getTransactions($acctNum)
     }
 }
 
-function getAccountDropdown($customer)
-{
-    global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
-    $result = $db->query($query);
-    $num_results = $result->num_rows;
-    while ($row = $result->fetch_assoc()) {
-        echo '<option value="' . $row['acctNum'] . '">' . $row['acctNum'] . '</option>';
-    }
-}
 
 
 // Functions to include

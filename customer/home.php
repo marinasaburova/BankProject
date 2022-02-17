@@ -20,7 +20,7 @@ include 'functions/db.php';
   <p>Pick your account:</p>
   <form action="balance.php" method="post">
     <select name="account" id="account">
-      <?php getAccountDropdown($customer); ?>
+      <?php getAccountOptions($customer); ?>
     </select>
     <input type="submit" name="submit" />
   </form>
