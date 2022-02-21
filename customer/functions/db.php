@@ -10,6 +10,7 @@ function disconnectDB()
 {
 }
 
+// gets all accounts for a customer
 function getAccountOptions($customer)
 {
     global $db;
@@ -21,6 +22,7 @@ function getAccountOptions($customer)
     }
 }
 
+// gets balance for a specific account
 function getBalance($acctNum)
 {
     global $db;
@@ -38,6 +40,7 @@ function getBalance($acctNum)
     // stuff
 }
 
+// gets all transactions for an account 
 function getTransactions($acctNum)
 {
     global $db;
@@ -63,8 +66,19 @@ function getTransactions($acctNum)
     }
 }
 
+// generates a stamenet for an account for a specific month 
+function generateStatement($acctNum, $month)
+{
+}
 
+function deposit($acctNum, $amount)
+{
+}
 
-// Functions to include
+function withdraw($acctNum, $amount)
+{
+}
 
-// get 
+function transfer($from, $to, $amount)
+{
+}
