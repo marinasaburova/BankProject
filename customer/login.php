@@ -13,12 +13,12 @@
 <body>
     <div class="login">
         <h1>Customer Login</h2>
-            <form action="home.php" method="post">
+            <form action="verify.php" method="post">
                 Username:<br />
                 <input name="uname" type="text" size="30" />
                 <br />
                 Password:<br />
-                <input name="passw" type="password" size="30" /><br />
+                <input name="pwd" type="password" size="30" /><br />
                 <input type="submit" name="submit" value="Log In" />
             </form>
             <p><a href="../admin.html">Employee Login</a></p>

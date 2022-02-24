@@ -10,6 +10,30 @@ function disconnectDB()
 {
 }
 
+function login($uname, $pwd)
+{
+    global $db;
+    $query = "SELECT * FROM customer WHERE username = '$uname'";
+    $result = $db->query($query);
+    $row = $result->fetch_assoc();
+
+    if (mysqli_num_rows($result) == 0) {
+        echo '<p>Incorrect credentials.</p></br>';
+        echo '<a class = "link" href=login.php>Try again.</a>';
+        exit;
+    }
+    if ($row['password'] !== $pwd) {
+        echo '<p>Incorrect credentials.</p></br>';
+        echo '<a class = "link" href=login.php>Try again.</a>';
+    } else {
+        $_SESSION['customer'] = $row['customerID'];
+        $_SESSION['fname'] = $row['firstName'];
+        $_SESSION['loggedin'] = TRUE;
+        echo '<p>Correct credentials!</p></br>';
+        echo '<p><a href="home.php">Please enter.</a></p></br>';
+    }
+}
+
 // gets all accounts for a customer
 function getAccountOptions($customer)
 {
