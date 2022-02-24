@@ -6,6 +6,12 @@ if (mysqli_connect_errno()) {
     exit;
 }
 
+$dsn = 'mysql:host=localhost;dbname=bankproject';
+$username = 'root';
+$password = 'Kittycaps0!';
+
+$db = new PDO($dsn, $username, $password);
+
 function disconnectDB()
 {
 }
@@ -26,10 +32,12 @@ function login($uname, $pwd)
     if ($row['password'] !== $pwd) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
+        $result->free();
     } else {
         $_SESSION['customer'] = $row['customerID'];
         $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
+        $result->free();
         header('Location: home.php');
     }
 }
@@ -44,6 +52,7 @@ function getAccountOptions($customer)
     while ($row = $result->fetch_assoc()) {
         echo '<option value="' . $row['acctNum'] . '">' . $row['acctNum'] . '</option>';
     }
+    $result->free();
 }
 
 // gets balance for a specific account
@@ -61,7 +70,7 @@ function getBalance($acctNum)
         $balance = $row['balance'];
         echo '$' . $balance;
     }
-    // stuff
+    $result->free();
 }
 
 // gets all transactions for an account 
@@ -88,6 +97,7 @@ function getTransactions($acctNum)
             echo "</tr>";
         }
     }
+    $result->free();
 }
 
 // generates a statement for an account for a specific month 
