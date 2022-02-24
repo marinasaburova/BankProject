@@ -14,12 +14,12 @@
     <div class="login">
         <h1>Customer Login</h2>
             <form action="verify.php" method="post">
-                Username:<br />
-                <input name="uname" type="text" size="30" />
+                <label for="uname">Username: </label>
+                <input name="uname" type="text" size="30" required/>
                 <br />
-                Password:<br />
-                <input name="pwd" type="password" size="30" /><br />
-                <input type="submit" name="submit" value="Log In" />
+                <label for="pwd">Password:</label>
+                <input name="pwd" type="password" size="30" required/><br />
+                <button type="submit" name="submit">Log In</button>
             </form>
             <p><a href="../admin.html">Employee Login</a></p>
 

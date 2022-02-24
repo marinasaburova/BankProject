@@ -12,17 +12,19 @@ include '../view/header.php'; ?>
     <!-- menu -->
     <?php include '../view/menu.php'; ?> <br>
 
-    <!-- option to view history -->
-    <p><a href="statement.html">View History</a></p>
+    <div class="wrapper">
+        <!-- option to view history -->
+        <p><a href="statement.html">View History</a></p>
 
-    <!-- display balance -->
-    <h1>Balance: <?php getBalance($acctNum); ?></h1>
+        <!-- display balance -->
+        <h1>Balance: <?php getBalance($acctNum); ?></h1>
 
-    <!-- loop through data to show latest transactions -->
-    <h2>Recent Transactions: </h2>
-    <table>
-        <?php getTransactions($acctNum); ?>
-    </table>
+        <!-- loop through data to show latest transactions -->
+        <h2>Recent Transactions: </h2>
+        <table class="trans">
+            <?php getTransactions($acctNum); ?>
+        </table>
+    </div>
 
     <!-- footer -->
     <?php include '../view/footer.php'; ?>

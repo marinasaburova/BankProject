@@ -30,8 +30,7 @@ function login($uname, $pwd)
         $_SESSION['customer'] = $row['customerID'];
         $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
-        echo '<p>Correct credentials!</p></br>';
-        echo '<p><a href="home.php">Please enter.</a></p></br>';
+        header('Location: home.php');
     }
 }
 
