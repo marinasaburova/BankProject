@@ -1,5 +1,6 @@
 <?php
 // create session variables
+
 $acctNum = $_POST['account'];
 
 $title = "Balance";
@@ -13,8 +14,6 @@ include '../view/header.php'; ?>
     <?php include '../view/menu.php'; ?> <br>
 
     <div class="wrapper">
-        <!-- option to view history -->
-        <p><a href="statement.html">View History</a></p>
 
         <!-- display balance -->
         <h1>Balance: <?php getBalance($acctNum); ?></h1>
@@ -24,6 +23,9 @@ include '../view/header.php'; ?>
         <table class="trans">
             <?php getTransactions($acctNum); ?>
         </table>
+
+        <!-- option to view history -->
+        <p class="centered"><a href="statement.html">View History</a></p>
     </div>
 
     <!-- footer -->

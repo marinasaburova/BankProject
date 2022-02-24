@@ -55,7 +55,7 @@ function getBalance($acctNum)
     $num_results = $result->num_rows;
 
     if ($num_results == 0) {
-        echo 'Uh oh... Your balance has not been found.';
+        echo '<p>Uh oh... Your balance has not been found.</p>';
     } else {
         $row = $result->fetch_assoc();
         $balance = $row['balance'];
@@ -72,7 +72,7 @@ function getTransactions($acctNum)
     $result = $db->query($query);
     $num_results = $result->num_rows;
     if ($num_results == 0) {
-        echo 'This account does not have any transactions.';
+        echo '<p>This account does not have any transactions.</p>';
     } else {
         echo '<tr><th>Vendor</th> <th>Amount</th> <th>Time Stamp</th></tr>';
         while ($row = $result->fetch_assoc()) {
@@ -90,7 +90,7 @@ function getTransactions($acctNum)
     }
 }
 
-// generates a stamenet for an account for a specific month 
+// generates a statement for an account for a specific month 
 function generateStatement($acctNum, $month)
 {
 }

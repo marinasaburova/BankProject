@@ -176,9 +176,24 @@ select {
   OUR CSS CODE 
 --------------*/
 
+a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+
+  color: lightsteelblue;
+  line-height: 30px;
+}
+
+.centered {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
 .wrapper {
   margin: 0 auto;
-  width: 1000px;
+  /*width: 1000px;*/
 }
 
 .login {
@@ -199,11 +214,24 @@ select {
 .menu a {
   display: block;
   padding: 8px;
-  background-color: #dddddd;
+  background-color: lightsteelblue;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  padding: 10px;
+  padding: 20px;
+  color: white;
+}
+
+.menu a:visted {
+  color: white;
+}
+
+.menu a:hover {
+  color: whitesmoke;
+}
+
+.menu a:active {
+  color: lightsteelblue;
 }
 
 h1 {
@@ -311,7 +339,7 @@ label {
   padding: 20px;
   text-align: center;
   margin: auto;
-  width: 60%;
+  width: 40%;
   background-color: whitesmoke;
 }
 
