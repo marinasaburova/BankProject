@@ -12,6 +12,7 @@ function disconnectDB()
 
 function login($uname, $pwd)
 {
+    session_start();
     global $db;
     $query = "SELECT * FROM customer WHERE username = '$uname'";
     $result = $db->query($query);

@@ -1,6 +1,5 @@
 <?php
 // create session variables
-$customer = 1111111111;
 $acctNum = $_POST['account'];
 
 $title = "Balance";
