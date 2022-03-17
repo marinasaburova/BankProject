@@ -9,7 +9,7 @@ include '../view/header.php'
   <div class="wrapper">
     <div id="pick-acct">
       <p>Pick your account:</p>
-      <form action="balance.php" method="post">
+      <form action="balance.php" method="get">
         <select name="account" id="account">
           <?php getAccountOptions($customer); ?>
         </select>

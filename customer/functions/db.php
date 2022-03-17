@@ -6,11 +6,12 @@ if (mysqli_connect_errno()) {
     exit;
 }
 
+/*
 $dsn = 'mysql:host=localhost;dbname=bankproject';
 $username = 'root';
 $password = 'Kittycaps0!';
 
-$db = new PDO($dsn, $username, $password);
+$db = new PDO($dsn, $username, $password); */
 
 function disconnectDB()
 {

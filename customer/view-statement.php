@@ -1,14 +1,12 @@
 <?php
-
-$title = "Balance";
+$month = $_GET['month'];
+$title = "Statement for $month";
 
 // include functions & files 
 include 'functions/db.php';
 include '../view/header.php';
 
-$acctNum = $_GET['account'];
-$_SESSION['account'] = $acctNum;
-?>
+$acctNum = $_SESSION['account']; ?>
 
 <body>
     <!-- menu -->
@@ -16,17 +14,12 @@ $_SESSION['account'] = $acctNum;
 
     <div class="wrapper">
 
-        <!-- display balance -->
-        <h1>Balance: <?php getBalance($acctNum); ?></h1>
-
         <!-- loop through data to show latest transactions -->
-        <h2>Recent Transactions: </h2>
+        <h2>Transactions for <?php echo $month ?> </h2>
         <table class="trans">
-            <?php getTransactions($acctNum); ?>
+            <?php generateStatement($acctNum, $month); ?>
         </table>
 
-        <!-- option to view history -->
-        <p class="centered"><a href="statement.php">View History</a></p>
     </div>
 
     <!-- footer -->
