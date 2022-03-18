@@ -323,14 +323,15 @@ label {
   padding-top: 10px;
 }
 
-#pick-acct {
+.pick {
   text-align: center;
   margin-right: auto;
   margin-left: auto;
   width: 50%;
 }
 
-#pick-acct select {
+.pick select,
+.pick input {
   width: 30%;
   text-align: center;
 }
@@ -352,6 +353,8 @@ td {
 }
 
 footer {
+  position: fixed;
+  bottom: 0;
   text-align: center;
   padding: 10px;
   margin-top: 20px;

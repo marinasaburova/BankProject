@@ -16,12 +16,14 @@ include '../view/header.php'; ?>
     <!-- display statements -->
     <h1>Statements</h1>
 
-    <form action="view-statement.php" method="get">
-      <label for="month">Month:</label>
-      <input type="month" name="month" id="month" />
-      <input type="submit" name="submit" id="submit" />
-    </form>
-
+    <div class="pick">
+      <p>Select the month</p>
+      <form action="view-statement.php" target="_blank" method="get">
+        <input type="month" name="month" id="month" />
+        <br>
+        <button type="submit" name="submit">Generate Statement</button>
+      </form>
+    </div>
   </div>
 
   <!-- footer -->

@@ -7,7 +7,7 @@ include '../view/header.php'
 <body>
 
   <div class="wrapper">
-    <div id="pick-acct">
+    <div class="pick">
       <p>Pick your account:</p>
       <form action="balance.php" method="get">
         <select name="account" id="account">
@@ -17,6 +17,8 @@ include '../view/header.php'
         <button type="submit" name="submit">Select Account</button>
       </form>
     </div>
+
+    <p class="centered"><a href="newaccount.php">open a new bank account</a></p>
   </div>
 
   <!-- footer -->

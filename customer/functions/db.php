@@ -62,16 +62,7 @@ function getBalance($acctNum)
     global $db;
     $query = "SELECT balance FROM account WHERE acctNum = '$acctNum'";
     $result = $db->query($query);
-    $num_results = $result->num_rows;
-
-    if ($num_results == 0) {
-        echo '<p>Uh oh... Your balance has not been found.</p>';
-    } else {
-        $row = $result->fetch_assoc();
-        $balance = $row['balance'];
-        echo '$' . $balance;
-    }
-    $result->free();
+    return $result;
 }
 
 // gets all transactions for an account 
@@ -80,40 +71,29 @@ function getTransactions($acctNum)
     global $db;
     $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum'";
     $result = $db->query($query);
-    $num_results = $result->num_rows;
-    if ($num_results == 0) {
-        echo '<p>This account does not have any transactions.</p>';
-    } else {
-        echo '<tr><th>Vendor</th> <th>Amount</th> <th>Time Stamp</th></tr>';
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo '<td>' . $row['vendor'] . '</td>';
-            if ($row['type'] == 'withdraw') {
-                echo '<td> -$' . $row['amount'] . '</td>';
-            }
-            if ($row['type'] == 'deposit') {
-                echo '<td> +$' . $row['amount'] . '</td>';
-            }
-            echo '<td>' . $row['timeStmp'] . '</td>';
-            echo "</tr>";
-        }
-    }
-    $result->free();
+    return $result;
 }
 
 // generates a statement for an account for a specific month 
 function generateStatement($acctNum, $month)
 {
+    global $db;
+    $query = "SELECT * FROM transaction WHERE `date` BETWEEN '$month-01' AND '$month-31' AND `acctNum` = '$acctNum'";
+    $result = $db->query($query);
+    return $result;
 }
 
 function deposit($acctNum, $amount)
 {
+    global $db;
 }
 
 function withdraw($acctNum, $amount)
 {
+    global $db;
 }
 
 function transfer($from, $to, $amount)
 {
+    global $db;
 }
