@@ -6,13 +6,6 @@ if (mysqli_connect_errno()) {
     exit;
 }
 
-/*
-$dsn = 'mysql:host=localhost;dbname=bankproject';
-$username = 'root';
-$password = 'Kittycaps0!';
-
-$db = new PDO($dsn, $username, $password); */
-
 function disconnectDB()
 {
 }
@@ -39,7 +32,7 @@ function login($uname, $pwd)
         $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
-        header('Location: home.php');
+        header('Location: ../home.php');
     }
 }
 
