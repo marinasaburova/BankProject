@@ -12,12 +12,15 @@
 
 <body>
     <div class="login">
-        <form action="register.php" method="post">
+        <form action="functions/register.php" method="post">
             <label for="fname"><b>First Name</b></label>
             <input type="text" placeholder="Enter First Name" name="fname" required />
 
             <label for="lname"><b>Last Name</b></label>
             <input type="text" placeholder="Enter Last Name" name="lname" required />
+
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required />
 
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" required />
@@ -30,7 +33,7 @@
 
             <button type="submit" name="register">Create Account</button>
         </form>
-        <p><a href="../admin.html">Employee Login</a></p>
+        <p><a href="login.php">Back to Login</a></p>
 
     </div>
 

@@ -18,7 +18,7 @@ include '../view/header.php'
       </form>
     </div>
 
-    <p class="centered"><a href="newaccount.php">open a new bank account</a></p>
+    <p class="centered"><a href="newbank.php">open a new bank account</a></p>
   </div>
 
   <!-- footer -->

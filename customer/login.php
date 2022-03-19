@@ -21,6 +21,7 @@
                 <input name="pwd" type="password" size="30" required /><br />
                 <button type="submit" name="submit">Log In</button>
             </form>
+            <p><a href="newaccount.php">Register</a></p>
             <p><a href="../admin.html">Employee Login</a></p>
 
     </div>
