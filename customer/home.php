@@ -11,7 +11,8 @@ include '../view/header.php'
       <p>Pick your account:</p>
       <form action="balance.php" method="get">
         <select name="account" id="account">
-          <?php getAccountOptions($customer); ?>
+          <?php 
+          getAccountOptions($customer); ?>
         </select>
         <br>
         <button type="submit" name="submit">Select Account</button>

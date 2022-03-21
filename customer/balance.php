@@ -39,7 +39,7 @@ $_SESSION['account'] = $acctNum;
             $result = getTransactions($acctNum);
             $num_results = $result->num_rows;
             if ($num_results == 0) {
-                echo '<p>This account does not have any transactions.</p>';
+                echo '<p class="centered">This account does not have any transactions.</p>';
             } else {
                 echo '<tr><th>Vendor</th> <th>Amount</th> <th>Time Stamp</th></tr>';
                 while ($row = $result->fetch_assoc()) {

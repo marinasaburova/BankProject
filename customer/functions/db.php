@@ -46,9 +46,29 @@ function getAccountOptions($customer)
     $result = $db->query($query);
     $num_results = $result->num_rows;
     while ($row = $result->fetch_assoc()) {
-        echo '<option value="' . $row['acctNum'] . '">' . $row['acctNum'] . '</option>';
+        echo '<option value="' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' - xxxxxx' . getFourDigits($row['acctNum']) . '</option>';
     }
     $result->free();
+}
+
+function getFourDigits($acctNum)
+{
+    $digits = substr($acctNum, -4);
+    return $digits;
+}
+
+function getAccountType($acctNum)
+{
+    global $db;
+    $query = "SELECT acctType FROM account WHERE acctNum = '$acctNum'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    if ($num_results != 1) {
+        echo 'Error.';
+    } else {
+        $row = $result->fetch_assoc();
+        return $row['acctType'];
+    }
 }
 
 // gets balance for a specific account

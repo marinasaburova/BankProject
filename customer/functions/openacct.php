@@ -14,7 +14,6 @@
 
     // checks for successful result
     if ($result) {
-        $result->free();
         echo '<p>Bank account successfully created!</p></br>';
         echo '<a class = "link" href="../home.php">Please enter.</a>';
     } else {
