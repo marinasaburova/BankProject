@@ -1,6 +1,6 @@
 <?php
 
-$db = new mysqli('localhost', 'root', '', 'bankproject');
+$db = new mysqli('localhost', 'root', 'password', 'bankproject');
 if (mysqli_connect_errno()) {
     echo "Error: Could not connect to database.  Please try again later.";
     exit;
@@ -21,13 +21,13 @@ function login($uname, $pwd)
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
-        include('../login.php');
+        include('../Pages/login.php');
         exit;
     }
     if ($row['password'] !== $pwd) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
-        include('../login.php');
+        include('../Pages/login.php');
         $result->free();
     } else {
         $_SESSION['customer'] = $row['customerID'];

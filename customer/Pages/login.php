@@ -32,7 +32,7 @@
 
                 <form action="../functions/verify.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" id="email" class="form-control" placeholder="Email">
+                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="password" class="form-control" placeholder="Password">
+                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -58,7 +58,8 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button id="SignIn" type="button" onclick="SignInFunction()" class="btn btn-primary btn-block">Sign In</button>
+                            <button id="SignIn" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <!--onclick="SignInFunction()"-->
                         </div>
                         <!-- /.col -->
                     </div>
@@ -75,29 +76,28 @@
         </div>
         <!-- /.card -->
 
-        </div>
-        <!-- /.login-box -->
-        <!-- jQuery -->
-        <script src="../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="../dist/js/adminlte.min.js"></script>
-        <script src="../dist/js/pages/login.js"></script>
-        <script>
-            function SignInFunction() {
-                var _signInID = document.getElementById('email').value;
-                var _pass = document.getElementById('password').value;
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js"></script>
+    <script src="../dist/js/pages/login.js"></script>
+    <script>
+        function SignInFunction() {
+            var _signInID = document.getElementById('email').value;
+            var _pass = document.getElementById('password').value;
 
-                if (_signInID === 'syeds3@montclair.edu' && _pass === 'password') {
-                    window.location = 'users.html';
-                }
-                else {
-                    alert('Please provide the correct credentials.');
-                }
+            if (_signInID === 'syeds3@montclair.edu' && _pass === 'password') {
+                window.location = 'users.html';
+            } else {
+                alert('Please provide the correct credentials.');
             }
-        </script>
+        }
+    </script>
 
-    </body>
+</body>
 
 </html>
