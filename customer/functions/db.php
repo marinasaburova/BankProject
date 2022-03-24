@@ -1,6 +1,6 @@
 <?php
 
-$db = new mysqli('localhost', 'root', 'password', 'bankproject');
+$db = new mysqli('localhost', 'root', '', 'bankproject');
 if (mysqli_connect_errno()) {
     echo "Error: Could not connect to database.  Please try again later.";
     exit;
