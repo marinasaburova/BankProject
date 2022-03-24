@@ -77,7 +77,15 @@ function getBalance($acctNum)
     global $db;
     $query = "SELECT balance FROM account WHERE acctNum = '$acctNum'";
     $result = $db->query($query);
-    return $result;
+    $num_results = $result->num_rows;
+
+    if ($num_results == 0) {
+        echo '<p>Uh oh... Your balance has not been found.</p>';
+    } else {
+        $row = $result->fetch_assoc();
+        $balance = $row['balance'];
+        return $balance;
+    }
 }
 
 // gets all transactions for an account 
