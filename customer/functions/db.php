@@ -34,7 +34,7 @@ function login($uname, $pwd)
         $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
-        header('Location: ../home.php');
+        header('Location: ../Pages/home.php');
     }
 }
 
