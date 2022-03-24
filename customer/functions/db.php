@@ -51,12 +51,19 @@ function getAccountOptions($customer)
     $result->free();
 }
 
+// gets all info for a customer
+function getCustomerData($customer)
+{
+}
+
+// get last 4 digits of account
 function getFourDigits($acctNum)
 {
     $digits = substr($acctNum, -4);
     return $digits;
 }
 
+// get type of account
 function getAccountType($acctNum)
 {
     global $db;
@@ -80,7 +87,7 @@ function getBalance($acctNum)
     $num_results = $result->num_rows;
 
     if ($num_results == 0) {
-        echo '<p>Uh oh... Your balance has not been found.</p>';
+        return ' Uh oh... Your balance has not been found.';
     } else {
         $row = $result->fetch_assoc();
         $balance = $row['balance'];
