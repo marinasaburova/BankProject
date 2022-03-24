@@ -13,7 +13,7 @@
 <body>
     <div class="login">
         <h1>Customer Login</h2>
-            <form action="functions/verify.php" method="post">
+            <form action="../functions/verify.php" method="post">
                 <label for="uname">Username: </label>
                 <input name="uname" type="text" size="30" required />
                 <br />
