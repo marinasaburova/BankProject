@@ -3,6 +3,7 @@ $month = $_GET['month'];
 $title = "Statement for $month";
 
 // include functions & files 
+// hi
 include 'functions/db.php';
 include '../view/header.php';
 
