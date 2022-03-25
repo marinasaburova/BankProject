@@ -139,17 +139,65 @@ function generateStatement($acctNum, $month)
     return $result;
 }
 
-function deposit($acctNum, $amount)
+// Deposit a check
+function deposit($acctNum, $amount, $vendor)
 {
     global $db;
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $acctNum";
+        return 'Deposit has been successfully made!';
+    } else {
+        return 'There was an error with your deposit';
+    }
 }
 
-function withdraw($acctNum, $amount)
+// Withdraw money
+function withdraw($acctNum, $amount, $vendor)
 {
     global $db;
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        $query2 = "UPDATE `account` SET `balance` = '`balance` - $amount' WHERE `account`.`acctNum` = $acctNum";
+        return 'Withdraw has been successfully made!';
+    } else {
+        return 'There was an error with your withdraw.';
+    }
 }
 
+// Transfer money between two accounts
 function transfer($from, $to, $amount)
 {
     global $db;
+
+    // Remove money from $from account
+    global $db;
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','Transfer to $to','$from')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        $query2 = "UPDATE `account` SET `balance` = '`balance` - $amount' WHERE `account`.`acctNum` = $from";
+        return 'Deposit has been successfully made!';
+    } else {
+        return 'There was an error with your deposit';
+    }
+
+    // Add money to $to account
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','Transfer from $from','$to')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $to";
+        return 'Deposit has been successfully made!';
+    } else {
+        return 'There was an error with your deposit';
+    }
 }

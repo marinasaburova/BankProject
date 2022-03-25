@@ -107,7 +107,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="bank-transfer.html" class="nav-link">
+                                <a href="bank-transaction.php" class="nav-link">
                                     <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
                                     <p>
                                         Make A Transaction
@@ -115,7 +115,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="transaction_history.html" class="nav-link">
+                                <a href="transaction_history.php" class="nav-link">
                                     <i class="nav-icon fas fa-solid fa-file-invoice"></i>
                                     <p>
                                         Transaction History
