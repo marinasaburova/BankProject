@@ -137,38 +137,41 @@ include '../view/navigation.php';
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Title</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+
+                                <?php
+                                $result = getTransactions($acctNum);
+                                $num_results = $result->num_rows;
+                                if ($num_results == 0) {
+                                    echo '<p class="text-center">This account does not have any transactions.</p>';
+                                } else {
+                                    $i = 0;
+                                ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Title</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     <?php
-                                    $result = getTransactions($acctNum);
-                                    $num_results = $result->num_rows;
-                                    if ($num_results == 0) {
-                                        echo '<p>This account does not have any transactions.</p>';
-                                    } else {
-                                        $i = 0;
-                                        while (($row = $result->fetch_assoc()) && ($i < 10)) {
-                                            echo '<tr>';
-                                            echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
-                                            echo '<td>' . $row['vendor'] . '</td>';
-                                            if ($row['type'] == 'withdraw') {
-                                                echo '<td><div class="sparkbar" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
-                                            }
-                                            if ($row['type'] == 'deposit') {
-                                                echo '<td><div class="sparkbar" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
-                                            }
-                                            echo '</tr>';
-                                            $i++;
+                                    while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                        echo '<td>' . $row['vendor'] . '</td>';
+                                        if ($row['type'] == 'withdraw') {
+                                            echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
                                         }
+                                        if ($row['type'] == 'deposit') {
+                                            echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
+                                        }
+                                        echo '</tr>';
+                                        $i++;
                                     }
-                                    $result->free();
+                                }
+                                $result->free();
                                     ?>
-                                </tbody>
+                                    </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
