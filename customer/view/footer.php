@@ -1,5 +1,5 @@
 <?php
-$db->close();
+disconnectDB()
 ?>
 
 
@@ -9,7 +9,7 @@ $db->close();
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
+  <!-- Control sidebar content goes here -->
 </aside>
 <!-- /.control-sidebar -->
 
@@ -21,9 +21,9 @@ $db->close();
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0-rc
     </div>
-  </footer>
+  </footer> -->
 </div>
- ./wrapper -->
+<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

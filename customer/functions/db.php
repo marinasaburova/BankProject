@@ -8,6 +8,8 @@ if (mysqli_connect_errno()) {
 
 function disconnectDB()
 {
+    global $db;
+    $db->close();
 }
 
 function login($uname, $pwd)
@@ -148,7 +150,7 @@ function deposit($acctNum, $amount, $vendor)
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $acctNum";
+        $query2 = "UPDATE `account` SET `balance` = `balance` + $amount WHERE `account`.`acctNum` = $acctNum";
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
@@ -186,36 +188,6 @@ function transfer($from, $to, $amount)
 {
     global $db;
 
-    // Remove money from $from account
-    global $db;
-    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','Transfer to $to','$from')";
-    $result = $db->query($query);
-
-    // checks for successful result
-    if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = '`balance` - $amount' WHERE `account`.`acctNum` = $from";
-        $result2 = $db->query($query2);
-        if (!$result2) {
-            echo 'Error updating your balance.';
-        }
-        return 'Deposit has been successfully made!';
-    } else {
-        return 'There was an error with your deposit';
-    }
-
-    // Add money to $to account
-    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','Transfer from $from','$to')";
-    $result = $db->query($query);
-
-    // checks for successful result
-    if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $to";
-        $result2 = $db->query($query2);
-        if (!$result2) {
-            echo 'Error updating your balance.';
-        }
-        return 'Deposit has been successfully made!';
-    } else {
-        return 'There was an error with your deposit';
-    }
+    withdraw($from, $amount, "Transfer to $to");
+    deposit($to, $amount, "Transfer from $from");
 }

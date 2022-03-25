@@ -55,7 +55,10 @@
                     <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="../Pages/dashboard.php" class="d-block">Saba Syed</a>
+                    <a href="../Pages/dashboard.php" class="d-block">
+                        <?php $data = getCustomerData($customer);
+                        echo $data['firstName'] . ' ' . $data['lastName'] ?>
+                    </a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -69,6 +72,9 @@
                     $dashboard_class = "nav-link";
                     $users_class = "nav-link";
                     $transaction_class = "nav-link";
+                    $transaction_nav = 'nav-item';
+                    $bank_trans_class = "nav-link";
+                    $trans_history_class = 'nav-link';
 
                     if ($current == 'dashboard.php') {
                         $dashboard_class = 'nav-link active';
@@ -78,6 +84,14 @@
                     }
                     if ($current == 'transactions.php') {
                         $transaction_class = 'nav-link active';
+                    }
+                    if ($current == 'bank-transaction.php') {
+                        $bank_trans_class = 'nav-link active';
+                        $transaction_nav = 'nav-item menu-open';
+                    }
+                    if ($current == 'transaction-history.php') {
+                        $trans_history_class = 'nav-link active';
+                        $transaction_nav = 'nav-item menu-open';
                     }
                     ?>
 
@@ -97,7 +111,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="<?php echo $transaction_nav ?>">
                         <a href="#" class="<?php echo $transaction_class ?>">
                             <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
                             <p>
@@ -107,7 +121,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="bank-transaction.php" class="nav-link">
+                                <a href="bank-transaction.php" class="<?php echo $bank_trans_class ?>">
                                     <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
                                     <p>
                                         Make A Transaction
@@ -115,7 +129,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="transaction-history.php" class="nav-link">
+                                <a href="transaction-history.php" class="<?php echo $trans_history_class ?>">
                                     <i class="nav-icon fas fa-solid fa-file-invoice"></i>
                                     <p>
                                         Transaction History
