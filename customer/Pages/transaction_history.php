@@ -4,7 +4,7 @@
 $title = "Statement";
 
 // include functions & files 
-include 'functions/db.php';
+include '../functions/db.php';
 include '../view/header.php'; ?>
 
 <body>
