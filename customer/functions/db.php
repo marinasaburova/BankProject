@@ -38,6 +38,23 @@ function login($uname, $pwd)
     }
 }
 
+// gets all info for a customer
+function getCustomerData($customer)
+{
+    global $db;
+    $query = "SELECT * FROM customer WHERE customerID = '$customer'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    if ($num_results == 0) {
+        return 'Customer has not been found.';
+    } elseif ($num_results != 1) {
+        return 'Error.';
+    } else {
+        $data = $result->fetch_assoc();
+        return $data;
+    }
+}
+
 // gets all accounts for a customer
 function getAccountDropdown($customer)
 {
@@ -63,11 +80,6 @@ function getAccountOptions($customer)
     }
     $result->free();
     return $accts;
-}
-
-// gets all info for a customer
-function getCustomerData($customer)
-{
 }
 
 // get last 4 digits of account

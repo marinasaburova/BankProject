@@ -10,7 +10,7 @@
                 <a href="../Pages/dashboard.php" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="contact-us.html" class="nav-link">Contact</a>
+                <a href="../../Admin/Pages/contact-us.html" class="nav-link">Contact</a>
             </li>
         </ul>
 
@@ -65,13 +65,24 @@
     with font-awesome or any other icon font library -->
 
                     <?php
-                    $dashboard_class;
-                    $users_class;
-                    $transaction_class;
+                    $current = basename($_SERVER['PHP_SELF']);
+                    $dashboard_class = "nav-link";
+                    $users_class = "nav-link";
+                    $transaction_class = "nav-link";
+
+                    if ($current == 'dashboard.php') {
+                        $dashboard_class = 'nav-link active';
+                    }
+                    if ($current == 'users.php') {
+                        $users_class = 'nav-link active';
+                    }
+                    if ($current == 'transactions.php') {
+                        $transaction_class = 'nav-link active';
+                    }
                     ?>
 
-                    <li class="nav-item menu-open">
-                        <a href="../Pages/dashboard.php" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="../Pages/dashboard.php" class="<?php echo $dashboard_class ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -79,7 +90,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../Pages/users.php" class="nav-link">
+                        <a href="../Pages/users.php" class="<?php echo $users_class ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 User Info
@@ -87,7 +98,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="<?php echo $transaction_class ?>">
                             <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
                             <p>
                                 Transaction
