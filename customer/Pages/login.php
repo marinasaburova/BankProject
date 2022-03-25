@@ -19,13 +19,12 @@
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
 
-<body>
-
+<body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Admin</b>Login</a>
+                <a href="login.html" class="h1"><b>Customer</b>Login</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

@@ -65,9 +65,9 @@
     with font-awesome or any other icon font library -->
 
                     <?php
-                    $dashboard_class; 
+                    $dashboard_class;
                     $users_class;
-                    $transaction_class; 
+                    $transaction_class;
                     ?>
 
                     <li class="nav-item menu-open">
@@ -114,7 +114,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="login.html" class="nav-link">
+                        <a href="../functions/logout.php" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>
                                 Logout

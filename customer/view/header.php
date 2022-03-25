@@ -1,3 +1,19 @@
+<?php
+// Create session
+session_start();
+
+// If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// Set commonly used variables
+$customer = $_SESSION['customer'];
+$accts = getAccountOptions($customer);
+$acctNum = $accts[0];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

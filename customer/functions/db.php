@@ -34,12 +34,12 @@ function login($uname, $pwd)
         $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
-        header('Location: ../Pages/home.php');
+        header('Location: ../Pages/dashboard.php');
     }
 }
 
 // gets all accounts for a customer
-function getAccountOptions($customer)
+function getAccountDropdown($customer)
 {
     global $db;
     $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
@@ -49,6 +49,20 @@ function getAccountOptions($customer)
         echo '<option value="' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' - xxxxxx' . getFourDigits($row['acctNum']) . '</option>';
     }
     $result->free();
+}
+
+function getAccountOptions($customer)
+{
+    global $db;
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
 }
 
 // gets all info for a customer
