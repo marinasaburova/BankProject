@@ -125,7 +125,7 @@ function getBalance($acctNum)
 function getTransactions($acctNum)
 {
     global $db;
-    $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum'";
+    $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum' ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }
@@ -149,9 +149,14 @@ function deposit($acctNum, $amount, $vendor)
     // checks for successful result
     if ($result) {
         $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $acctNum";
-        return 'Deposit has been successfully made!';
+        $result2 = $db->query($query2);
+        if (!$result2) {
+            echo 'Error updating your balance.';
+        }
+        echo 'Deposit has been successfully made!';
+        header('Location: ../Pages/dashboard.php');
     } else {
-        return 'There was an error with your deposit';
+        echo 'There was an error with your deposit';
     }
 }
 
@@ -164,10 +169,15 @@ function withdraw($acctNum, $amount, $vendor)
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = '`balance` - $amount' WHERE `account`.`acctNum` = $acctNum";
-        return 'Withdraw has been successfully made!';
+        $query2 = "UPDATE `account` SET `balance` = `balance` - $amount WHERE `account`.`acctNum` = $acctNum";
+        $result2 = $db->query($query2);
+        if (!$result2) {
+            echo 'Error updating your balance.';
+        }
+        echo 'Withdraw has been successfully made!';
+        header('Location: ../Pages/dashboard.php');
     } else {
-        return 'There was an error with your withdraw.';
+        echo 'There was an error with your withdraw.';
     }
 }
 
@@ -184,6 +194,10 @@ function transfer($from, $to, $amount)
     // checks for successful result
     if ($result) {
         $query2 = "UPDATE `account` SET `balance` = '`balance` - $amount' WHERE `account`.`acctNum` = $from";
+        $result2 = $db->query($query2);
+        if (!$result2) {
+            echo 'Error updating your balance.';
+        }
         return 'Deposit has been successfully made!';
     } else {
         return 'There was an error with your deposit';
@@ -196,6 +210,10 @@ function transfer($from, $to, $amount)
     // checks for successful result
     if ($result) {
         $query2 = "UPDATE `account` SET `balance` = '`balance` + $amount' WHERE `account`.`acctNum` = $to";
+        $result2 = $db->query($query2);
+        if (!$result2) {
+            echo 'Error updating your balance.';
+        }
         return 'Deposit has been successfully made!';
     } else {
         return 'There was an error with your deposit';

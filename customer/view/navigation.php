@@ -115,7 +115,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="transaction_history.php" class="nav-link">
+                                <a href="transaction-history.php" class="nav-link">
                                     <i class="nav-icon fas fa-solid fa-file-invoice"></i>
                                     <p>
                                         Transaction History

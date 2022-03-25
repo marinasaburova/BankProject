@@ -131,7 +131,7 @@ include '../view/navigation.php';
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
-                        <h3 class="card-title">Account History</h3>
+                        <h3 class="card-title">Recent Transactions</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
@@ -151,7 +151,8 @@ include '../view/navigation.php';
                                     if ($num_results == 0) {
                                         echo '<p>This account does not have any transactions.</p>';
                                     } else {
-                                        while ($row = $result->fetch_assoc()) {
+                                        $i = 0;
+                                        while (($row = $result->fetch_assoc()) && ($i < 10)) {
                                             echo '<tr>';
                                             echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                             echo '<td>' . $row['vendor'] . '</td>';
@@ -162,6 +163,7 @@ include '../view/navigation.php';
                                                 echo '<td><div class="sparkbar" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
                                             }
                                             echo '</tr>';
+                                            $i++;
                                         }
                                     }
                                     $result->free();
@@ -173,8 +175,8 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transfer.html" class="btn btn-sm btn-info float-left">Make A Transfer</a>
-                        <a href="transaction_history.html" class="btn btn-sm btn-secondary float-right">View All History</a>
+                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left">Make a Transaction</a>
+                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">View All History</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
