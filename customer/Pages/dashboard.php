@@ -22,6 +22,7 @@ include '../view/navigation.php';
                         <span class="info-box-number">
                             <?php echo getAccountType($acctNum) ?>
                             <small> *<?php echo getFourDigits($acctNum) ?></small>
+                            <a href="#" class="btn btn-sm btn-secondary float-right">Switch Account</a>
                         </span>
                     </div>
                     <!-- /.info-box-content -->

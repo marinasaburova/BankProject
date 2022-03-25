@@ -51,6 +51,7 @@ include '../view/navigation.php';
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
+                                    <!-- POSSIBLY CHANGE TO EDIT ACCOUNT -->
                                     <a href="customer_transactions.html" class="btn btn-sm btn-primary">
                                         <i class="fas fa-file"></i> View Transactions
                                     </a>
