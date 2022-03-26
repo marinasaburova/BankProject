@@ -24,9 +24,12 @@ include '../view/navigation.php';
                 <?php getAccountDropdown($customer); ?>
               </select>
             </div>
-            <div class="form-group">
-              <label for="amount">Transaction Amount</label>
-              <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" required />
+            <label for="amount">Transaction Amount</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
             </div>
             <div class="form-group">
               <label for="vendor">Vendor Name</label>
@@ -57,9 +60,12 @@ include '../view/navigation.php';
                 <?php getAccountDropdown($customer); ?>
               </select>
             </div>
-            <div class="form-group">
-              <label for="amount">Transaction Amount</label>
-              <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" required />
+            <label for="amount">Transaction Amount</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
             </div>
             <div class="form-group">
               <label for="vendor">Vendor Name</label>

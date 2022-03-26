@@ -22,7 +22,18 @@ include '../view/navigation.php';
                         <span class="info-box-number">
                             <?php echo getAccountType($acctNum) ?>
                             <small> *<?php echo getFourDigits($acctNum) ?></small>
-                            <a href="#" class="btn btn-sm btn-secondary float-right">Switch Account</a>
+                            <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Switch Account
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <?php
+                                for ($i = 0; $i < sizeof($accts); $i++) {
+                                    echo '<form action="#" method="post">';
+                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - xxxxxx' . getFourDigits($accts[$i]) . '</button>';
+                                    echo '</form>';
+                                }
+                                ?>
+                            </div>
                         </span>
                     </div>
                     <!-- /.info-box-content -->

@@ -11,7 +11,11 @@ if (!isset($_SESSION['loggedin'])) {
 // Set commonly used variables
 $customer = $_SESSION['customer'];
 $accts = getAccountOptions($customer);
-$acctNum = $accts[0];
+if (isset($_POST['change_acct'])) {
+    $acctNum = $_POST['change_acct'];
+} else {
+    $acctNum = $accts[0];
+}
 ?>
 
 <!DOCTYPE html>

@@ -33,7 +33,6 @@ function login($uname, $pwd)
         $result->free();
     } else {
         $_SESSION['customer'] = $row['customerID'];
-        $_SESSION['fname'] = $row['firstName'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
         header('Location: ../Pages/dashboard.php');
@@ -146,11 +145,13 @@ function deposit($acctNum, $amount, $vendor)
 {
     global $db;
     $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
+    echo $query;
     $result = $db->query($query);
 
     // checks for successful result
     if ($result) {
         $query2 = "UPDATE `account` SET `balance` = `balance` + $amount WHERE `account`.`acctNum` = $acctNum";
+        echo $query2;
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
