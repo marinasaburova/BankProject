@@ -75,6 +75,7 @@
                     $transaction_nav = 'nav-item';
                     $bank_trans_class = "nav-link";
                     $trans_history_class = 'nav-link';
+                    $bank_transfer_class = 'nav-link';
 
                     if ($current == 'dashboard.php') {
                         $dashboard_class = 'nav-link active';
@@ -91,6 +92,10 @@
                     }
                     if ($current == 'transaction-history.php') {
                         $trans_history_class = 'nav-link active';
+                        $transaction_nav = 'nav-item menu-open';
+                    }
+                    if ($current == 'make-transfer.php') {
+                        $bank_transfer_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
                     }
                     ?>
@@ -125,6 +130,14 @@
                                     <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
                                     <p>
                                         Make A Transaction
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="make-transfer.php" class="<?php echo $bank_transfer_class ?>">
+                                    <i class="nav-icon fas fa-regular fa-exchange-alt"></i>
+                                    <p>
+                                        Transfer Funds
                                     </p>
                                 </a>
                             </li>
