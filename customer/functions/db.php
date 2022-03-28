@@ -56,6 +56,36 @@ function getCustomerData($customer)
     }
 }
 
+// updates customer account info 
+function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr)
+{
+    global $db;
+    $query = "UPDATE `customer` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone', `addr` = '$addr' WHERE `customer`.`customerID` = '$customer'";
+    echo $query;
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating info.';
+    } else {
+        header('Location: ../Pages/users.php');
+        exit;
+    }
+}
+
+// changes customer password 
+function changePassword($customer, $newpwd)
+{
+    global $db;
+    $query = "UPDATE `customer` SET `password` = '$newpwd' WHERE `customer`.`customerID` = '$customer'";
+    $result = $db->query($query);
+    if (!$result) {
+        echo 'Error updating password.';
+    } else {
+        header('Location: ../Pages/users.php');
+        exit;
+    }
+}
+
 // gets all accounts for a customer
 function getAccountDropdown($customer)
 {
@@ -67,6 +97,7 @@ function getAccountDropdown($customer)
         echo '<option value="' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' - xxxxxx' . getFourDigits($row['acctNum']) . '</option>';
     }
     $result->free();
+    exit;
 }
 
 function getAccountOptions($customer)
@@ -145,21 +176,21 @@ function deposit($acctNum, $amount, $vendor)
 {
     global $db;
     $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
-    echo $query;
     $result = $db->query($query);
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = `balance` + $amount WHERE `account`.`acctNum` = $acctNum";
-        echo $query2;
+        $query2 = "UPDATE `account` SET `balance` = `balance` + '$amount' WHERE `account`.`acctNum` = '$acctNum'";
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
         }
         echo 'Deposit has been successfully made!';
         header('Location: ../Pages/dashboard.php');
+        exit;
     } else {
         echo 'There was an error with your deposit';
+        exit;
     }
 }
 
@@ -172,15 +203,17 @@ function withdraw($acctNum, $amount, $vendor)
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = `balance` - $amount WHERE `account`.`acctNum` = $acctNum";
+        $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
         }
         echo 'Withdraw has been successfully made!';
         header('Location: ../Pages/dashboard.php');
+        exit;
     } else {
         echo 'There was an error with your withdraw.';
+        exit;
     }
 }
 
@@ -189,6 +222,7 @@ function transfer($from, $to, $amount)
 {
     global $db;
 
-    withdraw($from, $amount, "Transfer to $to");
-    deposit($to, $amount, "Transfer from $from");
+    withdraw($from, $amount, "Transfer to *" . getFourDigits($to));
+    deposit($to, $amount, "Transfer from *" . getFourDigits($from));
+    exit;
 }

@@ -51,7 +51,6 @@ include '../view/navigation.php';
         <div class="card card-secondary">
           <div class="card-header">
             <h3 class="card-title">Withdraw</h3>
-
             <div class="card-tools"></div>
           </div>
           <div class="card-body">

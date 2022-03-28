@@ -38,9 +38,9 @@ include '../view/navigation.php';
                                             ?>
                                         </p>
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
-                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
                                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?php echo $data['email'] ?></li>
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: <?php echo $data['phone'] ?></li>
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?php echo $data['addr'] ?></li>
 
                                         </ul>
                                     </div>
@@ -51,9 +51,8 @@ include '../view/navigation.php';
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
-                                    <!-- POSSIBLY CHANGE TO EDIT ACCOUNT -->
-                                    <a href="customer_transactions.html" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-file"></i> View Transactions
+                                    <a href="edit-info.php" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-pen"></i> Edit Account Info
                                     </a>
                                 </div>
                             </div>
