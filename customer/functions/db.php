@@ -97,7 +97,6 @@ function getAccountDropdown($customer)
         echo '<option value="' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' - xxxxxx' . getFourDigits($row['acctNum']) . '</option>';
     }
     $result->free();
-    exit;
 }
 
 function getAccountOptions($customer)
