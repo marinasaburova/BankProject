@@ -23,13 +23,13 @@ function login($uname, $pwd)
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
-        include('../Pages/login.php');
+        header('Location: ../Pages/login.php');
         exit;
     }
     if ($row['password'] !== $pwd) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
-        include('../Pages/login.php');
+        header('Location: ../Pages/login.php');
         $result->free();
     } else {
         $_SESSION['customer'] = $row['customerID'];
