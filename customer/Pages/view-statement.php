@@ -1,3 +1,4 @@
+<html>
 <?php
 $month = $_GET['month'];
 $title = "Statement for $month";
@@ -24,18 +25,72 @@ $acctNum = $_SESSION['account']; ?>
             if ($num_results == 0) {
                 echo '<p>This account does not have any transactions.</p>';
             } else {
-                echo '<tr><th>Vendor</th> <th>Amount</th> <th>Time Stamp</th></tr>';
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo '<td>' . $row['vendor'] . '</td>';
-                    if ($row['type'] == 'withdraw') {
-                        echo '<td> -$' . $row['amount'] . '</td>';
-                    }
-                    if ($row['type'] == 'deposit') {
-                        echo '<td> +$' . $row['amount'] . '</td>';
-                    }
-                    echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
-                    echo "</tr>";
+                ?>
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <div class="col-md-12">
+
+                        <!-- TABLE: LATEST TRANSACTIONS -->
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Recent Transactions</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+
+                                        <?php
+                                        $result = getTransactions($acctNum);
+                                        $num_results = $result->num_rows;
+                                        if ($num_results == 0) {
+                                            echo '<p class="text-center">This account does not have any transactions.</p>';
+                                        } else {
+                                            $i = 0;
+                                        ?>
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Title</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                                echo '<tr>';
+                                                echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                                echo '<td>' . $row['vendor'] . '</td>';
+                                                if ($row['type'] == 'withdraw') {
+                                                    echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
+                                                }
+                                                if ($row['type'] == 'deposit') {
+                                                    echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
+                                                }
+                                                echo '</tr>';
+                                                $i++;
+                                            }
+                                        }
+                                        $result->free();
+                                            ?>
+                                            </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                <a href="bank-transaction.php" class="btn btn-sm btn-info float-left">Make a Transaction</a>
+                                <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">View All History</a>
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                            <!-- /.col -->
+                </div>
+                <!-- /.row -->
                 }
             }
             $result->free();
