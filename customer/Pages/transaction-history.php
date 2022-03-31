@@ -8,6 +8,7 @@ $title = "Statement";
 include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
+
 ?>
 
 <!-- Main content -->

@@ -10,7 +10,7 @@
                 <a href="../Pages/dashboard.php" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="../../Admin/Pages/contact-us.html" class="nav-link">Contact</a>
+                <a href="../Pages/contact-us.php" class="nav-link">Contact</a>
             </li>
         </ul>
 
@@ -30,10 +30,10 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">
+                    <!-- <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <a href="../Pages/dashboard.php" class="d-block">
+                    <a href="../Pages/dashboard.php" class="d-block ">
                         <?php $data = getCustomerData($customer);
                         echo $data['firstName'] . ' ' . $data['lastName'] ?>
                     </a>
