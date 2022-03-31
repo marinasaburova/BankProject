@@ -12,31 +12,34 @@ include '../view/navigation.php';
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Select Month</h3>
-                    </div>
-                    <div class="card-body">
-                    <div class="pick">
-                      <form action="view-statement.php" method="get">
-                      <div class="form-group">
-                        <input type="month" name="month" id="month" />
-                        <br>
-                        <button type="submit" name="submit">Generate Statement</button>
-                      </form>
-                    </div>
-                    </div>
-                    <!-- /.card-body -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Select Month</h3>
+          </div>
+          <div class="card-body">
+            <div class="pick">
+              <form action="statement.php" method="get">
+                <div class="form-group">
+                  <input type="month" name="month" id="month" class="form-control custom-select" required />
                 </div>
-                <!-- /.card -->
+
+                <div class="form-group">
+                  <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>
+                </div>
+              </form>
             </div>
+          </div>
+          <!-- /.card-body -->
         </div>
+        <!-- /.card -->
+      </div>
     </div>
-    <br />
+  </div>
+  <br />
 </section>
 <!-- /.content -->
 
