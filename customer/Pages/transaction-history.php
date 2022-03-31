@@ -1,15 +1,16 @@
 <?php
- 
+
 // create session variables
- 
+
 $title = "Statement";
- 
+
 // include functions & files
 include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 ?>
 
+<<<<<<< HEAD
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -39,7 +40,6 @@ include '../view/navigation.php';
     <br />
 </section>
 <!-- /.content -->
- 
- 
+
 <!-- footer -->
 <?php include '../view/footer.php'; ?>

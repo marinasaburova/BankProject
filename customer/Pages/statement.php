@@ -1,5 +1,6 @@
 <?php
-$title = "Dashboard";
+$month = $_GET['month'];
+$title = "Statement for $month";
 
 // include functions & files 
 include '../functions/db.php';
@@ -11,59 +12,6 @@ include '../view/navigation.php';
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-university"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Account</span>
-                        <span class="info-box-number">
-                            <?php echo getAccountType($acctNum) ?>
-                            <small> *<?php echo getFourDigits($acctNum) ?></small>
-                            <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Switch Account
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <?php
-                                for ($i = 0; $i < sizeof($accts); $i++) {
-                                    echo '<form action="#" method="post">';
-                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - xxxxxx' . getFourDigits($accts[$i]) . '</button>';
-                                    echo '</form>';
-                                }
-                                ?>
-                                <form action="new-bankacct.php" method="post">
-                                    <button class="dropdown-item" type="submit" name="new_acct" value="new_acct'">open an account</button>
-                                </form>
-                            </div>
-                        </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-6">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Balance</span>
-                        <span class="info-box-number">Available: <small> $<?php echo getBalance($acctNum) ?> </small></span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
@@ -80,7 +28,7 @@ include '../view/navigation.php';
                             <table class="table m-0">
 
                                 <?php
-                                $result = getTransactions($acctNum);
+                                $result = generateStatement($acctNum, $month);
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
                                     echo '<p class="text-center">This account does not have any transactions.</p>';
@@ -96,7 +44,7 @@ include '../view/navigation.php';
                                     </thead>
                                     <tbody>
                                     <?php
-                                    while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                    while (($row = $result->fetch_assoc())) {
                                         echo '<tr>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                         echo '<td>' . $row['vendor'] . '</td>';
@@ -119,8 +67,7 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left">Make a Transaction</a>
-                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">View All History</a>
+                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">Switch Month</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
