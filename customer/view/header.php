@@ -11,6 +11,9 @@ if (!isset($_SESSION['loggedin'])) {
 // Set commonly used variables
 $customer = $_SESSION['customer'];
 $accts = getAccountOptions($customer);
+if (empty($accts)) {
+    header('Location: new-bankacct.php');
+}
 if (isset($_POST['change_acct'])) {
     $acctNum = $_POST['change_acct'];
 } else {

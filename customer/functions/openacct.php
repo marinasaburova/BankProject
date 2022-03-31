@@ -4,7 +4,6 @@
     <?php
     $type = $_POST['type'];
     $balance = 0.00;
-    include '../../view/header.php';
     include 'db.php';
     global $db;
 

@@ -27,16 +27,16 @@
 
     // checks for successful result
     if ($result) {
-        echo '<p>Account successfully created!</p></br>';
-        login($uname, $pwd);
-        echo '<a class = "link" href="../dashboard.php">Please enter.</a>';
+        $_SESSION['customer'] = $row['customerID'];
+        $_SESSION['loggedin'] = TRUE;
+        header('Location: ../Pages/new-bankacct.php');
+        exit;
     } else {
         echo '<p>Error. Your account could not be created.</p></br>';
         echo '<a class = "link" href="../register.php">Try again.</a>';
     }
 
     // disconnect from database
-    $result->free();
 
     ?>
 </body>
