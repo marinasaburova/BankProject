@@ -59,8 +59,9 @@ include '../view/navigation.php';
                         </div>
                     </div>
                 </div>
+
+                <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>

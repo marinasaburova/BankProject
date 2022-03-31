@@ -24,7 +24,7 @@ include '../view/navigation.php';
             <div class="pick">
               <form action="statement.php" method="get">
                 <div class="form-group">
-                  <input type="month" name="month" id="month" class="form-control custom-select" />
+                  <input type="month" name="month" id="month" class="form-control custom-select" required />
                 </div>
 
                 <div class="form-group">
