@@ -22,13 +22,15 @@ include '../view/navigation.php';
                         <form action="../functions/transfer.php" method="post">
                             <div class="form-group">
                                 <label for="acctFrom">From Account</label>
-                                <select id="acctFrom" name="acctFrom" class="form-control custom-select">
+                                <select id="acctFrom" name="acctFrom" class="form-control custom-select" required>
+                                    <option disabled selected value> -- select an account -- </option>
                                     <?php getAccountDropdown($customer); ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="acctTo">To Account</label>
-                                <select id="acctTo" name="acctTo" class="form-control custom-select">
+                                <select id="acctTo" name="acctTo" class="form-control custom-select" required>
+                                    <option disabled selected value> -- select an account -- </option>
                                     <?php getAccountDropdown($customer); ?>
                                 </select>
                             </div>
