@@ -19,22 +19,7 @@
         exit;
     }
 
-    global $db;
-
-    // finds matching credentials
-    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwd', $pin)";
-    $result = $db->query($query);
-
-    // checks for successful result
-    if ($result) {
-        $_SESSION['customer'] = $row['customerID'];
-        $_SESSION['loggedin'] = TRUE;
-        header('Location: ../Pages/new-bankacct.php');
-        exit;
-    } else {
-        echo '<p>Error. Your account could not be created.</p></br>';
-        echo '<a class = "link" href="../register.php">Try again.</a>';
-    }
+    register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin);
 
     // disconnect from database
 

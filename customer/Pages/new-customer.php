@@ -23,7 +23,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Customer</b>Registration</a>
+                <a href="#" class="h1"><b>Customer</b>Registration</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register for a new account</p>
@@ -52,7 +52,7 @@
 
                     <label for="phone">Phone</label>
                     <div class="input-group mb-3">
-                        <input class="form-control" type="phone" placeholder="Enter Phone" name="phone" required />
+                        <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" required />
                     </div>
 
                     <label for="addr">Address</label>
