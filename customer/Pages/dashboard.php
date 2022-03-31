@@ -33,6 +33,9 @@ include '../view/navigation.php';
                                     echo '</form>';
                                 }
                                 ?>
+                                <form action="new-bankacct.php" method="post">
+                                    <button class="dropdown-item" type="submit" name="new_acct" value="new_acct'">open an account</button>
+                                </form>
                             </div>
                         </span>
                     </div>

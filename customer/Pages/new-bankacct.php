@@ -38,16 +38,16 @@ include '../functions/db.php';
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Customer</b>Registration</a>
+                <a href="login.html" class="h1"><b>Account</b>Registration</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Open a New Bank Account</p>
 
                 <form action="../functions/openacct.php" method="post">
-                    <label for="type">Account Type</label>
 
-                    <div class="input-group mb-3">
-                        <select name="type" class="form-select form-select-lg mb-3" required>
+                    <div class="form-group">
+                        <label for="type">Account Type</label>
+                        <select name="type" class="form-control custom-select" required>
                             <option value="checking">Checking</option>
                             <option value="savings">Savings</option>
                         </select>

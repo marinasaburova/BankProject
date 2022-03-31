@@ -94,6 +94,10 @@
                         $trans_history_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
                     }
+                    if ($current == 'statement.php') {
+                        $trans_history_class = 'nav-link active';
+                        $transaction_nav = 'nav-item menu-open';
+                    }
                     if ($current == 'make-transfer.php') {
                         $bank_transfer_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';

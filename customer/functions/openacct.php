@@ -2,7 +2,9 @@
 
 <body>
     <?php
+    session_start();
     $type = $_POST['type'];
+    $customer = $_SESSION['customer'];
     $balance = 0.00;
     include 'db.php';
     global $db;
@@ -13,8 +15,7 @@
 
     // checks for successful result
     if ($result) {
-        echo '<p>Bank account successfully created!</p></br>';
-        echo '<a class = "link" href="../home.php">Please enter.</a>';
+        header('Location: ../Pages/dashboard.php');
     } else {
         echo '<p>Error. Your account could not be created.</p></br>';
         echo '<a class = "link" href="../newaccount.php">Try again.</a>';
