@@ -22,9 +22,6 @@ $acctNum = $_SESSION['account']; ?>
             <?php
             $result = generateStatement($acctNum, $month);
             $num_results = $result->num_rows;
-            if ($num_results == 0) {
-                echo '<p>This account does not have any transactions.</p>';
-            } else {
                 ?>
                 <!-- Main row -->
                 <div class="row">
@@ -93,6 +90,7 @@ $acctNum = $_SESSION['account']; ?>
                 <!-- /.row -->
                 }
             }
+            <?php
             $result->free();
             ?>
         </table>
