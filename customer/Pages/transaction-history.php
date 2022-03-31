@@ -10,7 +10,6 @@ include '../view/header.php';
 include '../view/navigation.php';
 ?>
 
-<<<<<<< HEAD
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
