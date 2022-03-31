@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bank Name | Transaction History</title>
+    <title>Bank Name | Make A Transfer</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../dist/css/adminlte.min.css" />
   </head>
   <body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
     <div class="wrapper">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -79,7 +80,7 @@
           <span class="brand-text font-weight-light">Bank Name</span>
         </a>
 
-       <!-- Sidebar -->
+        <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -167,14 +168,14 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Transaction History</h1>
+                <h1>Make A Transfer</h1>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-10">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item">
                     <a href="dashboard.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Transaction History</li>
+                  <li class="breadcrumb-item active">Make A Transfer</li>
                 </ol>
               </div>
             </div>
@@ -182,114 +183,67 @@
           <!-- /.container-fluid -->
         </section>
 
+        <!-- Main content -->
         <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <!-- Main content -->
-                <div class="invoice p-3 mb-3">
-                  <div class="row">
-                    <div class="col-md-2 offset-md-1">
-                      <a
-                        href="bank-transfer.html"
-                        style="margin-top: 10px"
-                        class="btn btn-sm btn-info"
-                        >Make A Transaction</a
-                      >
-                    </div>
-                    <div class="col-md-8">
-                      <form>
-                        <div class="input-group">
-                          <input
-                            type="search"
-                            class="form-control form-control-lg"
-                            placeholder="Enter Transaction ID"
-                          />
-                          <div class="input-group-append">
-                            <button
-                              type="button"
-                              class="btn btn-lg btn-default"
-                            >
-                              <i class="fa fa-search"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Transfer</h3>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputName">Customer Name</label>
+                    <input type="text" id="inputName" class="form-control" />
                   </div>
-                  <br />
-                  <!-- Table row -->
-                  <div class="row">
-                    <div class="col-12 table-responsive">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>Qty</th>
-                            <th>Product</th>
-                            <th>Serial #</th>
-                            <th>Description</th>
-                            <th>Subtotal</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Call of Duty</td>
-                            <td>455-981-221</td>
-                            <td>
-                              El snort testosterone trophy driving gloves
-                              handsome
-                            </td>
-                            <td>$64.50</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Need for Speed IV</td>
-                            <td>247-925-726</td>
-                            <td>Wes Anderson umami biodiesel</td>
-                            <td>$50.00</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Monsters DVD</td>
-                            <td>735-845-642</td>
-                            <td>
-                              Terry Richardson helvetica tousled street art
-                              master
-                            </td>
-                            <td>$10.70</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Grown Ups Blue Ray</td>
-                            <td>422-568-642</td>
-                            <td>Tousled lomo letterpress</td>
-                            <td>$25.99</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <!-- /.col -->
+                  <div class="form-group">
+                    <label for="inputClientCompany">Transfer Amount</label>
+                    <input
+                      type="text"
+                      id="inputClientCompany"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Transfer Description</label>
+                    <textarea
+                      id="inputDescription"
+                      class="form-control"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputStatus">Status</label>
+                    <select id="inputStatus" class="form-control custom-select">
+                      <option selected disabled>Select one</option>
+                      <option>Pending</option>
+                      <option>Posted</option>
+                      <option>Canceled</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <p class="lead">Payment Methods:</p>
+                    <img src="../dist/img/credit/visa.png" alt="Visa" />
+                    <img
+                      src="../dist/img/credit/mastercard.png"
+                      alt="Mastercard"
+                    />
+                    
                   </div>
                 </div>
+                <!-- /.card-body -->
               </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-      </div>
+             
+      <!-- /.content-wrapper-->
+
       <!--
-        
-        <footer class="main-footer no-print">
+        <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.1.0-rc
             </div>
             <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
         </footer>
-  -->
+    -->
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
