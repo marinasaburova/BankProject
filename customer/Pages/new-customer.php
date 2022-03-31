@@ -1,5 +1,5 @@
 <?php
-$title = "Login";
+$title = "Register";
 include '../view/header-simple.php';
 ?>
 

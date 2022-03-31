@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin'])) {
 $customer = $_SESSION['customer'];
 include '../functions/db.php';
 
-$title = "Login";
+$title = "Open Bank Account";
 include '../view/header-simple.php';
 ?>
 

@@ -29,7 +29,7 @@ include '../view/navigation.php';
                                 <?php
                                 for ($i = 0; $i < sizeof($accts); $i++) {
                                     echo '<form action="#" method="post">';
-                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - xxxxxx' . getFourDigits($accts[$i]) . '</button>';
+                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - *' . getFourDigits($accts[$i]) . '</button>';
                                     echo '</form>';
                                 }
                                 ?>
