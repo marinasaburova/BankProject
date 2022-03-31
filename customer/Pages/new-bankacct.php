@@ -11,34 +11,17 @@ if (!isset($_SESSION['loggedin'])) {
 // Set commonly used variables
 $customer = $_SESSION['customer'];
 include '../functions/db.php';
+
+$title = "Login";
+include '../view/header-simple.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Customer Login</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-</head>
 
 <body class="hold-transition login-page">
     <div class="login-box" style="width:500px">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Account</b>Registration</a>
+                <a href="" class="h1"><b>Account</b>Registration</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Open a New Bank Account</p>
