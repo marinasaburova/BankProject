@@ -11,9 +11,9 @@
     //create short variable names
      $Customer_Name=$_POST['Customer_Name'];
      $Transaction_Amount=$_POST['Transaction_Amount'];
-     $Transfer_Description=$_POST['Transfer_Description'];
+     $Transfer_Description=$_POST['Transaction_Description'];
     
-        if(!$Customer_Name || !$Transaction_Amount || !$Transfer_Description){
+        if(!$Customer_Name || !$Transaction_Amount || !$Transaction_Description){
         echo "You have not completed a transaction. Please go back and try again.";
         exit;
     }
@@ -22,7 +22,7 @@
         if (!get_magic_quotes_gpc()){
      $Customer_Name= addslashes($Customer_Name);
      $Transaction_Amount= addslashes($Transaction_Amount);
-     $Transfer_Description= addslashes($Transfer_Description);
+     $Transaction_Description= addslashes($Transaction_Description);
     }
     
     
@@ -34,7 +34,7 @@
     }
     
   $query = "insert into Transfer values
-            ('".$Customer_Name."', '".$Transaction_Amount."', '".$Transfer_Description."')";
+            ('".$Customer_Name."', '".$Transaction_Amount."', '".$Transaction_Description."')";
   $result = $db->query($query);
 
 
