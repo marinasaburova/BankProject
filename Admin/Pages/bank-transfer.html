@@ -183,13 +183,14 @@
           <!-- /.container-fluid -->
         </section>
 
+        
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-md-10">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Transfer</h3>
+                  <h3 class="card-title">Transfer Origin</h3>
                 </div>
                 <div class="card-body">
                   <div class="form-group">
@@ -213,30 +214,50 @@
                     ></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="inputStatus">Status</label>
+                    <label for="inputStatus">Account</label>
                     <select id="inputStatus" class="form-control custom-select">
                       <option selected disabled>Select one</option>
-                      <option>Pending</option>
-                      <option>Posted</option>
-                      <option>Canceled</option>
+                      <option>Checkings</option>
+                      <option>Savings</option>
+                     
                     </select>
                   </div>
-                  <div class="form-group">
-                    <p class="lead">Payment Methods:</p>
-                    <img src="../dist/img/credit/visa.png" alt="Visa" />
-                    <img
-                      src="../dist/img/credit/mastercard.png"
-                      alt="Mastercard"
-                    />
-                    
-                  </div>
+                  
+                    <div class="form-group">
+                      <label for="routingNumber">Origin Routing Number</label>
+                      <input type="text" name="routingNumber" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="accountNumb">Orgin Account Number</label>
+                      <input type="text" name="inputName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="routingNumber">Destination Routing Number</label>
+                      <input type="text" name="routingNumber" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="accountNumb">Destination Account Number</label>
+                      <input type="text" name="inputName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="inputStatus">Status</label>
+                      <select id="inputStatus" class="form-control custom-select">
+                        <option selected disabled>Select one</option>
+                        <option>Pending</option>
+                        <option>Posted</option>
+                        <option>Canceled</option>
+                      </select>
+                    </div>
                 </div>
-                                <!-- /.card-body -->
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+        
               </div>
               <div class="row">
                 <div class="col-12">
                     <a href="#" class="btn btn-secondary float-left">Cancel</a>
-                    <input type="submit" value="Submit Transaction" class="btn btn-success float-right">
+                    <input type="submit" value="Submit Transfer" class="btn btn-success float-right">
                 </div>
             </div>
             <br />
