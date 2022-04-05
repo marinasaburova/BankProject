@@ -30,86 +30,77 @@
                 </li>
             </ul>
 
-   
-  <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img
-                src="../dist/img/Saba.jpg"
-                class="img-circle elevation-2"
-                alt="User Image"
-              />
-            </div>
-            <div class="info">
-              <a href="./dashboard.html" class="d-block">Saba Syed</a>
-            </div>
-          </div>
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul
-              class="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview"
-              role="menu"
-              data-accordion="false"
-            >
-              <!-- Add icons to the links using the .nav-icon class
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="./dashboard.html" class="d-block">Saba Syed</a>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
-              <li class="nav-item menu-open">
-                <a href="./dashboard.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="users.html" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
-                  <p>
-                    Transaction
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="bank-transaction.html" class="nav-link active">
-                      <i
-                        class="nav-icon fas fa-regular fa-hand-holding-usd"
-                      ></i>
-                      <p>Make A Transaction</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="transaction_history.html" class="nav-link">
-                      <i class="nav-icon fas fa-solid fa-file-invoice"></i>
-                      <p>Transaction History</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="bank-transfer.html" class="nav-link">
-                    <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
-                  <p>Make a Transfer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="login.html" class="nav-link">
-                  <i class="nav-icon fas fa-sign-out-alt"></i>
-                  <p>Logout</p>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
+                        <li class="nav-item menu-open">
+                            <a href="./dashboard.html" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="users.html" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
+                                <p>
+                                    Transaction
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="bank-transaction.html" class="nav-link">
+                                        <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
+                                        <p>
+                                            Make A Transaction
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="transaction_history.html" class="nav-link active">
+                                        <i class="nav-icon fas fa-solid fa-file-invoice"></i>
+                                        <p>
+                                            Transaction History</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login.html" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
@@ -217,7 +208,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="bank-transfer.html" class="nav-link">
+                                    <a href="bank-transaction.html" class="nav-link">
                                         <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
                                         <p>
                                             Make A Transaction
@@ -281,7 +272,7 @@
                                             
                                             
                                        
-<form action="Result (2).php" method="post">
+<form action="Transaction_history_result.php" method="post">
 
    Choose Search Type:<br />
   <select name="searchtype">
@@ -343,7 +334,7 @@
                             <div class="invoice p-3 mb-3">
                                 <div class="row">
                                     <div class="col-md-8 offset-md-2">
-                                        <form action="Result (2).php">
+                                <form action="Transaction_history_result.php">
                                             <div class="input-group">
                                                
                                             </div>
