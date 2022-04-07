@@ -20,7 +20,7 @@ include '../view/navigation.php';
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
-                        <h3 class="card-title">Recent Transactions</h3>
+                        <h3 class="card-title">Monthly Transactions</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
@@ -67,6 +67,7 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
+                        <a href="#" class="btn btn-sm btn-info float-left">Print Statement</a>
                         <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">Switch Month</a>
                     </div>
                     <!-- /.card-footer -->
