@@ -27,7 +27,11 @@ include '../view/navigation.php';
                 <div class="form-group">
                   <input type="month" name="month" id="month" class="form-control custom-select" required />
                 </div>
-
+                <div class="form-group">
+                  <select id="acctNum" name="acctNum" class="form-control custom-select" required>
+                    <?php getAccountDropdown($customer); ?>
+                  </select>
+                </div>
                 <div class="form-group">
                   <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>
                 </div>

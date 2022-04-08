@@ -7,6 +7,8 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+$acctNum = $_GET['acctNum'];
+
 ?>
 
 <!-- Main content -->
@@ -67,7 +69,7 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="#" class="btn btn-sm btn-info float-left">Print Statement</a>
+                        <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
                         <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">Switch Month</a>
                     </div>
                     <!-- /.card-footer -->
