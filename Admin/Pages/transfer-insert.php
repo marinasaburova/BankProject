@@ -1,3 +1,5 @@
+
+
 <html>
     <head>
         <title>Bank Project Transaction</title>
@@ -29,14 +31,14 @@
     }
     
     
-    @$db= new mysqli('localhost','elzomom1_carphotos','Electriccars123','elzomom1_Elzomom1_SQL_Project');
+    @$db= new mysqli('localhost','elzomom1_mennaelz','Bankproject123','elzomom1_bankproject');
     
     if(mysqli_connect_errno()){
         echo'Error: Could not connect to database. Please try again later.';
         exit;
     }
     
-  $query = "insert into Transaction values
+  $query = "insert into Transfer values
 ('".$Customer_Name."', '".$Transfer_Amount."', '".$Transfer_Description."', '".$AccountNum."')";
             
          
