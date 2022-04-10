@@ -1,5 +1,3 @@
-
-
 <html>
     <head>
         <title>Bank Project Transaction</title>
@@ -12,14 +10,12 @@
      $Customer_Name=$_POST['Customer_Name'];
      $Transfer_Amount=$_POST['Transfer_Amount'];
      $Transfer_Description=$_POST['Transfer_Description'];
-     $Origin_Route=$_POST['Origin_Route'];
-     $Origin_Account=$_POST['Origin_Account'];
-     $Destination_Route=$_POST['Destination_Route'];
-     $Destination_Account=$_POST['Destination_Account'];
+     $AccountNum=$_POST['AccountNum'];
+
 
     
         if(!$Customer_Name || !$Transfer_Amount || !$Transfer_Description
-        || !$Origin_Route || !$Origin_Account  || !$Destination_Route || !$Destination_Account){
+        || !$AccountNum){
         echo "You have not completed a transfer. Please go back and try again.";
         exit;
     }
@@ -28,10 +24,8 @@
      $Customer_Name= addslashes($Customer_Name);
      $Transfer_Amount= addslashes($Transfer_Amount);
      $Transfer_Description= addslashes($Transfer_Description);
-     $Origin_Route= addslashes($Origin_Route);
-     $Origin_Account= addslashes($Origin_Account);
-     $Destination_Route= addslashes($Destination_Route);
-     $Destination_Account= addslashes($Destination_Account);
+     $AccountNum= addslashes($AccountNum);
+
     }
     
     
@@ -43,7 +37,7 @@
     }
     
   $query = "insert into Transaction values
-('".$Customer_Name."', '".$Transfer_Amount."', '".$Transfer_Description."', '".$Origin_Route."', '".$Origin_Account."', '".$Destination_Route."','".$Destination_Account."' )";
+('".$Customer_Name."', '".$Transfer_Amount."', '".$Transfer_Description."', '".$AccountNum."')";
             
          
             
