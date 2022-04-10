@@ -35,36 +35,7 @@
           </li>
         </ul>
 
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-          <!-- Navbar Search -->
-          <li class="nav-item">
-            <div class="navbar-search-block">
-              <form class="form-inline">
-                <div class="input-group input-group-sm">
-                  <input
-                    class="form-control form-control-navbar"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                    <button
-                      class="btn btn-navbar"
-                      type="button"
-                      data-widget="navbar-search"
-                    >
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
-        </ul>
+      
       </nav>
       <!-- /.navbar -->
       <!-- Main Sidebar Container -->
@@ -192,79 +163,56 @@
                 <div class="card-header">
                   <h3 class="card-title">Transfer Origin</h3>
                 </div>
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="inputName">Customer Name</label>
-                    <input type="text" id="inputName" class="form-control" />
-                  </div>
-                  <div class="form-group">
-                    <label for="inputClientCompany">Transfer Amount</label>
-                    <input
-                      type="text"
-                      id="inputClientCompany"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="inputDescription">Transfer Description</label>
-                    <textarea
-                      id="inputDescription"
-                      class="form-control"
-                      rows="4"
-                    ></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputStatus">Account</label>
-                    <select id="inputStatus" class="form-control custom-select">
-                      <option selected disabled>Select one</option>
-                      <option>Checkings</option>
-                      <option>Savings</option>
-                     
-                    </select>
-                  </div>
-                  
-                    <div class="form-group">
-                      <label for="routingNumber">Origin Routing Number</label>
-                      <input type="text" name="routingNumber" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                      <label for="accountNumb">Orgin Account Number</label>
-                      <input type="text" name="inputName" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                      <label for="routingNumber">Destination Routing Number</label>
-                      <input type="text" name="routingNumber" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                      <label for="accountNumb">Destination Account Number</label>
-                      <input type="text" name="inputName" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                      <label for="inputStatus">Status</label>
-                      <select id="inputStatus" class="form-control custom-select">
-                        <option selected disabled>Select one</option>
-                        <option>Pending</option>
-                        <option>Posted</option>
-                        <option>Canceled</option>
-                      </select>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
+                
+                
+                   <form action="transfer-insert.php" method="post">
+                               <table border="0">
+                                <tr>
+                    <td>Customer Name</td>
+        <td><input type="text" name="Customer_Name"
+        maxlength="30" size="30"></td>
+                </tr>
+                
+        <tr>
+            <td>Transfer Amount</td>
+            <td><input type="text" name="Transfer_Amount"
+            maxlength="30" size="30">
+            </td>
+        </tr>
         
-              </div>
-              <div class="row">
-                <div class="col-12">
-                    <a href="#" class="btn btn-secondary float-left">Cancel</a>
-                   
-                    <input type="submit" value="Submit Transfer" class="btn btn-success float-right">
-                </div>
-            </div>
-            <br />
-        </section>
-        <!-- /.content -->
-    </div>
+                <tr>
+            <td>Transfer Description</td>
+            <td><input type="text" name="Transfer_Description"
+            maxlength="30" size="30">
+            </td>
+        </tr>
+
+         <tr>
+            <td>Account Number</td>
+            <td><input type="text" name="AccountNum"
+            maxlength="30" size="30">
+            </td>
+        </tr>
+
+               <tr>
+            <td>Account</td>
+             <td><select name ="find">
+<option value = "a"> Checkings</option>
+<option value ="b"> Savings</option>
+</select>
+
+</td>
+    </tr>        
+        
+        
+              
+        <tr>
+            <td colspan="2"><input type="submit"
+            value="Submit Transaction"></td>
+        </tr>
+        
+        
+
       <!-- /.content-wrapper-->
              
       <!-- /.content-wrapper-->
