@@ -22,7 +22,7 @@
         if (!get_magic_quotes_gpc()){
      $Customer_Name= addslashes($Customer_Name);
      $Transaction_Amount= addslashes($Transaction_Amount);
-     $Transfer_Description= addslashes($Transaction_Description);
+     $Transaction_Description= addslashes($Transaction_Description);
     }
     
     
