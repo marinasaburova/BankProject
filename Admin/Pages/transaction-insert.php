@@ -11,9 +11,9 @@
     //create short variable names
      $Customer_Name=$_POST['Customer_Name'];
      $Transaction_Amount=$_POST['Transaction_Amount'];
-     $Transfer_Description=$_POST['Transaction_Description'];
+     $Transfer_Description=$_POST['Transfer_Description'];
     
-        if(!$Customer_Name || !$Transaction_Amount || !$Transaction_Description){
+        if(!$Customer_Name || !$Transaction_Amount || !$Transfer_Description){
         echo "You have not completed a transaction. Please go back and try again.";
         exit;
     }
@@ -22,19 +22,19 @@
         if (!get_magic_quotes_gpc()){
      $Customer_Name= addslashes($Customer_Name);
      $Transaction_Amount= addslashes($Transaction_Amount);
-     $Transaction_Description= addslashes($Transaction_Description);
+     $Transfer_Description= addslashes($Transfer_Description);
     }
     
     
-    @$db= new mysqli('localhost','elzomom1_carphotos','Electriccars123','elzomom1_Elzomom1_SQL_Project');
+    @$db= new mysqli('localhost','elzomom1_mennaelz','Bankproject123','elzomom1_bankproject');
     
     if(mysqli_connect_errno()){
         echo'Error: Could not connect to database. Please try again later.';
         exit;
     }
     
-  $query = "insert into Transfer values
-            ('".$Customer_Name."', '".$Transaction_Amount."', '".$Transaction_Description."')";
+  $query = "insert into History values
+            ('".$Customer_Name."', '".$Transaction_Amount."', '".$Transfer_Description."')";
   $result = $db->query($query);
 
 
