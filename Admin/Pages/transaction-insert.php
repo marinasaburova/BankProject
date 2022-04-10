@@ -11,7 +11,7 @@
     //create short variable names
      $Customer_Name=$_POST['Customer_Name'];
      $Transaction_Amount=$_POST['Transaction_Amount'];
-     $Transfer_Description=$_POST['Transfer_Description'];
+     $Transaction_Description=$_POST['Transaction_Description'];
     
         if(!$Customer_Name || !$Transaction_Amount || !$Transaction_Description){
         echo "You have not completed a transaction. Please go back and try again.";
