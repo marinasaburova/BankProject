@@ -12,12 +12,12 @@
      $Customer_Name=$_POST['Customer_Name'];
      $Transfer_Amount=$_POST['Transfer_Amount'];
      $Transfer_Description=$_POST['Transfer_Description'];
-     $AccountNum=$_POST['AccountNum'];
+     $AccountNum=$_POST['Account'];
 
 
     
         if(!$Customer_Name || !$Transfer_Amount || !$Transfer_Description
-        || !$AccountNum){
+        || !$Account){
         echo "You have not completed a transfer. Please go back and try again.";
         exit;
     }
@@ -26,7 +26,7 @@
      $Customer_Name= addslashes($Customer_Name);
      $Transfer_Amount= addslashes($Transfer_Amount);
      $Transfer_Description= addslashes($Transfer_Description);
-     $AccountNum= addslashes($AccountNum);
+     $AccountNum= addslashes($Account);
 
     }
     
@@ -39,7 +39,7 @@
     }
     
   $query = "insert into Transfer values
-('".$Customer_Name."', '".$Transfer_Amount."', '".$Transfer_Description."', '".$AccountNum."')";
+('".$Customer_Name."', '".$Transfer_Amount."', '".$Transfer_Description."', '".$Account."')";
             
          
             
