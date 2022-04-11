@@ -10,29 +10,30 @@ function disconnectDB()
 {
     global $db;
     $db->close();
+    exit;
 }
 
 function OpenCon()
- {
- $dbhost = "localhost";
- $dbuser = "root";
- $dbpass = "";
- $db = "bankproject";
- $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
- 
- return $conn;
- }
- 
+{
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $db = "bankproject";
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("Connect failed: %s\n" . $conn->error);
+
+    return $conn;
+}
+
 function CloseCon($conn)
- {
- $conn -> close();
- }
+{
+    $conn->close();
+}
 
 function login($uname, $pwd)
 {
     session_start();
     global $db;
-    $queryCustomerInfo = "SELECT * FROM customer WHERE username = '$uname' || email = '$uname'";  
+    $queryCustomerInfo = "SELECT * FROM employee WHERE username = '$uname' || email = '$uname'";
     $result = $db->query($queryCustomerInfo);
     $row = $result->fetch_assoc();
 
@@ -45,11 +46,13 @@ function login($uname, $pwd)
         echo '<p>Incorrect credentials.</p></br>';
         header('Location: ../login.html');
         $result->free();
+        exit;
     } else {
         $_SESSION['customer'] = $row['customerID'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
         header('Location: dashboard.php');
+        exit;
     }
 }
 
@@ -181,7 +184,7 @@ function generateStatement($acctNum, $month)
     global $db;
     $query = "SELECT * FROM transaction WHERE DATE(Timestamp) as mydate BETWEEN '$month-01' AND '$month-31' AND `AccountNum` = '$acctNum'";
     $result = $db->query($query);
-   
+
     return $result;
 }
 

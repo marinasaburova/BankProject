@@ -182,7 +182,7 @@ include 'navigation.php';
                                     }
                                     $result->free();
                                 }
-                                
+
                                     ?>
                                     </tbody>
                             </table>
