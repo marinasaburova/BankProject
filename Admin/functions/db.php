@@ -123,9 +123,7 @@ function getAllCustomers()
     global $db;
     $query = "SELECT * FROM customer";
     $result = $db->query($query);
-    $num_results = $result->num_rows;
-    $data = $result->fetch_assoc();
-    return $data;
+    return $result;
 }
 
 // updates customer account info 

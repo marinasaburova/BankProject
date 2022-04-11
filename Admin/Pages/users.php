@@ -31,27 +31,26 @@ include '../view/navigation.php';
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">
                     <?php
-                    $customers = getAllCustomers();
-                    foreach ($customers as $c) {
-                        $cust = getCustomerData($c);
+                    $result = getAllCustomers();
+                    $num_results = $result->num_rows;
+
+                    while (($row = $result->fetch_assoc())) {
                     ?>
                         <!-- Customer -->
                         <div class="col-12 col-sm-4 col-md-3 d-flex align-items-stretch">
                             <div class="card bg-light">
-
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
                                             <br />
-                                            <h2 class="lead"><b><?php echo $cust['firstName'] . ' ' . $cust['lastName'] ?></b></h2>
+                                            <h2 class="lead"><b><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></b></h2>
 
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?php echo $cust['email'] ?></li>
-                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: <?php echo $cust['phone'] ?></li>
-                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?php echo $cust['addr'] ?></li>
+                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?php echo $row['email'] ?></li>
+                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: <?php echo $row['phone'] ?></li>
+                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?php echo $row['addr'] ?></li>
                                             </ul>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="card-footer">
