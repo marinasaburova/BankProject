@@ -7,7 +7,6 @@ include '../view/header.php';
 include '../view/navigation.php';
 
 $customer = $_GET['customerid'];
-
 ?>
 
 <!-- Main content -->

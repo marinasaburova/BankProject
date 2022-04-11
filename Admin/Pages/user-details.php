@@ -39,11 +39,12 @@ $accts = getAccountOptions($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <div class="text-right">
-                            <a href="edit-info.php" class="btn btn-sm btn-primary">
-                                <i class="fas fa-pen"></i> Edit Account Info
-                            </a>
-                        </div>
+                        <a href="edit-info.php" class="btn btn-sm btn-success">
+                            <i class="fas fa-pen"></i> Edit Info
+                        </a>
+                        <a href="edit-info.php" class="btn btn-sm btn-danger float-right">
+                            <i class="fas fa-pen"></i> Remove Customer
+                        </a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
