@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 08:29 PM
+-- Generation Time: Apr 11, 2022 at 10:52 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -32,21 +32,31 @@ CREATE TABLE `account` (
   `acctType` varchar(10) NOT NULL,
   `balance` decimal(14,2) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT current_timestamp(),
-  `customerID` int(10) UNSIGNED ZEROFILL NOT NULL
+  `customerID` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`acctNum`, `acctType`, `balance`, `dateCreated`, `customerID`) VALUES
-(1000000000, 'checking', '1046.36', '2022-03-18 13:50:14', 1111111111),
-(1000000001, 'savings', '727.50', '2022-03-18 13:50:43', 1111111111),
-(1000000002, 'checking', '1252.12', '2022-03-18 13:51:18', 1111111112),
-(1000000003, 'savings', '300.00', '2022-03-18 13:51:31', 1111111112),
-(1000000005, 'checking', '10348.44', '2022-03-19 17:53:43', 1111111113),
-(1000000006, 'savings', '12000.00', '2022-03-21 16:55:23', 1111111113),
-(1000000007, 'savings', '0.00', '2022-03-21 16:56:20', 1111111113);
+INSERT INTO `account` (`acctNum`, `acctType`, `balance`, `dateCreated`, `customerID`, `status`) VALUES
+(1000000000, 'checking', '1046.36', '2022-03-18 13:50:14', 1111111111, 'active'),
+(1000000001, 'savings', '727.50', '2022-03-18 13:50:43', 1111111111, 'active'),
+(1000000002, 'checking', '1252.12', '2022-03-18 13:51:18', 1111111112, 'active'),
+(1000000003, 'savings', '300.00', '2022-03-18 13:51:31', 1111111112, 'active'),
+(1000000005, 'checking', '10348.44', '2022-03-19 17:53:43', 1111111113, 'active'),
+(1000000006, 'savings', '12000.00', '2022-03-21 16:55:23', 1111111113, 'active'),
+(1000000007, 'savings', '0.00', '2022-03-21 16:56:20', 1111111113, 'active'),
+(1000000011, 'checking', '-10.00', '2022-03-31 19:22:26', 1111111119, 'active'),
+(1000000012, 'savings', '0.00', '2022-03-31 19:43:15', 1111111119, 'active'),
+(1000000013, 'checking', '0.00', '2022-03-31 20:59:24', 1111111120, 'active'),
+(1000000016, 'checking', '0.00', '2022-03-31 21:03:50', 1111111122, 'active'),
+(1000000017, 'checking', '0.00', '2022-03-31 21:08:52', 1111111123, 'pending'),
+(1000000018, 'savings', '0.00', '2022-03-31 21:08:59', 1111111123, 'pending'),
+(1000000019, 'savings', '0.00', '2022-03-31 21:17:51', 1111111111, 'pending'),
+(1000000020, 'checking', '0.00', '2022-04-07 18:51:14', 1111111117, 'pending'),
+(1000000022, 'checking', '0.00', '2022-04-11 18:22:32', 1111111111, 'pending');
 
 -- --------------------------------------------------------
 
@@ -72,11 +82,17 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`, `dateCreated`) VALUES
-(1111111111, 'Marina', 'Saburova', 'marina', 'marinas@gmail.com', '9082406937', '1 Normal Ave, Montclair NJ 07043', '1234', '1234', '2022-03-18 04:00:00'),
-(1111111112, 'Kat', 'Saburova', 'kats', 'kats@gmail.com', NULL, '', '1234', '1234', '2022-03-18 04:00:00'),
-(1111111113, 'Sharpay', 'Evans', 'sharpay', 'sharpay@gmail.com', NULL, '', '1234', '1234', '2022-03-19 17:41:52'),
-(1111111114, 'Liv', 'Rooney', 'liv', 'livrooney@gmail.com', NULL, '', '1234', '1234', '2022-03-19 17:49:37'),
-(1111111116, 'Maddie', 'Rooney', 'maddie', 'maddie@gmail.com', '1829080147', '1 Cheese Ave, Stevens Point, WI', '1234', '1234', '2022-03-29 15:14:07');
+(1111111111, 'Marina', 'Saburova', 'marina', 'marinas@gmail.com', '9082400000', '1 Normal Ave, Montclair NJ 07043', '1234', '1234', '2022-03-18 04:00:00'),
+(1111111112, 'Kat', 'Saburova', 'kats', 'kats@gmail.com', '1289120391', '1 Normal Ave', '1234', '1234', '2022-03-18 04:00:00'),
+(1111111113, 'Sharpay', 'Evans', 'sharpay', 'sharpay@gmail.com', '1284930099', '1 Normal Ave', '1234', '1234', '2022-03-19 17:41:52'),
+(1111111114, 'Liv', 'Rooney', 'liv', 'livrooney@gmail.com', '1899992938', '1 Normal Ave', '1234', '1234', '2022-03-19 17:49:37'),
+(1111111116, 'Maddie', 'Rooney', 'maddie', 'maddie@gmail.com', '1829080147', '1 Cheese Ave, Stevens Point, WI', '1234', '1234', '2022-03-29 15:14:07'),
+(1111111117, 'London', 'Tipton', 'london', 'london@tipton.com', '1282191203', '1 Money Ave, Chicago ', '1234', '1234', '2022-03-31 18:48:13'),
+(1111111119, 'Cody', 'Martin', 'codymartin', 'codymartin@tipton.com', '1282191203', '1 Money Ave, Chicago ', '1234', '1234', '2022-03-31 18:49:05'),
+(1111111120, 'KC', 'Cooper', 'kccooper', 'kccooper@gmail.com', '1291234102', '1 Normal Ave', '1234', '1234', '2022-03-31 20:48:27'),
+(1111111121, 'Hannah', 'Montana', 'hannamontana', 'hannamontana@gmail.com', '1292302401', '1 Normal Ave', '1234', '1234', '2022-03-31 21:00:20'),
+(1111111122, 'Steven', 'Rash', 'steven', 'stevenrash@gmail.com', '1293120123', '1 Normal Ave', '1234', '1234', '2022-03-31 21:02:26'),
+(1111111123, 'Paul', 'Saburov', 'pinout', 'pinout@gmail.com', '1291291021', '1 Normal Ave', '1234', '1234', '2022-03-31 21:08:49');
 
 -- --------------------------------------------------------
 
@@ -94,6 +110,13 @@ CREATE TABLE `employee` (
   `pin` char(4) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`employeeID`, `firstName`, `lastName`, `username`, `email`, `password`, `pin`, `dateCreated`) VALUES
+(1111111111, 'Steve', 'Stevens', 'steve', 'steve@gmail.com', '1234', '1234', '2022-04-11 12:53:51');
 
 -- --------------------------------------------------------
 
@@ -143,7 +166,8 @@ INSERT INTO `transaction` (`transactionID`, `amount`, `type`, `vendor`, `date`, 
 (0000000028, '126.12', 'deposit', 'AAE Payroll', '2022-03-27', '20:08:57', 1000000000),
 (0000000029, '50.00', 'withdraw', 'Transfer to 1000000001', '2022-03-27', '20:10:55', 1000000000),
 (0000000030, '50.00', 'deposit', 'Transfer from 1000000000', '2022-03-27', '20:10:56', 1000000001),
-(0000000031, '100.00', 'withdraw', 'Transfer to *0001', '2022-03-28', '10:43:14', 1000000000);
+(0000000031, '100.00', 'withdraw', 'Transfer to *0001', '2022-03-28', '10:43:14', 1000000000),
+(0000000033, '10.00', 'withdraw', 'Transfer to *0012', '2022-03-31', '15:47:37', 1000000011);
 
 --
 -- Indexes for dumped tables
@@ -191,25 +215,25 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acctNum` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000008;
+  MODIFY `acctNum` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000023;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111111117;
+  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111111124;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111111112;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `transactionID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
