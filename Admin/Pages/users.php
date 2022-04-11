@@ -37,7 +37,7 @@ include '../view/navigation.php';
                     while ($row = $result->fetch_assoc()) {
                     ?>
                         <!-- Customer -->
-                        <div class="col-12 col-sm-4 col-md-3 flex-fill">
+                        <div class="col-12 col-sm-6 col-md-3 flex-fill">
                             <div class="card bg-light" style="height:250px">
                                 <div class="card-body pt-3">
                                     <div class="card-title">
