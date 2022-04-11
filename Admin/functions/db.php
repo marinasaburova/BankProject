@@ -226,7 +226,7 @@ function getBalance($acctNum)
 function getTransactions($acctNum)
 {
     global $db;
-    $query = "SELECT * FROM transaction WHERE AccountNum = '$acctNum' ORDER BY `Timestamp` DESC";
+    $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum' ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }

@@ -2,9 +2,11 @@
 $title = "Make a Transaction";
 
 // include functions & files 
-include 'db.php';
-include 'header.php';
-include 'navigation.php';
+include '../functions/db.php';
+include '../view/header.php';
+include '../view/navigation.php';
+
+$customer = $_GET['customerid'];
 
 ?>
 
@@ -93,4 +95,4 @@ include 'navigation.php';
 <!-- /.content -->
 
 <?php
-include 'footer.php';
+include '../view/footer.php';
