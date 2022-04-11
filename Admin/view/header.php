@@ -9,16 +9,8 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 // Set commonly used variables
-$customer = $_SESSION['customer'];
-$accts = getAccountOptions($customer);
-if (empty($accts)) {
-    header('Location: new-bankacct.php');
-}
-if (isset($_POST['change_acct'])) {
-    $acctNum = $_POST['change_acct'];
-} else {
-    $acctNum = $accts[0];
-}
+$employee = $_SESSION['employee'];
+
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +24,11 @@ if (isset($_POST['change_acct'])) {
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

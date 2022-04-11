@@ -7,43 +7,21 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="dashboard.php" class="nav-link">Home</a>
+                <a href="../Pages/dashboard.php" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="../contact-us.html" class="nav-link">Contact</a>
+                <a href="../Pages/contact-us.php" class="nav-link">Contact</a>
             </li>
         </ul>
 
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <li class="nav-item">
-                <div class="navbar-search-block">
-                    <form class="form-inline">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
-        </ul>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="dashboard.php" class="brand-link">
-            <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <a href="../Pages/dashboard.php" class="brand-link">
+            <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Bank Name</span>
         </a>
 
@@ -52,11 +30,11 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="../../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">
+                    <!-- <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <a href="dashboard.php" class="d-block">
-                        <?php $data = getCustomerData($customer);
+                    <a href="../Pages/dashboard.php" class="d-block ">
+                        <?php $data = getEmployeeData($employee);
                         echo $data['firstName'] . ' ' . $data['lastName'] ?>
                     </a>
                 </div>
@@ -94,6 +72,10 @@
                         $trans_history_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
                     }
+                    if ($current == 'statement.php') {
+                        $trans_history_class = 'nav-link active';
+                        $transaction_nav = 'nav-item menu-open';
+                    }
                     if ($current == 'make-transfer.php') {
                         $bank_transfer_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
@@ -101,7 +83,7 @@
                     ?>
 
                     <li class="nav-item">
-                        <a href="dashboard.php" class="<?php echo $dashboard_class ?>">
+                        <a href="../Pages/dashboard.php" class="<?php echo $dashboard_class ?>">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -109,7 +91,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="users.php" class="<?php echo $users_class ?>">
+                        <a href="../Pages/users.php" class="<?php echo $users_class ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 User Info
@@ -152,7 +134,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="logout.php" class="nav-link">
+                        <a href="../functions/logout.php" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>
                                 Logout

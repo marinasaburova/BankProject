@@ -2,9 +2,9 @@
 $title = "Dashboard";
 
 // include functions & files 
-include 'db.php';
-include 'header.php';
-include 'navigation.php';
+include '../functions/db.php';
+include '../view/header.php';
+include '../view/navigation.php';
 
 ?>
 
@@ -20,8 +20,6 @@ include 'navigation.php';
                     <div class="info-box-content">
                         <span class="info-box-text">Account</span>
                         <span class="info-box-number">
-                            <?php echo getAccountType($acctNum) ?>
-                            <small> *<?php echo getFourDigits($acctNum) ?></small>
                             <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Switch Account
                             </button>
@@ -208,4 +206,4 @@ include 'navigation.php';
 
 
 <!-- footer -->
-<?php include 'footer.php'; ?>
+<?php include '../view/footer.php'; ?>
