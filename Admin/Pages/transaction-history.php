@@ -1,15 +1,15 @@
 <?php
- 
+
 // create session variables
- 
+
 $title = "Statement";
- 
+
 // include functions & files
-include 'db.php';
-include 'header.php';
-include 'navigation.php';
+include '../functions/db.php';
+include '../view/header.php';
+include '../view/navigation.php';
 ?>
- 
+
 <div class="pick">
   <p>Select the month</p>
   <form action="view-statement.php" target="_blank" method="get">
@@ -18,7 +18,7 @@ include 'navigation.php';
     <button type="submit" name="submit">Generate Statement</button>
   </form>
 </div>
- 
- 
+
+
 <!-- footer -->
 <?php include 'footer.php'; ?>

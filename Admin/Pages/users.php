@@ -5,6 +5,7 @@ $title = "Users";
 include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
+
 ?>
 
 <!-- Main content -->
@@ -53,7 +54,7 @@ include '../view/navigation.php';
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-left">
-                                        <a href="customer_transactions.html" class="btn btn-sm btn-primary">
+                                        <a href="user-details.php?customerid=<?php echo $row['customerID'] ?>" class="btn btn-sm btn-primary">
                                             <i class="fas fa-file"></i> View Account
                                         </a>
                                     </div>
