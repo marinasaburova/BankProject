@@ -24,13 +24,6 @@ include '../view/navigation.php';
                                 Switch Account
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <?php
-                                for ($i = 0; $i < sizeof($accts); $i++) {
-                                    echo '<form action="#" method="post">';
-                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - xxxxxx' . getFourDigits($accts[$i]) . '</button>';
-                                    echo '</form>';
-                                }
-                                ?>
                             </div>
                         </span>
                     </div>
@@ -45,7 +38,7 @@ include '../view/navigation.php';
 
                     <div class="info-box-content">
                         <span class="info-box-text">Balance</span>
-                        <span class="info-box-number">Available: <small> $<?php echo getBalance($acctNum) ?> </small></span>
+                        <span class="info-box-number">Available: <small> $0.00 </small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -63,67 +56,62 @@ include '../view/navigation.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Monthly Recap Report</h5>
+                        <h5 class="card-title">Pending Accounts</h5>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <p class="text-center">
-                                    <strong>Spendings: 1 April, 2021 - 30 April, 2022</strong>
-                                </p>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
 
-                                <div class="chart">
-                                    <!-- Sales Chart Canvas -->
-                                    <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
-                                </div>
-                                <!-- /.chart-responsive -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <p class="text-center">
-                                    <strong>Your Spendings For April</strong>
-                                </p>
+                                <?php
+                                $result = getPendingAccts();
+                                if (!$result) {
+                                    echo '<p class="text-center">There are no pending accounts!</p>';
+                                } else {
+                                    $num_results = $result->num_rows;
+                                    $i = 0;
+                                ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Account Number</th>
+                                            <th>Customer</th>
+                                            <th>Account Type</th>
+                                            <th>Date Requested</th>
+                                            <th>Manage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                            $data = getCustomerData($row['customerID']);
+                                            $customerName = $data['firstName'] . ' ' . $data['lastName'];
+                                            echo '<tr>';
+                                            echo '<td>' . $row['acctNum'] . '</td>';
+                                            echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
+                                            echo '<td> ' . $row['acctType'] . '</td>';
+                                            echo '<td>' . $row['dateCreated'] . '</td>'; ?>
+                                            <td>
+                                                <form action="../functions/changestatus.php" method="post">
+                                                    <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
+                                                    <button type="submit" name="approve" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i>
+                                                    </button>
+                                                    <button type="submit" name="deny" class="btn btn-sm btn-danger"> <i class="fas fa-times-circle"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
 
-                                <div class="progress-group">
-                                    Services
-                                    <span class="float-right"><b>$160</b></span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                                    </div>
-                                </div>
-                                <!-- /.progress-group -->
+                                            </tr>
+                                    <?php
+                                            $i++;
+                                        }
+                                        $result->free();
+                                    }
 
-                                <div class="progress-group">
-                                    Merchandise
-                                    <span class="float-right"><b>$310</b></span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-danger" style="width: 75%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- /.progress-group -->
-                                <div class="progress-group">
-                                    <span class="progress-text">Restraunts</span>
-                                    <span class="float-right"><b>$480</b></span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-success" style="width: 60%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- /.progress-group -->
-                                <div class="progress-group">
-                                    Health Care
-                                    <span class="float-right"><b>$250</b></span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                    </div>
-                                </div>
-                                <!-- /.progress-group -->
-                            </div>
-                            <!-- /.col -->
+                                    ?>
+                                    </tbody>
+                            </table>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.table-responsive -->
                     </div>
                     <!-- ./card-body -->
                 </div>

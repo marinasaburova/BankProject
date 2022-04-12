@@ -118,12 +118,36 @@ function getEmployeeData($customer)
     }
 }
 
+// returns a list of all customers
 function getAllCustomers()
 {
     global $db;
-    $query = "SELECT * FROM customer";
+    $query = "SELECT * FROM customer ORDER BY lastName ASC";
     $result = $db->query($query);
     return $result;
+}
+
+// gets all of the accounts waiting to be created
+function getPendingAccts()
+{
+    global $db;
+    $query = "SELECT * FROM account WHERE status='pending' ORDER BY dateCreated";
+    $result = $db->query($query);
+    return $result;
+}
+
+function changeStatus($acctNum, $status)
+{
+    global $db;
+    $query = "UPDATE `account` SET `status` = '$status' WHERE `account`.`acctNum` = '$acctNum'";
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating account status.';
+    } else {
+        header('Location: ../Pages/dashboard.php');
+        exit;
+    }
 }
 
 // updates customer account info 
@@ -235,9 +259,8 @@ function getTransactions($acctNum)
 function generateStatement($acctNum, $month)
 {
     global $db;
-    $query = "SELECT * FROM transaction WHERE DATE(Timestamp) as mydate BETWEEN '$month-01' AND '$month-31' AND `AccountNum` = '$acctNum'";
+    $query = "SELECT * FROM transaction WHERE `date` BETWEEN '$month-01' AND '$month-31' AND `acctNum` = '$acctNum'";
     $result = $db->query($query);
-
     return $result;
 }
 

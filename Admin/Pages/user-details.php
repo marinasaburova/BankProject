@@ -39,11 +39,11 @@ $accts = getAccountOptions($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="edit-info.php" class="btn btn-sm btn-success">
-                            <i class="fas fa-pen"></i> Edit Info
+                        <a href="edit-info.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
+                            Edit Info
                         </a>
                         <a href="edit-info.php" class="btn btn-sm btn-danger float-right">
-                            <i class="fas fa-pen"></i> Remove Customer
+                            Remove Customer
                         </a>
                     </div>
                     <!-- /.card-footer -->
@@ -74,11 +74,11 @@ $accts = getAccountOptions($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="edit-info.php" class="btn btn-sm btn-success">
-                            <i class="fas fa-pen"></i> Open a New Account
+                        <a href="#" class="btn btn-sm btn-success">
+                            Open a New Account
                         </a>
-                        <a href="edit-info.php" class="btn btn-sm btn-danger float-right">
-                            <i class="fas fa-pen"></i> Close an Account
+                        <a href="#" class="btn btn-sm btn-danger float-right">
+                            Close an Account
                         </a>
                     </div>
                     <!-- /.card-footer -->
@@ -140,7 +140,7 @@ $accts = getAccountOptions($customer);
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
                         <a href="bank-transaction.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left">Make a Transaction</a>
-                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">View All History</a>
+                        <a href="transaction-history.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-secondary float-right">View All History</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>

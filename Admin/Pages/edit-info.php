@@ -2,10 +2,11 @@
 $title = "Edit Account";
 
 // include functions & files 
-include 'db.php';
-include 'header.php';
-include 'navigation.php';
+include '../functions/db.php';
+include '../view/header.php';
+include '../view/navigation.php';
 
+$customer = $_GET['customerid'];
 $data = getCustomerData($customer);
 
 ?>
@@ -21,7 +22,7 @@ $data = getCustomerData($customer);
                         <h3 class="card-title">Personal Info</h3>
                     </div>
                     <div class="card-body">
-                        <form action="update-customer.php" method="post">
+                        <form action="../functions/update-customer.php" method="post">
                             <div class="form-group">
                                 <label for="fname">First Name</label>
                                 <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" />
@@ -67,7 +68,7 @@ $data = getCustomerData($customer);
                         <div class="card-tools"></div>
                     </div>
                     <div class="card-body">
-                        <form action="update-customer.php" method="post">
+                        <form action="../functions/update-customer.php" method="post">
                             <div class="form-group">
                                 <label for="currPwd">Current Password</label>
                                 <input type="password" name="currPwd" id="currPwd" placeholder="Enter current password" class="form-control" />
@@ -98,4 +99,4 @@ $data = getCustomerData($customer);
 <!-- /.content -->
 
 <?php
-include 'footer.php';
+include '../view/footer.php';

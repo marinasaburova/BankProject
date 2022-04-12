@@ -42,7 +42,7 @@ include '../view/navigation.php';
                             <div class="card bg-light" style="height:250px">
                                 <div class="card-body pt-3">
                                     <div class="card-title">
-                                        <h2 class="lead"><b><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></b></h2>
+                                        <h2 class="lead"><b><?php echo $row['lastName'] . ', ' . $row['firstName'] ?></b></h2>
                                     </div>
                                     <div class="card-text">
                                         <ul class="ml-4 mb-0 fa-ul text-muted">

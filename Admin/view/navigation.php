@@ -94,7 +94,23 @@
                         <a href="../Pages/users.php" class="<?php echo $users_class ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
-                                User Info
+                                Users
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="<?php echo 'nav-link' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Bank Accounts
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="<?php echo 'nav-link' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Transactions
                             </p>
                         </a>
                     </li>
