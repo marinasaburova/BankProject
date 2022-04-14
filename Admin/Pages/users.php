@@ -79,7 +79,7 @@ include '../view/navigation.php';
             var UserDivi = UserDivs[i];
             var UserName = UserDivi.getElementsByClassName('UserName');
             var UserNameValue = $(UserName).text();
-            if (!UserNameValue.toLowerCase().startsWith(searchValue.toLowerCase())) {
+            if (!UserNameValue.toLowerCase().includes(searchValue.toLowerCase())) {
                 $(UserDivi).hide();
             } else {
                 $(UserDivi).show();

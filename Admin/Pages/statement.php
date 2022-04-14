@@ -2,14 +2,17 @@
 if (isset($_GET['month'])) {
     $month = $_GET['month'];
 }
-$title = "Transactions";
+
 
 // include functions & files 
 include '../functions/db.php';
-include '../view/header.php';
-include '../view/navigation.php';
 
 $customer = $_GET['customerid'];
+$data = getCustomerData($customer);
+$title = "Transactions for " . $data['firstName'] . " " . $data['lastName'];
+
+include '../view/header.php';
+include '../view/navigation.php';
 
 if (isset($_GET['acctNum'])) {
     $acctNum = $_GET['acctNum'];
@@ -30,9 +33,9 @@ if (isset($_GET['acctNum'])) {
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card card-primary">
+                        <div class="card card-white">
                             <div class="card-header">
-                                <h3 class="card-title">Select Month</h3>
+                                <h3 class="card-title">Filter</h3>
                             </div>
                             <div class="card-body">
                                 <div class="pick">
@@ -62,7 +65,7 @@ if (isset($_GET['acctNum'])) {
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
-                        <h3 class="card-title">Monthly Transactions</h3>
+                        <h3 class="card-title">Transactions</h3>
                     </div>
                     <!-- /.card-header -->
 

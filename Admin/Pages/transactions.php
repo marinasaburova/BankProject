@@ -55,7 +55,7 @@ include '../view/navigation.php';
                                 $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
                                 echo '<tr>';
-                                echo '<td><a href="user-details.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
+                                echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
                                 echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                 echo '<td>' . $row['vendor'] . '</td>';
                                 if ($row['type'] == 'withdraw') {
