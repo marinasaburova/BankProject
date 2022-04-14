@@ -115,7 +115,7 @@ function changePassword($customer, $newpwd)
 function getAccountDropdown($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND status = 'active'";
     $result = $db->query($query);
     $num_results = $result->num_rows;
     while ($row = $result->fetch_assoc()) {
@@ -127,9 +127,8 @@ function getAccountDropdown($customer)
 function getAccountOptions($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND status = 'active'";
     $result = $db->query($query);
-    $num_results = $result->num_rows;
     $accts = array();
     while ($row = $result->fetch_assoc()) {
         $accts[] = $row['acctNum'];

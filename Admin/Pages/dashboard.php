@@ -157,9 +157,10 @@ include '../view/navigation.php';
                                     while (($row = $result->fetch_assoc()) && ($i < 10)) {
                                         $cid = getCustomerDataByAcct($row['acctNum']);
                                         $data = getCustomerData($cid);
+                                        $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
                                         echo '<tr>';
-                                        echo '<td>' . $data['firstName'] . ' ' . $data['lastName'] . '</td>';
+                                        echo '<td><a href="user-details.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                         echo '<td>' . $row['vendor'] . '</td>';
                                         if ($row['type'] == 'withdraw') {

@@ -107,7 +107,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="<?php echo 'nav-link' ?>">
+                        <a href="transactions.php" class="<?php echo 'nav-link' ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Transactions
@@ -115,7 +115,7 @@
                         </a>
                     </li>
                     <li class="<?php echo $transaction_nav ?>">
-                        <a href="#" class="<?php echo $transaction_class ?>">
+                        <a href="transactions.php" class="<?php echo $transaction_class ?>">
                             <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
                             <p>
                                 Transaction
