@@ -106,48 +106,13 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="transactions.php" class="<?php echo 'nav-link' ?>">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Transactions
-                            </p>
-                        </a>
-                    </li>
                     <li class="<?php echo $transaction_nav ?>">
                         <a href="transactions.php" class="<?php echo $transaction_class ?>">
                             <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
                             <p>
-                                Transaction
-                                <i class="right fas fa-angle-left"></i>
+                                Transactions
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="bank-transaction.php" class="<?php echo $bank_trans_class ?>">
-                                    <i class="nav-icon fas fa-regular fa-hand-holding-usd"></i>
-                                    <p>
-                                        Make A Transaction
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="make-transfer.php" class="<?php echo $bank_transfer_class ?>">
-                                    <i class="nav-icon fas fa-regular fa-exchange-alt"></i>
-                                    <p>
-                                        Transfer Funds
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="transaction-history.php" class="<?php echo $trans_history_class ?>">
-                                    <i class="nav-icon fas fa-solid fa-file-invoice"></i>
-                                    <p>
-                                        Transaction History
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="../functions/logout.php" class="nav-link">

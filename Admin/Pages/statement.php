@@ -1,6 +1,8 @@
 <?php
-$month = $_GET['month'];
-$title = "Statement for $month";
+if (isset($_GET['month'])) {
+    $month = $_GET['month'];
+}
+$title = "Transactions";
 
 // include functions & files 
 include '../functions/db.php';
@@ -31,7 +33,11 @@ $customer = $_GET['customerid'];
                             <table class="table m-0 table-striped">
 
                                 <?php
-                                $result = generateStatement($acctNum, $month);
+                                if (isset($month)) {
+                                    $result = generateStatement($acctNum, $month);
+                                } else {
+                                    $result = getTransactions($acctNum);
+                                }
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
                                     echo '<p class="text-center">This account does not have any transactions.</p>';
