@@ -301,7 +301,7 @@ function deposit($acctNum, $amount, $vendor)
             echo 'Error updating your balance.';
         }
         echo 'Deposit has been successfully made!';
-        header('Location: dashboard.php');
+        header('Location: ../Pages/dashboard.php');
         exit;
     } else {
         echo 'There was an error with your deposit';
@@ -313,7 +313,7 @@ function deposit($acctNum, $amount, $vendor)
 function withdraw($acctNum, $amount, $vendor)
 {
     global $db;
-    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `AccountNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
     $result = $db->query($query);
 
     // checks for successful result
@@ -324,7 +324,7 @@ function withdraw($acctNum, $amount, $vendor)
             echo 'Error updating your balance.';
         }
         echo 'Withdraw has been successfully made!';
-        header('Location: dashboard.php');
+        header('Location: ../Pages/dashboard.php');
         exit;
     } else {
         echo 'There was an error with your withdraw.';

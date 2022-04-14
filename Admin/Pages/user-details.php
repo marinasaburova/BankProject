@@ -139,7 +139,8 @@ $accts = getAccountOptions($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transaction.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left">Make a Transaction</a>
+                        <a href="bank-transaction.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
+                        <a href="make-transfer.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
                         <a href="statement.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-secondary float-right">View All History</a>
                     </div>
                     <!-- /.card-footer -->

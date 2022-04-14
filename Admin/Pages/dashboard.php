@@ -13,32 +13,41 @@ include '../view/navigation.php';
     <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-6">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-university"></i></span>
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Account</span>
-                        <span class="info-box-number">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Switch Account
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            </div>
-                        </span>
+                        <span class="info-box-text">Number of Users</span>
+                        <span class="info-box-number">#</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-6">
+
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-money-check-alt"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Number of Bank Accounts</span>
+                        <span class="info-box-number">#</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Balance</span>
-                        <span class="info-box-number">Available: <small> $0.00 </small></span>
+                        <span class="info-box-text">Pending Accounts</span>
+                        <span class="info-box-number">#</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -66,49 +75,53 @@ include '../view/navigation.php';
                                 <?php
                                 $result = getPendingAccts();
                                 if (!$result) {
-                                    echo '<p class="text-center">There are no pending accounts!</p>';
+                                    echo '<p class="text-center pt-3">There are no pending accounts!</p>';
                                 } else {
                                     $num_results = $result->num_rows;
-                                    $i = 0;
+                                    if ($num_results == 0) {
+                                        echo '<p class="text-center pt-3">There are no pending accounts!</p>';
+                                    } else {
+                                        $i = 0;
                                 ?>
-                                    <thead>
-                                        <tr>
-                                            <th>Account Number</th>
-                                            <th>Customer</th>
-                                            <th>Account Type</th>
-                                            <th>Date Requested</th>
-                                            <th>Manage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        while (($row = $result->fetch_assoc()) && ($i < 10)) {
-                                            $data = getCustomerData($row['customerID']);
-                                            $customerName = $data['firstName'] . ' ' . $data['lastName'];
-                                            echo '<tr>';
-                                            echo '<td>' . $row['acctNum'] . '</td>';
-                                            echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
-                                            echo '<td> ' . $row['acctType'] . '</td>';
-                                            echo '<td>' . $row['dateCreated'] . '</td>'; ?>
-                                            <td>
-                                                <form action="../functions/changestatus.php" method="post">
-                                                    <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
-                                                    <button type="submit" name="approve" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i>
-                                                    </button>
-                                                    <button type="submit" name="deny" class="btn btn-sm btn-danger"> <i class="fas fa-times-circle"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-
+                                        <thead>
+                                            <tr>
+                                                <th>Account Number</th>
+                                                <th>Customer</th>
+                                                <th>Account Type</th>
+                                                <th>Date Requested</th>
+                                                <th>Manage</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                                $data = getCustomerData($row['customerID']);
+                                                $customerName = $data['firstName'] . ' ' . $data['lastName'];
+                                                echo '<tr>';
+                                                echo '<td>' . $row['acctNum'] . '</td>';
+                                                echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
+                                                echo '<td> ' . $row['acctType'] . '</td>';
+                                                echo '<td>' . $row['dateCreated'] . '</td>'; ?>
+                                                <td>
+                                                    <form action="../functions/changestatus.php" method="post">
+                                                        <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
+                                                        <button type="submit" name="approve" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i>
+                                                        </button>
+                                                        <button type="submit" name="deny" class="btn btn-sm btn-danger"> <i class="fas fa-times-circle"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+
+                                                </tr>
                                     <?php
-                                            $i++;
+                                                $i++;
+                                            }
                                         }
                                         $result->free();
                                     }
 
                                     ?>
-                                    </tbody>
+                                        </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
@@ -183,8 +196,7 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left">Make a Transaction</a>
-                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View All History</a>
+                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View Transactions</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>

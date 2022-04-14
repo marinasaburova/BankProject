@@ -2,9 +2,11 @@
 $title = "Transfer Funds";
 
 // include functions & files 
-include 'db.php';
-include 'header.php';
-include 'navigation.php';
+include '../functions/db.php';
+include '../view/header.php';
+include '../view/navigation.php';
+
+$customer = $_GET['customerid'];
 
 ?>
 
@@ -19,7 +21,7 @@ include 'navigation.php';
                         <h3 class="card-title">Transfer</h3>
                     </div>
                     <div class="card-body">
-                        <form action="transfer.php" method="post">
+                        <form action="../functions/transfer.php" method="post">
                             <div class="form-group">
                                 <label for="acctFrom">From Account</label>
                                 <select id="acctFrom" name="acctFrom" class="form-control custom-select">
@@ -56,4 +58,4 @@ include 'navigation.php';
 <!-- /.content -->
 
 <?php
-include 'footer.php';
+include '../view/footer.php';
