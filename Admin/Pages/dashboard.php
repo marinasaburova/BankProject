@@ -137,15 +137,16 @@ include '../view/navigation.php';
                             <table class="table m-0">
 
                                 <?php
-                                $result = getTransactions($acctNum);
+                                $result = getAllTransactions();
                                 if (!$result) {
-                                    echo '<p class="text-center">This account does not have any transactions.</p>';
+                                    echo '<p class="text-center">There are no transactions.</p>';
                                 } else {
                                     $num_results = $result->num_rows;
                                     $i = 0;
                                 ?>
                                     <thead>
                                         <tr>
+                                            <th>Customer</th>
                                             <th>Date</th>
                                             <th>Title</th>
                                             <th>Amount</th>
@@ -154,14 +155,18 @@ include '../view/navigation.php';
                                     <tbody>
                                     <?php
                                     while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                        $cid = getCustomerDataByAcct($row['acctNum']);
+                                        $data = getCustomerData($cid);
+
                                         echo '<tr>';
-                                        echo '<td>' . $row['Timestamp'] . '</td>';
-                                        echo '<td>' . $row['Vendor'] . '</td>';
-                                        if ($row['Type'] == 'withdraw') {
-                                            echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['Amount'] . '</div></td>';
+                                        echo '<td>' . $data['firstName'] . ' ' . $data['lastName'] . '</td>';
+                                        echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                        echo '<td>' . $row['vendor'] . '</td>';
+                                        if ($row['type'] == 'withdraw') {
+                                            echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
                                         }
-                                        if ($row['Type'] == 'deposit') {
-                                            echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['Amount'] . '</div></td>';
+                                        if ($row['type'] == 'deposit') {
+                                            echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
                                         }
                                         echo '</tr>';
                                         $i++;

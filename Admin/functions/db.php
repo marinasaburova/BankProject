@@ -101,6 +101,20 @@ function getCustomerData($customer)
     }
 }
 
+function getCustomerDataByAcct($acctNum)
+{
+    global $db;
+    $query = "SELECT customerID FROM account WHERE acctNum = '$acctNum'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    if ($num_results != 1) {
+        echo 'Error.';
+    } else {
+        $row = $result->fetch_assoc();
+        return $row['customerID'];
+    }
+}
+
 // gets all info for a customer
 function getEmployeeData($customer)
 {
@@ -251,6 +265,14 @@ function getTransactions($acctNum)
 {
     global $db;
     $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum' ORDER BY `date` DESC, `time` DESC";
+    $result = $db->query($query);
+    return $result;
+}
+
+function getAllTransactions()
+{
+    global $db;
+    $query = "SELECT * FROM transaction ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }
