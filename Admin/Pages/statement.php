@@ -9,8 +9,14 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
-$acctNum = $_GET['acctNum'];
 $customer = $_GET['customerid'];
+
+if (isset($_GET['acctNum'])) {
+    $acctNum = $_GET['acctNum'];
+} else {
+    $accts = getAccountOptions($customer);
+    $acctNum = $accts[0];
+}
 
 ?>
 
@@ -22,17 +28,50 @@ $customer = $_GET['customerid'];
             <!-- Left col -->
             <div class="col-md-12">
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Select Month</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="pick">
+                                    <form action="statement.php" method="get">
+                                        <div class="form-group">
+                                            <input type="month" name="month" id="month" class="form-control custom-select" />
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="acctNum" name="acctNum" class="form-control custom-select" required>
+                                                <?php getAccountDropdown($customer); ?>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="customerid" value="<?php echo $customer ?>">
+                                        <div class="form-group">
+                                            <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- ./row -->
+
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
                         <h3 class="card-title">Monthly Transactions</h3>
                     </div>
                     <!-- /.card-header -->
+
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table m-0 table-striped">
 
                                 <?php
+
                                 if (isset($month)) {
                                     $result = generateStatement($acctNum, $month);
                                 } else {
