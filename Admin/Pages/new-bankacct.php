@@ -52,7 +52,7 @@ include 'db.php';
                             <option value="savings">Savings</option>
                         </select>
                     </div>
-                    <input type="hidden" name="customer" value="'<?php $customer ?>'" >
+                    <input type="hidden" name="customer" value="'<?php $customer ?>'">
 
                     <div class="row">
                         <div class="col-7">

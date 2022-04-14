@@ -210,7 +210,6 @@ function deposit($acctNum, $amount, $vendor)
         }
         echo 'Deposit has been successfully made!';
         header('Location: ../Pages/dashboard.php');
-        exit;
     } else {
         echo 'There was an error with your deposit';
         exit;
@@ -233,7 +232,6 @@ function withdraw($acctNum, $amount, $vendor)
         }
         echo 'Withdraw has been successfully made!';
         header('Location: ../Pages/dashboard.php');
-        exit;
     } else {
         echo 'There was an error with your withdraw.';
         exit;

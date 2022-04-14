@@ -175,7 +175,7 @@ function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr
     if (!$result) {
         echo 'Error updating info.';
     } else {
-        header('Location: users.php');
+        header("Location: ../Pages/users-details.php?customerid=$customer");
         exit;
     }
 }
@@ -189,7 +189,7 @@ function changePassword($customer, $newpwd)
     if (!$result) {
         echo 'Error updating password.';
     } else {
-        header('Location: users.php');
+        header("Location: ../Pages/users-details.php?customerid=$customer");
         exit;
     }
 }
@@ -290,19 +290,18 @@ function generateStatement($acctNum, $month)
 function deposit($acctNum, $amount, $vendor)
 {
     global $db;
-    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `AccountNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
+    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
     $result = $db->query($query);
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = `balance` + '$amount' WHERE `account`.`AcctNum` = '$acctNum'";
+        $query2 = "UPDATE `account` SET `balance` = `balance` + '$amount' WHERE `account`.`acctNum` = '$acctNum'";
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
         }
         echo 'Deposit has been successfully made!';
         header('Location: ../Pages/dashboard.php');
-        exit;
     } else {
         echo 'There was an error with your deposit';
         exit;
@@ -318,14 +317,13 @@ function withdraw($acctNum, $amount, $vendor)
 
     // checks for successful result
     if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`AcctNum` = '$acctNum'";
+        $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
         $result2 = $db->query($query2);
         if (!$result2) {
             echo 'Error updating your balance.';
         }
         echo 'Withdraw has been successfully made!';
         header('Location: ../Pages/dashboard.php');
-        exit;
     } else {
         echo 'There was an error with your withdraw.';
         exit;

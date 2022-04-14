@@ -196,7 +196,7 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View Transactions</a>
+                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View All Transactions</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>

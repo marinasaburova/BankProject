@@ -20,7 +20,7 @@ $customer = $_GET['customerid'];
             <h3 class="card-title">Deposit</h3>
           </div>
           <div class="card-body">
-            <form action="deposit.php" method="post">
+            <form action="../functions/deposit.php" method="post">
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select">
@@ -55,7 +55,7 @@ $customer = $_GET['customerid'];
             <div class="card-tools"></div>
           </div>
           <div class="card-body">
-            <form action="withdraw.php" method="post">
+            <form action="../functions/withdraw.php" method="post">
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select">
