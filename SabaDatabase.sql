@@ -145,12 +145,12 @@ INSERT INTO `history` (`Customer_Name`, `Transaction_Amount`, `Transfer_Descript
 
 DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction` (
-  `Transaction` int(100) NOT NULL AUTO_INCREMENT,
-  `Amount` decimal(12,2) NOT NULL,
-  `Type` varchar(10) NOT NULL,
-  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Vendor` varchar(60) NOT NULL,
-  `AccountNum` char(10) NOT NULL,
+  `transaction` int(100) NOT NULL AUTO_INCREMENT,
+  `amount` decimal(12,2) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `vendor` varchar(60) NOT NULL,
+  `accountNum` char(10) NOT NULL,
   PRIMARY KEY (`Transaction`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`Transaction`, `Amount`, `Type`, `Timestamp`, `Vendor`, `AccountNum`) VALUES
+INSERT INTO `transaction` (`transaction`, `amount`, `type`, `timestamp`, `vendor`, `accountNum`) VALUES
 (1, '12.00', 'deposit', '2022-04-11 02:24:31', 'Syed', '1000000009'),
 (2, '12.00', 'deposit', '2022-04-11 02:25:09', 'Syed', '1000000009'),
 (3, '1000.00', 'deposit', '2022-04-11 02:43:52', 'Syed', '1000000009'),
