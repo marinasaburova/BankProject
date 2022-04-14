@@ -98,14 +98,6 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="<?php echo 'nav-link' ?>">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Bank Accounts
-                            </p>
-                        </a>
-                    </li>
                     <li class="<?php echo $transaction_nav ?>">
                         <a href="transactions.php" class="<?php echo $transaction_class ?>">
                             <i class="nav-icon fas fa-regular fa-file-invoice-dollar"></i>
