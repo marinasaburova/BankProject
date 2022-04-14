@@ -18,13 +18,13 @@ include '../view/navigation.php';
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="input-group">
-                            <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Enter Customer Name">
-                            <div class="input-group-append">
-                                <button type="button" onclick="Searchfunction()" class="btn btn-lg btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
+                        <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Enter Customer Name">
+                        <div class="input-group-append">
+                            <button type="button" onclick="Searchfunction()" class="btn btn-lg btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
+                    </div>
                 </div>
             </div>
             <div class="card-body pb-0">
@@ -40,7 +40,7 @@ include '../view/navigation.php';
                             <div class="card bg-light" style="height:250px">
                                 <div class="card-body pt-3">
                                     <div class="card-title">
-                                        <h2 class="lead"><b class="UserName"><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></b></h2>
+                                        <h2 class="lead"><b class="UserName"><?php echo $row['lastName'] . ', ' . $row['firstName'] ?></b></h2>
                                     </div>
                                     <div class="card-text">
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
@@ -68,32 +68,26 @@ include '../view/navigation.php';
             <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-        <!-- jQuery -->
+<!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
 <script>
-        function Searchfunction() {
-           var searchValue = $('#UserSearch').val();
-            var UserDivs = $('.UserDiv');
-            var divLength = UserDivs.length;
-            for(var i = 0; i < divLength ; i++)
-                {
-                    var UserDivi = UserDivs[i];
-                    var UserName = UserDivi.getElementsByClassName('UserName');
-                    var UserNameValue = $(UserName).text();
-                    if(!UserNameValue.toLowerCase().startsWith(searchValue.toLowerCase()))
-                        {
-                            $(UserDivi).hide();
-                        }
-                    else
-                        {
-                            $(UserDivi).show();
-                        }
-                }
-            
+    function Searchfunction() {
+        var searchValue = $('#UserSearch').val();
+        var UserDivs = $('.UserDiv');
+        var divLength = UserDivs.length;
+        for (var i = 0; i < divLength; i++) {
+            var UserDivi = UserDivs[i];
+            var UserName = UserDivi.getElementsByClassName('UserName');
+            var UserNameValue = $(UserName).text();
+            if (!UserNameValue.toLowerCase().startsWith(searchValue.toLowerCase())) {
+                $(UserDivi).hide();
+            } else {
+                $(UserDivi).show();
+            }
         }
-    </script>
-               
-        
+
+    }
+</script>
+
+
 <?php include '../view/footer.php' ?>
-        
-        
