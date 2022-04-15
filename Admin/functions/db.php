@@ -101,7 +101,8 @@ function getCustomerData($customer)
     }
 }
 
-function getCustomerDataByAcct($acctNum)
+// Get customer ID for an account number
+function getCustomerUsingAcct($acctNum)
 {
     global $db;
     $query = "SELECT customerID FROM account WHERE acctNum = '$acctNum'";
@@ -269,10 +270,24 @@ function getTransactions($acctNum)
     return $result;
 }
 
+function getTransactionsCustomer($customer)
+{
+    global $db;
+    $accts = getAccountOptions($customer);
+    $query = "SELECT * FROM `transaction` WHERE `vendor` = ''";
+    foreach ($accts as $a) {
+        $query .= " OR `acctNum` = '$a'";
+    }
+    $query .= " ORDER BY `date` DESC, `time` DESC";
+    $result = $db->query($query);
+    return $result;
+}
+
+// get all transactions amongst all customers
 function getAllTransactions()
 {
     global $db;
-    $query = "SELECT * FROM transaction ORDER BY `date` DESC, `time` DESC";
+    $query = "SELECT * FROM `transaction` ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }
@@ -281,7 +296,7 @@ function getAllTransactions()
 function generateStatement($acctNum, $month)
 {
     global $db;
-    $query = "SELECT * FROM transaction WHERE `date` BETWEEN '$month-01' AND '$month-31' AND `acctNum` = '$acctNum'";
+    $query = "SELECT * FROM `transaction` WHERE `date` BETWEEN '$month-01' AND '$month-31' AND `acctNum` = '$acctNum'";
     $result = $db->query($query);
     return $result;
 }
@@ -338,4 +353,25 @@ function transfer($from, $to, $amount)
     withdraw($from, $amount, "Transfer to *" . getFourDigits($to));
     deposit($to, $amount, "Transfer from *" . getFourDigits($from));
     exit;
+}
+
+
+// Get number of customers
+function getCustomerCount()
+{
+    global $db;
+    $query = "SELECT * FROM customer";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    return $num_results;
+}
+
+// Get number of bank accounts
+function getBankAcctCount()
+{
+    global $db;
+    $query = "SELECT * FROM account";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    return $num_results;
 }

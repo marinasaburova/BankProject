@@ -19,7 +19,7 @@ include '../view/navigation.php';
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Users</span>
-                        <span class="info-box-number">#</span>
+                        <span class="info-box-number"><?php echo getCustomerCount() ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -33,7 +33,7 @@ include '../view/navigation.php';
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Bank Accounts</span>
-                        <span class="info-box-number">#</span>
+                        <span class="info-box-number"><?php echo getBankAcctCount() ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -44,10 +44,14 @@ include '../view/navigation.php';
             <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
+                    <?php
+                    $result = getPendingAccts();
+                    $num_results = $result->num_rows;
 
+                    ?>
                     <div class="info-box-content">
                         <span class="info-box-text">Pending Accounts</span>
-                        <span class="info-box-number">#</span>
+                        <span class="info-box-number"><?php echo $num_results ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -73,55 +77,50 @@ include '../view/navigation.php';
                             <table class="table m-0">
 
                                 <?php
-                                $result = getPendingAccts();
-                                if (!$result) {
+
+                                if ($num_results == 0) {
                                     echo '<p class="text-center pt-3">There are no pending accounts!</p>';
                                 } else {
-                                    $num_results = $result->num_rows;
-                                    if ($num_results == 0) {
-                                        echo '<p class="text-center pt-3">There are no pending accounts!</p>';
-                                    } else {
-                                        $i = 0;
+                                    $i = 0;
                                 ?>
-                                        <thead>
-                                            <tr>
-                                                <th>Account Number</th>
-                                                <th>Customer</th>
-                                                <th>Account Type</th>
-                                                <th>Date Requested</th>
-                                                <th>Manage</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            while (($row = $result->fetch_assoc()) && ($i < 10)) {
-                                                $data = getCustomerData($row['customerID']);
-                                                $customerName = $data['firstName'] . ' ' . $data['lastName'];
-                                                echo '<tr>';
-                                                echo '<td>' . $row['acctNum'] . '</td>';
-                                                echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
-                                                echo '<td> ' . $row['acctType'] . '</td>';
-                                                echo '<td>' . $row['dateCreated'] . '</td>'; ?>
-                                                <td>
-                                                    <form action="../functions/changestatus.php" method="post">
-                                                        <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
-                                                        <button type="submit" name="approve" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i>
-                                                        </button>
-                                                        <button type="submit" name="deny" class="btn btn-sm btn-danger"> <i class="fas fa-times-circle"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                    <thead>
+                                        <tr>
+                                            <th>Account Number</th>
+                                            <th>Customer</th>
+                                            <th>Account Type</th>
+                                            <th>Date Requested</th>
+                                            <th>Manage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                            $data = getCustomerData($row['customerID']);
+                                            $customerName = $data['firstName'] . ' ' . $data['lastName'];
+                                            echo '<tr>';
+                                            echo '<td>' . $row['acctNum'] . '</td>';
+                                            echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
+                                            echo '<td> ' . $row['acctType'] . '</td>';
+                                            echo '<td>' . $row['dateCreated'] . '</td>'; ?>
+                                            <td>
+                                                <form action="../functions/changestatus.php" method="post">
+                                                    <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
+                                                    <button type="submit" name="approve" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i>
+                                                    </button>
+                                                    <button type="submit" name="deny" class="btn btn-sm btn-danger"> <i class="fas fa-times-circle"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
 
-                                                </tr>
+                                            </tr>
                                     <?php
-                                                $i++;
-                                            }
+                                            $i++;
                                         }
                                         $result->free();
                                     }
 
                                     ?>
-                                        </tbody>
+                                    </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
@@ -142,7 +141,9 @@ include '../view/navigation.php';
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
-                        <h3 class="card-title">Recent Transactions</h3>
+                        <h5 class="card-title">Recent Transactions</h5>
+                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View All Transactions</a>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
@@ -168,8 +169,8 @@ include '../view/navigation.php';
                                     <tbody>
                                     <?php
                                     while (($row = $result->fetch_assoc()) && ($i < 10)) {
-                                        $cid = getCustomerDataByAcct($row['acctNum']);
-                                        $data = getCustomerData($cid);
+                                        $customer = getCustomerUsingAcct($row['acctNum']);
+                                        $data = getCustomerData($customer);
                                         $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
                                         echo '<tr>';
@@ -196,7 +197,6 @@ include '../view/navigation.php';
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="transactions.php" class="btn btn-sm btn-secondary float-right">View All Transactions</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>

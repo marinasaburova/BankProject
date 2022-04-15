@@ -48,11 +48,15 @@ include '../view/header-simple.php';
                     </div>
                 </form>
 
-                <p class="mb-1">
+                <!--     <p class="mb-1">
                     <a href="forgotpassword.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
+                </p> -->
+                <p class="mb-1">
                     <a href="new-customer.php" class="text-center">Register a new account</a>
+                </p>
+
+                <p class="mb-0">
+                    <a href="../../Admin/Pages/login.php" class="text-center">Admin login</a>
                 </p>
             </div>
             <!-- /.card-body -->

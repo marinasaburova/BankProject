@@ -78,7 +78,7 @@ if (isset($_GET['acctNum'])) {
                                 if (isset($month)) {
                                     $result = generateStatement($acctNum, $month);
                                 } else {
-                                    $result = getTransactions($acctNum);
+                                    $result = getTransactionsCustomer($customer);
                                 }
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
@@ -88,6 +88,7 @@ if (isset($_GET['acctNum'])) {
                                 ?>
                                     <thead>
                                         <tr>
+                                            <th>Bank Account</th>
                                             <th>Date</th>
                                             <th>Title</th>
                                             <th>Amount</th>
@@ -97,6 +98,7 @@ if (isset($_GET['acctNum'])) {
                                     <?php
                                     while (($row = $result->fetch_assoc())) {
                                         echo '<tr>';
+                                        echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                         echo '<td>' . $row['vendor'] . '</td>';
                                         if ($row['type'] == 'withdraw') {
