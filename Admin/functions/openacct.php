@@ -13,8 +13,7 @@
     $result = $db->query($query);
     // checks for successful result
     if ($result) {
-        echo '<p>Bank account successfully created!</p></br>';
-        echo '<a class = "link" href="home.php">Please enter.</a>';
+        header("Location: ../Pages/user-details.php?customerid=$customer");
     } else {
         echo '<p>Error. Your account could not be created.</p></br>';
         echo '<a class = "link" href="new-bankacct.php">Try again.</a>';

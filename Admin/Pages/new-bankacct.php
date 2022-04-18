@@ -1,84 +1,60 @@
 <?php
-// Create session
-session_start();
+$title = "User Info";
 
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: login.php');
-    exit;
-}
+// include functions & files 
+include '../functions/db.php';
 
-// Set commonly used variables
-$customer = $_SESSION['customer'];
-include 'db.php';
+include '../view/header.php';
+include '../view/navigation.php';
+
+$customer = $_GET['customerid'];
+$data = getCustomerData($customer);
+$accts = getAccountOptions($customer);
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Customer Login</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
-
-<body class="hold-transition login-page">
-    <div class="login-box" style="width:500px">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Customer</b>Registration</a>
-            </div>
-            <div class="card-body">
-                <p class="login-box-msg">Open a New Bank Account</p>
-
-                <form action="openacct.php" method="post">
-                    <label for="type">Account Type</label>
-
-                    <div class="input-group mb-3">
-                        <select name="type" class="form-select form-select-lg mb-3" required>
-                            <option value="checking">Checking</option>
-                            <option value="savings">Savings</option>
-                        </select>
+        <!-- Form -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Open New Account</h3>
+                        <div class="card-tools"></div>
                     </div>
-                    <input type="hidden" name="customer" value="'<?php $customer ?>'">
+                    <div class="card-body">
+                        <form action="../functions/openacct.php" method="post">
+                            <div class="form-group">
+                                <label for="dateCreated">Customer</label>
+                                <input type="text" name="customername" id="customername" readonly value="<?php echo $data['firstName'] . ' ' . $data['lastName']; ?>" class=" form-control" />
+                            </div>
+                            <label for="type">Account Type</label>
 
-                    <div class="row">
-                        <div class="col-7">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-5">
-                            <button type="submit" name="openacct" class="btn btn-primary btn-block">Create Bank Account</button>
-                        </div>
-                        <!-- /.col -->
+                            <div class="input-group mb-3">
+                                <select name="type" class="form-select form-select-lg mb-3" required>
+                                    <option value="checking">Checking</option>
+                                    <option value="savings">Savings</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="customer" value="'<?php $customer ?>'">
+
+                            <div class="form-group">
+                                <input type="submit" value="Register" class="btn btn-success float-right" />
+                            </div>
+                        </form>
                     </div>
-                </form>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
 
     </div>
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <script src="../../dist/js/pages/login.js"></script>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 
-</body>
-
-</html>
+<?php include '../view/footer.php' ?>

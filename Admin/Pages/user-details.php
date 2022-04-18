@@ -43,7 +43,7 @@ $accts = getAccountOptions($customer);
                         <a href="edit-info.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
                             Edit Info
                         </a>
-                        <a href="edit-info.php" class="btn btn-sm btn-danger float-right">
+                        <a href="#" class="btn btn-sm btn-danger float-right">
                             Remove Customer
                         </a>
                     </div>
@@ -75,7 +75,7 @@ $accts = getAccountOptions($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="#" class="btn btn-sm btn-success">
+                        <a href="new-bankacct.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
                             Open a New Account
                         </a>
                         <a href="#" class="btn btn-sm btn-danger float-right">
@@ -118,7 +118,7 @@ $accts = getAccountOptions($customer);
                                     </thead>
                                     <tbody>
                                     <?php
-                                    while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                    while (($row = $result->fetch_assoc()) && ($i < 5)) {
                                         echo '<tr>';
                                         echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
