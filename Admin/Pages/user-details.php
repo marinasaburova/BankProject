@@ -3,6 +3,7 @@ $title = "User Info";
 
 // include functions & files 
 include '../functions/db.php';
+
 include '../view/header.php';
 include '../view/navigation.php';
 
@@ -63,12 +64,12 @@ $accts = getAccountOptions($customer);
                         <p class="card-text">
                             <?php
                             for ($i = 0; $i < sizeof($accts); $i++) {
+                                echo '<a href="bank-account.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
                                 echo getAccountType($accts[$i]);
                                 echo ' *';
                                 echo getFourDigits($accts[$i]);
-                                echo '<br>';
+                                echo '</a><br>';
                             }
-
                             ?>
                         </p>
                     </div>
@@ -96,7 +97,7 @@ $accts = getAccountOptions($customer);
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table m-0">
+                            <table class="table m-0 table-hover">
 
                                 <?php
                                 $acctNum = $accts[0];

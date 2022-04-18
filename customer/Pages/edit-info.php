@@ -24,11 +24,11 @@ $data = getCustomerData($customer);
                         <form action="../functions/update-customer.php" method="post">
                             <div class="form-group">
                                 <label for="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" />
+                                <input type="text" name="fname" id="fname" readonly value="<?php echo $data['firstName']; ?>" class="form-control" />
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" id="lname" value="<?php echo $data['lastName']; ?>" class=" form-control" />
+                                <input type="text" name="lname" id="lname" readonly value="<?php echo $data['lastName']; ?>" class=" form-control" />
                             </div>
                             <div class="form-group">
                                 <label for="uname">Username</label>

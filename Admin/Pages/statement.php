@@ -13,12 +13,12 @@ $title = "Transactions for " . $data['firstName'] . " " . $data['lastName'];
 
 include '../view/header.php';
 include '../view/navigation.php';
+$data = getCustomerData($customer);
 
 if (isset($_GET['acctNum'])) {
     $acctNum = $_GET['acctNum'];
 } else {
-    $accts = getAccountOptions($customer);
-    $acctNum = $accts[0];
+    $acctNum = "all";
 }
 
 ?>
@@ -26,20 +26,58 @@ if (isset($_GET['acctNum'])) {
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
-        <div class="row">
-            <!-- Left col -->
-            <div class="col-md-12">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-white">
-                            <div class="card-header">
-                                <h3 class="card-title">Filter</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="pick">
-                                    <form action="statement.php" method="get">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Customer</span>
+                        <span class="info-box-number"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-money-check-alt"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Bank Account</span>
+                        <span class="info-box-number"> account num
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Balance</span>
+                        <span class="info-box-number">$<?php echo getBalance($acctNum) ?></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!--    <form action="statement.php" method="get">
                                         <div class="form-group">
                                             <input type="month" name="month" id="month" class="form-control custom-select" />
                                         </div>
@@ -52,84 +90,83 @@ if (isset($_GET['acctNum'])) {
                                         <div class="form-group">
                                             <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
+                                    </form> -->
+
+
+        <div class="card card-solid">
+            <br />
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="input-group">
+                        <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Search transactions">
+                        <div class="input-group-append">
+                            <button type="button" onclick="Searchfunction()" class="btn btn-lg btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
-                <!-- ./row -->
-
-                <!-- TABLE: LATEST TRANSACTIONS -->
-                <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Transactions</h3>
-                    </div>
-                    <!-- /.card-header -->
-
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table m-0 table-striped">
-
-                                <?php
-
-                                if (isset($month)) {
-                                    $result = generateStatement($acctNum, $month);
-                                } else {
-                                    $result = getCustomerTransactions($customer);
-                                }
-                                $num_results = $result->num_rows;
-                                if ($num_results == 0) {
-                                    echo '<p class="text-center">This account does not have any transactions.</p>';
-                                } else {
-                                    $i = 0;
-                                ?>
-                                    <thead>
-                                        <tr>
-                                            <th>Bank Account</th>
-                                            <th>Date</th>
-                                            <th>Title</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    while (($row = $result->fetch_assoc())) {
-                                        echo '<tr>';
-                                        echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
-                                        echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
-                                        echo '<td>' . $row['vendor'] . '</td>';
-                                        if ($row['type'] == 'withdraw') {
-                                            echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
-                                        }
-                                        if ($row['type'] == 'deposit') {
-                                            echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
-                                        }
-                                        echo '</tr>';
-                                        $i++;
-                                    }
-                                }
-                                $result->free();
-                                    ?>
-                                    </tbody>
-                            </table>
-                        </div>
-                        <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
-                        <a href="transaction-history.php?customerid=<?php $customer ?>" class="btn btn-sm btn-secondary float-right">Switch Month</a>
-                    </div>
-                    <!-- /.card-footer -->
-                </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
+            <div class="card-body p-4">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0 table-hover">
+
+                            <?php
+
+                            if (isset($_GET['acctNum'])) {
+                                $result = getTransactions($_GET['acctNum']);
+                            } else {
+                                $result = getCustomerTransactions($customer);
+                            }
+                            $num_results = $result->num_rows;
+                            if ($num_results == 0) {
+                                echo '<p class="text-center">This account does not have any transactions.</p>';
+                            } else {
+                                $i = 0;
+                            ?>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Title</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                    echo '<td>' . $row['vendor'] . '</td>';
+                                    if ($row['type'] == 'withdraw') {
+                                        echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
+                                    }
+                                    if ($row['type'] == 'deposit') {
+                                        echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
+                                    }
+                                    echo '</tr>';
+                                    $i++;
+                                }
+                            }
+                            $result->free();
+                                ?>
+                                </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                    <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
+                    <a href="transaction-history.php?customerid=<?php $customer ?>" class="btn btn-sm btn-secondary float-right">Switch Month</a>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
     </div>
     <!--/. container-fluid -->
 </section>
