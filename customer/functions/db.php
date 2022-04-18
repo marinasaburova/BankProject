@@ -19,6 +19,7 @@ function login($uname, $pwd)
     $query = "SELECT * FROM customer WHERE username = '$uname'";
     $result = $db->query($query);
     $row = $result->fetch_assoc();
+    $hash = $row['password'];
 
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
@@ -26,7 +27,7 @@ function login($uname, $pwd)
         header('Location: ../Pages/login.php');
         exit;
     }
-    if ($row['password'] !== $pwd) {
+    if (!password_verify($pwd, $hash)) {
         echo '<p>Incorrect credentials.</p></br>';
         echo '<a class = "link" href=login.php>Try again.</a>';
         header('Location: ../Pages/login.php');
@@ -43,7 +44,8 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
 {
     global $db;
     // finds matching credentials
-    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwd', $pin)";
+    $pwdHash = password_hash($pwd, PASSWORD_BCRYPT);
+    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
     $result = $db->query($query);
 
     // checks for successful result

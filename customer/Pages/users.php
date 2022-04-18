@@ -74,9 +74,6 @@ $data = getCustomerData($customer)
                         <a href="edit-info.php" class="btn btn-sm btn-success">
                             <i class="fas fa-pen"></i> Open a New Account
                         </a>
-                        <a href="edit-info.php" class="btn btn-sm btn-danger float-right">
-                            <i class="fas fa-pen"></i> Close an Account
-                        </a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
