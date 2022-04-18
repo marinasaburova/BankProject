@@ -7,19 +7,19 @@ if (isset($_GET['month'])) {
 // include functions & files 
 include '../functions/db.php';
 
-$customer = $_GET['customerid'];
-$data = getCustomerData($customer);
-$title = "Transactions for " . $data['firstName'] . " " . $data['lastName'];
+$title = "Transaction History";
 
 include '../view/header.php';
 include '../view/navigation.php';
-$data = getCustomerData($customer);
 
+$customer = $_GET['customerid'];
 if (isset($_GET['acctNum'])) {
     $acctNum = $_GET['acctNum'];
 } else {
     $acctNum = "all";
 }
+$accts = getAccountOptions($customer);
+$data = getCustomerData($customer);
 
 ?>
 
@@ -49,8 +49,10 @@ if (isset($_GET['acctNum'])) {
                     <div class="info-box-content">
                         <span class="info-box-text">Account</span>
                         <span class="info-box-number">
-                            <?php echo getAccountType($acctNum) ?>
-                            <small> *<?php echo getFourDigits($acctNum) ?></small>
+                            <?php if ($acctNum != "all") { ?>
+                                <?php echo getAccountType($acctNum) ?>
+                                <small> *<?php echo getFourDigits($acctNum) ?></small>
+                            <?php } ?>
                             <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Switch Account
                             </button>
