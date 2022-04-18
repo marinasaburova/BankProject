@@ -22,7 +22,8 @@ include '../view/navigation.php';
             <form action="../functions/deposit.php" method="post">
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
-                <select id="acctNum" name="acctNum" class="form-control custom-select">
+                <select id="acctNum" name="acctNum" class="form-control custom-select" required>
+                  <option disabled selected value> -- select an account -- </option>
                   <?php getAccountDropdown($customer); ?>
                 </select>
               </div>
@@ -57,7 +58,8 @@ include '../view/navigation.php';
             <form action="../functions/withdraw.php" method="post">
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
-                <select id="acctNum" name="acctNum" class="form-control custom-select">
+                <select id="acctNum" name="acctNum" class="form-control custom-select" required>
+                  <option disabled selected value> -- select an account -- </option>
                   <?php getAccountDropdown($customer); ?>
                 </select>
               </div>

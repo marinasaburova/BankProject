@@ -26,6 +26,7 @@ include '../view/navigation.php';
                         </div>
                     </div>
                 </div>
+                <p>register a new customer</p>
             </div>
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">

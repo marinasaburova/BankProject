@@ -50,6 +50,8 @@ $data = getCustomerData($customer);
                                 <label for="dateCreated">Member Since</label>
                                 <input type="text" name="dateCreated" id="dateCreated" readonly value="<?php echo $data['dateCreated']; ?>" class=" form-control" />
                             </div>
+                            <p><small>Please contact an admin to edit more details.</small></p>
+
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />
                                 <input type="submit" name="updateInfo" value="Update" class="btn btn-success float-right" />

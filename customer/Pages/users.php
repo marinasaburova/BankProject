@@ -37,11 +37,9 @@ $data = getCustomerData($customer)
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <div class="text-right">
-                            <a href="edit-info.php" class="btn btn-sm btn-primary">
-                                <i class="fas fa-pen"></i> Edit Account Info
-                            </a>
-                        </div>
+                        <a href="edit-info.php" class="btn btn-sm btn-primary">
+                            <i class="fas fa-pen"></i> Edit Account Info
+                        </a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -58,7 +56,7 @@ $data = getCustomerData($customer)
                     <div class="row">
                         <div class="col">
                             <div class="card-body">
-                                <h4 class="card-title"><b>Your Accounts</b></h4>
+                                <h4 class="card-title"><b>Active</b></h4>
                                 <p class="card-text">
                                     <?php
                                     for ($i = 0; $i < sizeof($accts); $i++) {

@@ -61,6 +61,9 @@
                     if ($current == 'users.php') {
                         $users_class = 'nav-link active';
                     }
+                    if ($current == 'user-details.php') {
+                        $users_class = 'nav-link open';
+                    }
                     if ($current == 'transactions.php') {
                         $transaction_class = 'nav-link active';
                     }
