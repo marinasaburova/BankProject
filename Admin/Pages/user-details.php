@@ -125,12 +125,12 @@ $accts = getAccountOptions($customer);
                             <table class="table m-0 table-hover">
 
                                 <?php
-                                $acctNum = $accts[0];
                                 $result = getCustomerTransactions($customer);
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
-                                    echo '<p class="text-center pt-3">This account does not have any transactions.</p>';
+                                    echo '<p class="text-center pt-3">This customer does not have any transactions.</p>';
                                 } else {
+                                    $acctNum = $accts[0];
                                     $i = 0;
                                 ?>
                                     <thead>
