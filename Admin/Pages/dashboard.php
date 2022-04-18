@@ -18,7 +18,7 @@ include '../view/navigation.php';
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Number of Users</span>
+                        <span class="info-box-text"><a href="users.php" class="text-reset stretched-link">Number of Users</a></span>
                         <span class="info-box-number"><?php echo getCustomerCount() ?></span>
                     </div>
                     <!-- /.info-box-content -->

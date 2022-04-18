@@ -35,7 +35,7 @@ $data = getCustomerData($customer);
 
                     <div class="info-box-content">
                         <span class="info-box-text">Customer</span>
-                        <span class="info-box-number"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></span>
+                        <span class="info-box-number"><a href="user-details.php?customerid=<?php echo $customer ?>" class="text-reset stretched-link"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></a></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -52,7 +52,10 @@ $data = getCustomerData($customer);
                             <?php if ($acctNum != "all") { ?>
                                 <?php echo getAccountType($acctNum) ?>
                                 <small> *<?php echo getFourDigits($acctNum) ?></small>
-                            <?php } ?>
+                            <?php } else {
+                                echo '<small>Pick an account</small>';
+                            }
+                            ?>
                             <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Switch Account
                             </button>
@@ -81,7 +84,15 @@ $data = getCustomerData($customer);
 
                     <div class="info-box-content">
                         <span class="info-box-text">Balance</span>
-                        <span class="info-box-number">Available: <small> $<?php echo getBalance($acctNum) ?> </small></span>
+                        <span class="info-box-number">
+                            <?php
+                            if ($acctNum != "all") {
+                                echo 'Available: <small> $' . getBalance($acctNum) . '</small>';
+                            } else {
+                                echo '<small>Pick an account to view balance</small>';
+                            }
+                            ?>
+                        </span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -145,6 +156,7 @@ $data = getCustomerData($customer);
                             ?>
                                 <thead>
                                     <tr>
+                                        <th>Account</th>
                                         <th>Date</th>
                                         <th>Title</th>
                                         <th>Amount</th>
@@ -152,8 +164,9 @@ $data = getCustomerData($customer);
                                 </thead>
                                 <tbody>
                                 <?php
-                                while (($row = $result->fetch_assoc()) && ($i < 10)) {
+                                while (($row = $result->fetch_assoc())) {
                                     echo '<tr>';
+                                    echo '<td><a href="statement.php?customerid=' . $customer . '&acctNum=' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
                                     echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                     echo '<td>' . $row['vendor'] . '</td>';
                                     if ($row['type'] == 'withdraw') {
@@ -176,7 +189,6 @@ $data = getCustomerData($customer);
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
-                    <a href="transaction-history.php?customerid=<?php $customer ?>" class="btn btn-sm btn-secondary float-right">Switch Month</a>
                 </div>
                 <!-- /.card-footer -->
             </div>

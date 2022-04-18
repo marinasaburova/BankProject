@@ -64,7 +64,7 @@ $accts = getAccountOptions($customer);
                         <p class="card-text">
                             <?php
                             for ($i = 0; $i < sizeof($accts); $i++) {
-                                echo '<a href="bank-account.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
+                                echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
                                 echo getAccountType($accts[$i]);
                                 echo ' *';
                                 echo getFourDigits($accts[$i]);
