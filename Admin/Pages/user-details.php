@@ -59,19 +59,44 @@ $accts = getAccountOptions($customer);
                         <h3 class="card-title">Bank Accounts</h3>
                         <div class="card-tools"></div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="card-title"><b>Accounts</b></h4>
-                        <p class="card-text">
-                            <?php
-                            for ($i = 0; $i < sizeof($accts); $i++) {
-                                echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
-                                echo getAccountType($accts[$i]);
-                                echo ' *';
-                                echo getFourDigits($accts[$i]);
-                                echo '</a><br>';
-                            }
-                            ?>
-                        </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Active</b></h4>
+                                <p class="card-text">
+                                    <?php
+                                    for ($i = 0; $i < sizeof($accts); $i++) {
+                                        echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
+                                        echo getAccountType($accts[$i]);
+                                        echo ' *';
+                                        echo getFourDigits($accts[$i]);
+                                        echo '</a><br>';
+                                    }
+
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Pending</b></h4>
+                                <p class="card-text">
+                                    <?php
+                                    $pending = getPendingAcctsCustomer($customer);
+                                    if (sizeof($pending) == 0) {
+                                        echo 'no pending accounts <br>';
+                                    }
+                                    for ($i = 0; $i < sizeof($pending); $i++) {
+                                        echo getAccountType($pending[$i]);
+                                        echo ' *';
+                                        echo getFourDigits($pending[$i]);
+                                        echo '<br>';
+                                    }
+
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

@@ -81,6 +81,7 @@ $data = getCustomerData($customer);
                                 <label for="newPwd2">Confirm New Password</label>
                                 <input type="password" name="newPwd2" id="newPwd2" class="form-control" />
                             </div>
+                            <input type="hidden" name="customer" value="<?php echo $customer ?>">
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />
                                 <input type="submit" name="updatePWD" value="Update" class="btn btn-success float-right" />

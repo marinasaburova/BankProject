@@ -139,6 +139,21 @@ function getAccountOptions($customer)
     return $accts;
 }
 
+// gets all of the accounts waiting to be created
+function getPendingAcctsCustomer($customer)
+{
+    global $db;
+    $query = "SELECT `acctNum` FROM `account` WHERE `status`='pending' AND `customerID` = $customer ORDER BY dateCreated";
+    $result = $db->query($query);
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
+}
+
+
 // get last 4 digits of account
 function getFourDigits($acctNum)
 {

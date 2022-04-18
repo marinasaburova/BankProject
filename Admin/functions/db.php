@@ -154,7 +154,7 @@ function getEmployeeData($customer)
 function getAllCustomers()
 {
     global $db;
-    $query = "SELECT * FROM `customer` WHERE `status` = 'active' ORDER BY lastName ASC";
+    $query = "SELECT * FROM `customer` WHERE `status` = 'active' ORDER BY `lastName` ASC";
     $result = $db->query($query);
     return $result;
 }
@@ -163,9 +163,23 @@ function getAllCustomers()
 function getPendingAccts()
 {
     global $db;
-    $query = "SELECT * FROM account WHERE status='pending' ORDER BY dateCreated";
+    $query = "SELECT * FROM `account` WHERE `status`='pending' ORDER BY dateCreated";
     $result = $db->query($query);
     return $result;
+}
+
+// gets all of the accounts waiting to be created
+function getPendingAcctsCustomer($customer)
+{
+    global $db;
+    $query = "SELECT `acctNum` FROM `account` WHERE `status`='pending' AND `customerID` = $customer ORDER BY dateCreated";
+    $result = $db->query($query);
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
 }
 
 function changeStatus($acctNum, $status)
@@ -202,12 +216,15 @@ function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr
 function changePassword($customer, $newpwd)
 {
     global $db;
-    $query = "UPDATE `customer` SET `password` = '$newpwd' WHERE `customer`.`customerID` = '$customer'";
+
+    $pwdHash = password_hash($newpwd, PASSWORD_BCRYPT);
+
+    $query = "UPDATE `customer` SET `password` = '$pwdHash' WHERE `customer`.`customerID` = '$customer'";
     $result = $db->query($query);
     if (!$result) {
         echo 'Error updating password.';
     } else {
-        header("Location: ../Pages/users-details.php?customerid=$customer");
+        header("Location: ../Pages/user-details.php?customerid=$customer");
         exit;
     }
 }
@@ -228,9 +245,8 @@ function getAccountDropdown($customer)
 function getAccountOptions($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer'";
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND status = 'active'";
     $result = $db->query($query);
-    $num_results = $result->num_rows;
     $accts = array();
     while ($row = $result->fetch_assoc()) {
         $accts[] = $row['acctNum'];
@@ -238,7 +254,6 @@ function getAccountOptions($customer)
     $result->free();
     return $accts;
 }
-
 // get last 4 digits of account
 function getFourDigits($acctNum)
 {
