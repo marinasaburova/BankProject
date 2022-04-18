@@ -80,8 +80,13 @@ include '../view/navigation.php';
                 <!-- /.table-responsive -->
             </div>
             <!-- ./card-body -->
+        </div>
+        <!-- ./card -->
+    </div>
+    <!--/. container-fluid -->
 </section>
 <!-- /.content -->
+
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
 <script>

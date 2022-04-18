@@ -84,6 +84,33 @@ function emplogin($uname, $pwd)
     }
 }
 
+function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
+{
+    global $db;
+    // finds matching credentials
+    $pwdHash = password_hash($pwd, PASSWORD_BCRYPT);
+    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        session_start();
+
+        $query = "SELECT * FROM customer WHERE username = '$uname'";
+        $result = $db->query($query);
+        $row = $result->fetch_assoc();
+        $_SESSION['customer'] = $row['customerID'];
+
+        $_SESSION['loggedin'] = TRUE;
+        $result->free();
+        header('Location: ../Pages/new-bankacct.php');
+        exit;
+    } else {
+        echo '<p>Error. Your account could not be created.</p></br>';
+        echo '<a class = "link" href="../register.php">Try again.</a>';
+    }
+}
+
 function createBankAcct($type, $deposit, $customer)
 {
     global $db;

@@ -26,7 +26,9 @@ include '../view/navigation.php';
                         </div>
                     </div>
                 </div>
-                <p>register a new customer</p>
+                <a href="new-customer.php">
+                    <p>register a new customer</p>
+                </a>
             </div>
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">
