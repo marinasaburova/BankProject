@@ -31,15 +31,24 @@ $accts = getAccountOptions($customer);
                                 <label for="dateCreated">Customer</label>
                                 <input type="text" name="customername" id="customername" readonly value="<?php echo $data['firstName'] . ' ' . $data['lastName']; ?>" class=" form-control" />
                             </div>
-                            <label for="type">Account Type</label>
 
-                            <div class="input-group mb-3">
-                                <select name="type" class="form-select form-select-lg mb-3" required>
+                            <div class="form-group">
+                                <label for="type">Account Type</label>
+                                <select id="type" name="type" class="form-control custom-select">
                                     <option value="checking">Checking</option>
                                     <option value="savings">Savings</option>
                                 </select>
                             </div>
-                            <input type="hidden" name="customer" value="'<?php $customer ?>'">
+
+                            <label for="amount">Initial Deposit</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" id="deposit" name="deposit" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
+                            </div>
+
+                            <input type="hidden" name="customer" value="<?php echo $customer ?>">
 
                             <div class="form-group">
                                 <input type="submit" value="Register" class="btn btn-success float-right" />

@@ -84,6 +84,23 @@ function emplogin($uname, $pwd)
     }
 }
 
+function createBankAcct($type, $deposit, $customer)
+{
+    global $db;
+
+    // finds matching credentials
+    $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', $deposit, '$customer', 'active')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        header("Location: ../Pages/user-details.php?customerid=$customer");
+    } else {
+        echo '<p>Error. Your account could not be created.</p></br>';
+        echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
+    }
+}
+
 // gets all info for a customer
 function getCustomerData($customer)
 {
