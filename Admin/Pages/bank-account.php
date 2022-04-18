@@ -18,19 +18,20 @@ $data = getCustomerData($customer);
     <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-            <div class="col">
-                <div class="info-box">
-                    <div class="info-box-content">
+            <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
 
-                        <a href="user-details.php?customerid=<?php echo $customer ?>" class="text-reset">
-                            <h5><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></h5>
-                        </a>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Customer</span>
+                        <span class="info-box-number"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></span>
                     </div>
+                    <!-- /.info-box-content -->
                 </div>
+                <!-- /.info-box -->
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6">
+            <!-- /.col -->
+            <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box">
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-university"></i></span>
 
@@ -61,7 +62,7 @@ $data = getCustomerData($customer);
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-6">
+            <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
 

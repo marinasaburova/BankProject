@@ -42,14 +42,30 @@ if (isset($_GET['acctNum'])) {
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-
             <div class="col-12 col-sm-4 col-md-4">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-money-check-alt"></i></span>
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-university"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Bank Account</span>
-                        <span class="info-box-number"> account num
+                        <span class="info-box-text">Account</span>
+                        <span class="info-box-number">
+                            <?php echo getAccountType($acctNum) ?>
+                            <small> *<?php echo getFourDigits($acctNum) ?></small>
+                            <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Switch Account
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <?php
+                                for ($i = 0; $i < sizeof($accts); $i++) {
+                                    echo '<form action="#" method="get">';
+                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - *' . getFourDigits($accts[$i]) . '</button>';
+                                    echo '</form>';
+                                }
+                                ?>
+                                <form action="new-bankacct.php" method="post">
+                                    <button class="dropdown-item" type="submit" name="new_acct" value="new_acct'">open an account</button>
+                                </form>
+                            </div>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -57,13 +73,13 @@ if (isset($_GET['acctNum'])) {
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-
             <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check-alt"></i></span>
+
                     <div class="info-box-content">
                         <span class="info-box-text">Balance</span>
-                        <span class="info-box-number">$<?php echo getBalance($acctNum) ?></span>
+                        <span class="info-box-number">Available: <small> $<?php echo getBalance($acctNum) ?> </small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
