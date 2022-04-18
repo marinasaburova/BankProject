@@ -50,7 +50,7 @@ include '../view/navigation.php';
                             <tbody>
                             <?php
                             while (($row = $result->fetch_assoc())) {
-                                $cid = getCustomerDataByAcct($row['acctNum']);
+                                $cid = getCustomerUsingAcct($row['acctNum']);
                                 $data = getCustomerData($cid);
                                 $customerName = $data['firstName'] . ' ' . $data['lastName'];
 

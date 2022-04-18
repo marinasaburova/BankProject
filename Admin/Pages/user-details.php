@@ -100,7 +100,7 @@ $accts = getAccountOptions($customer);
 
                                 <?php
                                 $acctNum = $accts[0];
-                                $result = getTransactions($acctNum);
+                                $result = getCustomerTransactions($customer);
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
                                     echo '<p class="text-center pt-3">This account does not have any transactions.</p>';
@@ -109,6 +109,7 @@ $accts = getAccountOptions($customer);
                                 ?>
                                     <thead>
                                         <tr>
+                                            <th>Account</th>
                                             <th>Date</th>
                                             <th>Title</th>
                                             <th>Amount</th>
@@ -118,6 +119,7 @@ $accts = getAccountOptions($customer);
                                     <?php
                                     while (($row = $result->fetch_assoc()) && ($i < 10)) {
                                         echo '<tr>';
+                                        echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                         echo '<td>' . $row['vendor'] . '</td>';
                                         if ($row['type'] == 'withdraw') {

@@ -270,15 +270,10 @@ function getTransactions($acctNum)
     return $result;
 }
 
-function getTransactionsCustomer($customer)
+function getCustomerTransactions($customer)
 {
     global $db;
-    $accts = getAccountOptions($customer);
-    $query = "SELECT * FROM `transaction` WHERE `vendor` = ''";
-    foreach ($accts as $a) {
-        $query .= " OR `acctNum` = '$a'";
-    }
-    $query .= " ORDER BY `date` DESC, `time` DESC";
+    $query = "SELECT * FROM `transaction` INNER JOIN `account` ON `account`.`acctNum` = `transaction`.`acctNum` WHERE `customerID` = $customer ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }

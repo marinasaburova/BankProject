@@ -78,7 +78,7 @@ if (isset($_GET['acctNum'])) {
                                 if (isset($month)) {
                                     $result = generateStatement($acctNum, $month);
                                 } else {
-                                    $result = getTransactionsCustomer($customer);
+                                    $result = getCustomerTransactions($customer);
                                 }
                                 $num_results = $result->num_rows;
                                 if ($num_results == 0) {
