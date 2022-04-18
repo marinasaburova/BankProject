@@ -42,6 +42,7 @@ include '../view/navigation.php';
                             <thead>
                                 <tr>
                                     <th>Customer</th>
+                                    <th>Account</th>
                                     <th>Date</th>
                                     <th>Title</th>
                                     <th>Amount</th>
@@ -56,6 +57,8 @@ include '../view/navigation.php';
 
                                 echo '<tr>';
                                 echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
+                                echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
+
                                 echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                 echo '<td>' . $row['vendor'] . '</td>';
                                 if ($row['type'] == 'withdraw') {
