@@ -6,6 +6,14 @@ if (mysqli_connect_errno()) {
     exit;
 }
 
+if (isset($_SESSION['emploggedin'])) {
+    $user = 'admin';
+} else if (isset($_SESSION['loggedin'])) {
+    $user = 'customer';
+} else {
+    header('Location: index.html');
+}
+
 function disconnectDB()
 {
     global $db;
@@ -40,6 +48,34 @@ function login($uname, $pwd)
     }
 }
 
+// Employee login
+function emplogin($uname, $pwd)
+{
+    global $db;
+    $query = "SELECT * FROM employee WHERE username = '$uname'";
+    $result = $db->query($query);
+    $row = $result->fetch_assoc();
+
+    if (mysqli_num_rows($result) == 0) {
+        echo '<p>Incorrect credentials.</p></br>';
+        header('Location: ../Pages/login.html');
+        exit;
+    }
+    if ($row['password'] !== $pwd) {
+        echo '<p>Incorrect credentials.</p></br>';
+        header('Location: ../Pages/login.html');
+        $result->free();
+        exit;
+    } else {
+        session_start();
+        $_SESSION['employee'] = $row['employeeID'];
+        $_SESSION['emploggedin'] = TRUE;
+        $result->free();
+        header('Location: ../Pages/dashboard.php');
+        exit;
+    }
+}
+
 function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
 {
     global $db;
@@ -56,7 +92,6 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
         $result = $db->query($query);
         $row = $result->fetch_assoc();
         $_SESSION['customer'] = $row['customerID'];
-
         $_SESSION['loggedin'] = TRUE;
         $result->free();
         header('Location: ../Pages/new-bankacct.php');
@@ -66,6 +101,89 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
         echo '<a class = "link" href="../register.php">Try again.</a>';
     }
 }
+
+function requestBankAcct($type, $customer)
+{
+    global $db;
+
+    $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', '0.00', '$customer', 'pending')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        echo '<p>Your account request has been submitted. Please wait for an employee to approve it.';
+        echo '<a href="../Pages/dashboard.php">Go back to dashboard</a>';
+    } else {
+        echo '<p>Error. Your account could not be created.</p></br>';
+        echo '<a class = "link" href="../newaccount.php">Try again.</a>';
+    }
+}
+
+// create a new bank account for a customer
+function createBankAcct($type, $deposit, $customer)
+{
+    global $db;
+
+    $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', $deposit, '$customer', 'active')";
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        header("Location: ../Pages/user-details.php?customerid=$customer");
+    } else {
+        echo '<p>Error. Your account could not be created.</p></br>';
+        echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
+    }
+}
+
+// changes customer password 
+function changePassword($customer, $newpwd)
+{
+    global $db;
+    global $user;
+
+    $pwdHash = password_hash($newpwd, PASSWORD_BCRYPT);
+
+    $query = "UPDATE `customer` SET `password` = '$pwdHash' WHERE `customer`.`customerID` = '$customer'";
+    $result = $db->query($query);
+    if (!$result) {
+        echo 'Error updating password.';
+    } else {
+        if ($user == 'customer') {
+            header('Location: ../Pages/users.php');
+            exit;
+        }
+        if ($user == 'employee') {
+            header("Location: ../Pages/user-details.php?customerid=$customer");
+            exit;
+        }
+    }
+}
+
+// updates customer account info 
+function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr)
+{
+    global $db;
+    global $user;
+
+    $query = "UPDATE `customer` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone', `addr` = '$addr' WHERE `customer`.`customerID` = '$customer'";
+    echo $query;
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating info.';
+    } else {
+        if ($user == 'customer') {
+            header('Location: ../Pages/users.php');
+            exit;
+        }
+        if ($user == 'admin') {
+            header("Location: ../Pages/users-details.php?customerid=$customer");
+            exit;
+        }
+    }
+}
+
 // gets all info for a customer
 function getCustomerData($customer)
 {
@@ -83,34 +201,28 @@ function getCustomerData($customer)
     }
 }
 
-// updates customer account info 
-function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr)
+// Get customer ID for an account number
+function getCustomerUsingAcct($acctNum)
 {
     global $db;
-    $query = "UPDATE `customer` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone', `addr` = '$addr' WHERE `customer`.`customerID` = '$customer'";
-    echo $query;
+    $query = "SELECT customerID FROM account WHERE acctNum = '$acctNum'";
     $result = $db->query($query);
-
-    if (!$result) {
-        echo 'Error updating info.';
+    $num_results = $result->num_rows;
+    if ($num_results != 1) {
+        echo 'Error.';
     } else {
-        header('Location: ../Pages/users.php');
-        exit;
+        $row = $result->fetch_assoc();
+        return $row['customerID'];
     }
 }
 
-// changes customer password 
-function changePassword($customer, $newpwd)
+// returns a list of all customers
+function getAllCustomers()
 {
     global $db;
-    $query = "UPDATE `customer` SET `password` = '$newpwd' WHERE `customer`.`customerID` = '$customer'";
+    $query = "SELECT * FROM `customer` WHERE `status` = 'active' ORDER BY `lastName` ASC";
     $result = $db->query($query);
-    if (!$result) {
-        echo 'Error updating password.';
-    } else {
-        header('Location: ../Pages/users.php');
-        exit;
-    }
+    return $result;
 }
 
 // gets all accounts for a customer
@@ -139,21 +251,6 @@ function getAccountOptions($customer)
     return $accts;
 }
 
-// gets all of the accounts waiting to be created
-function getPendingAcctsCustomer($customer)
-{
-    global $db;
-    $query = "SELECT `acctNum` FROM `account` WHERE `status`='pending' AND `customerID` = $customer ORDER BY dateCreated";
-    $result = $db->query($query);
-    $accts = array();
-    while ($row = $result->fetch_assoc()) {
-        $accts[] = $row['acctNum'];
-    }
-    $result->free();
-    return $accts;
-}
-
-
 // get last 4 digits of account
 function getFourDigits($acctNum)
 {
@@ -176,6 +273,29 @@ function getAccountType($acctNum)
     }
 }
 
+// gets all of the accounts waiting to be created
+function getPendingAccts()
+{
+    global $db;
+    $query = "SELECT * FROM `account` WHERE `status`='pending' ORDER BY dateCreated";
+    $result = $db->query($query);
+    return $result;
+}
+
+// gets all of the accounts waiting to be created for a specific customer
+function getPendingAcctsCustomer($customer)
+{
+    global $db;
+    $query = "SELECT `acctNum` FROM `account` WHERE `status`='pending' AND `customerID` = $customer ORDER BY dateCreated";
+    $result = $db->query($query);
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
+}
+
 // gets balance for a specific account
 function getBalance($acctNum)
 {
@@ -193,11 +313,29 @@ function getBalance($acctNum)
     }
 }
 
-// gets all transactions for an account 
+// gets all transactions for a single account 
 function getTransactions($acctNum)
 {
     global $db;
     $query = "SELECT * FROM transaction WHERE acctNum = '$acctNum' ORDER BY `date` DESC, `time` DESC";
+    $result = $db->query($query);
+    return $result;
+}
+
+// get all transactions for a specific customer
+function getCustomerTransactions($customer)
+{
+    global $db;
+    $query = "SELECT * FROM `transaction` INNER JOIN `account` ON `account`.`acctNum` = `transaction`.`acctNum` WHERE `customerID` = $customer ORDER BY `date` DESC, `time` DESC";
+    $result = $db->query($query);
+    return $result;
+}
+
+// get all transactions amongst all customers
+function getAllTransactions()
+{
+    global $db;
+    $query = "SELECT * FROM `transaction` ORDER BY `date` DESC, `time` DESC";
     $result = $db->query($query);
     return $result;
 }
@@ -258,9 +396,59 @@ function withdraw($acctNum, $amount, $vendor)
 // Transfer money between two accounts
 function transfer($from, $to, $amount)
 {
-    global $db;
-
     withdraw($from, $amount, "Transfer to *" . getFourDigits($to));
     deposit($to, $amount, "Transfer from *" . getFourDigits($from));
     exit;
+}
+
+// gets all info for a customer
+function getEmployeeData($customer)
+{
+    global $db;
+    $query = "SELECT * FROM employee WHERE employeeID = '$customer'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    if ($num_results == 0) {
+        return 'Employee has not been found.';
+    } elseif ($num_results != 1) {
+        return 'Error.';
+    } else {
+        $data = $result->fetch_assoc();
+        return $data;
+    }
+}
+
+// change status of a bank account
+function changeStatus($acctNum, $status)
+{
+    global $db;
+    $query = "UPDATE `account` SET `status` = '$status' WHERE `account`.`acctNum` = '$acctNum'";
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating account status.';
+    } else {
+        header('Location: ../Pages/dashboard.php');
+        exit;
+    }
+}
+
+// Get number of customers
+function getCustomerCount()
+{
+    global $db;
+    $query = "SELECT * FROM customer";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    return $num_results;
+}
+
+// Get number of bank accounts
+function getBankAcctCount()
+{
+    global $db;
+    $query = "SELECT * FROM account";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    return $num_results;
 }

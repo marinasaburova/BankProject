@@ -1,6 +1,3 @@
-<html>
-
-<body>
     <?php
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -21,9 +18,4 @@
 
     register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin);
 
-    // disconnect from database
-
     ?>
-</body>
-
-</html>

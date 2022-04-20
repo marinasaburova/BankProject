@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['emploggedin'])) {
+    header('Location: ../Pages/login.php');
+    exit;
+}
+
 $type = $_POST['type'];
 $customer = $_POST['customer'];
 $deposit = $_POST['deposit'];

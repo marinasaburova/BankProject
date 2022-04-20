@@ -1,6 +1,3 @@
-<html>
-
-<body>
     <?php
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -24,6 +21,3 @@
     // disconnect from database
 
     ?>
-</body>
-
-</html>
