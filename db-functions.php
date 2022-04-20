@@ -6,14 +6,6 @@ if (mysqli_connect_errno()) {
     exit;
 }
 
-if (isset($_SESSION['emploggedin'])) {
-    $user = 'admin';
-} else if (isset($_SESSION['loggedin'])) {
-    $user = 'customer';
-} else {
-    header('Location: index.html');
-}
-
 function disconnectDB()
 {
     global $db;
@@ -136,11 +128,30 @@ function createBankAcct($type, $deposit, $customer)
     }
 }
 
+// closes a bank account for a customer
+function closeBankAcct($acctNum, $transfer)
+{
+    global $db;
+
+    $query = "UPDATE `account` SET `status` = 'closed' WHERE `account`.`acctNum` = '$acctNum'";
+    echo $query;
+    $result = $db->query($query);
+
+    // checks for successful result
+    if ($result) {
+        $balance = getBalance($acctNum);
+        transfer($acctNum, $transfer, $balance);
+        // header("Location: ../Pages/user-details.php?customerid=$customer");
+    } else {
+        echo '<p>Error. Your account could not be updated.</p></br>';
+        echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
+    }
+}
+
 // changes customer password 
 function changePassword($customer, $newpwd)
 {
     global $db;
-    global $user;
 
     $pwdHash = password_hash($newpwd, PASSWORD_BCRYPT);
 
@@ -149,11 +160,13 @@ function changePassword($customer, $newpwd)
     if (!$result) {
         echo 'Error updating password.';
     } else {
-        if ($user == 'customer') {
+        if (isset($_SESSION['loggedin'])) {
+            echo 'customer';
             header('Location: ../Pages/users.php');
             exit;
         }
-        if ($user == 'employee') {
+        if (isset($_SESSION['emploggedin'])) {
+            echo 'employee';
             header("Location: ../Pages/user-details.php?customerid=$customer");
             exit;
         }
@@ -164,7 +177,6 @@ function changePassword($customer, $newpwd)
 function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr)
 {
     global $db;
-    global $user;
 
     $query = "UPDATE `customer` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone', `addr` = '$addr' WHERE `customer`.`customerID` = '$customer'";
     echo $query;
@@ -173,11 +185,11 @@ function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr
     if (!$result) {
         echo 'Error updating info.';
     } else {
-        if ($user == 'customer') {
+        if (isset($_SESSION['loggedin'])) {
             header('Location: ../Pages/users.php');
             exit;
         }
-        if ($user == 'admin') {
+        if (isset($_SESSION['emploggedin'])) {
             header("Location: ../Pages/users-details.php?customerid=$customer");
             exit;
         }

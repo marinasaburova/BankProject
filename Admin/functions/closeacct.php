@@ -6,8 +6,8 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-$acctNum = $_POST['acctNum'];
-$amount = $_POST['amount'];
-$vendor = $_POST['vendor'];
+$acctNum = $_POST['close'];
+$transfer = $_POST['transfer'];
 include 'db.php';
-withdraw($acctNum, $amount, $vendor);
+
+closeBankAcct($acctNum, $transfer);

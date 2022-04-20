@@ -103,7 +103,7 @@ $accts = getAccountOptions($customer);
                         <a href="new-bankacct.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
                             Open a New Account
                         </a>
-                        <a href="#" class="btn btn-sm btn-danger float-right">
+                        <a href="close-bankacct.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-danger float-right">
                             Close an Account
                         </a>
                     </div>

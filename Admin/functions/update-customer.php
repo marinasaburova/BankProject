@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: login.php');
+if (!isset($_SESSION['emploggedin'])) {
+    header('Location: ../Pages/login.php');
     exit;
 }
 
