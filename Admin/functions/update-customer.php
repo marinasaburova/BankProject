@@ -30,9 +30,9 @@ if (isset($_POST['updatePWD'])) {
 
     if ($newPwd !== $newPwd2) {
         echo 'Your new passwords do not match';
-    } /*else if ($currPwd !== $dbPwd) {
+    } else if ($currPwd !== $dbPwd) {
         echo 'Incorrect current password.';
-    } */ else {
+    } else {
         changePassword($customer, $newPwd);
     }
 }

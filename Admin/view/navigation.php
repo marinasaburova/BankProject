@@ -50,10 +50,9 @@
                     $dashboard_class = "nav-link";
                     $users_class = "nav-link";
                     $transaction_class = "nav-link";
+
+                    $users_nav = 'nav-item';
                     $transaction_nav = 'nav-item';
-                    $bank_trans_class = "nav-link";
-                    $trans_history_class = 'nav-link';
-                    $bank_transfer_class = 'nav-link';
 
                     if ($current == 'dashboard.php') {
                         $dashboard_class = 'nav-link active';
@@ -61,26 +60,19 @@
                     if ($current == 'users.php') {
                         $users_class = 'nav-link active';
                     }
-                    if ($current == 'user-details.php') {
-                        $users_class = 'nav-link open';
-                    }
                     if ($current == 'transactions.php') {
                         $transaction_class = 'nav-link active';
                     }
-                    if ($current == 'bank-transaction.php') {
-                        $bank_trans_class = 'nav-link active';
-                        $transaction_nav = 'nav-item menu-open';
+                    if ($current == 'user-details.php' || $current == 'edit-info.php' || $current == 'new-bankacct.php' || $current == 'close-bankacct.php') {
+                        $users_nav = 'nav-item menu-open';
                     }
-                    if ($current == 'transaction-history.php') {
-                        $trans_history_class = 'nav-link active';
+                    if ($current == 'bank-transaction.php') {
                         $transaction_nav = 'nav-item menu-open';
                     }
                     if ($current == 'statement.php') {
-                        $trans_history_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
                     }
                     if ($current == 'make-transfer.php') {
-                        $bank_transfer_class = 'nav-link active';
                         $transaction_nav = 'nav-item menu-open';
                     }
                     ?>
@@ -93,7 +85,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="<?php echo $users_nav ?>">
                         <a href="../Pages/users.php" class="<?php echo $users_class ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
