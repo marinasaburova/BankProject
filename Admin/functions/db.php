@@ -10,8 +10,6 @@ if (isset($_SESSION['emploggedin'])) {
     $user = 'admin';
 } else if (isset($_SESSION['loggedin'])) {
     $user = 'customer';
-} else {
-    header('Location: index.html');
 }
 
 function disconnectDB()

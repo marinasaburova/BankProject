@@ -53,7 +53,7 @@ $data = getCustomerData($customer);
                                 <?php echo getAccountType($acctNum) ?>
                                 <small> *<?php echo getFourDigits($acctNum) ?></small>
                             <?php } else {
-                                echo '<small>Pick an account</small>';
+                                echo '<small>Viewing all accounts</small>';
                             }
                             ?>
                             <button class="btn btn-sm btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,12 +63,14 @@ $data = getCustomerData($customer);
                                 <?php
                                 for ($i = 0; $i < sizeof($accts); $i++) {
                                     echo '<form action="#" method="get">';
-                                    echo '<button class="dropdown-item" type="submit" name="change_acct" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - *' . getFourDigits($accts[$i]) . '</button>';
+                                    echo '<input type="hidden" name="customerid" value="' . $customer . '">';
+                                    echo '<button class="dropdown-item" type="submit" name="acctNum" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - *' . getFourDigits($accts[$i]) . '</button>';
                                     echo '</form>';
                                 }
                                 ?>
-                                <form action="new-bankacct.php" method="post">
-                                    <button class="dropdown-item" type="submit" name="new_acct" value="new_acct'">open an account</button>
+                                <form action="#" method="get">
+                                    <input type="hidden" name="customerid" value="<?php echo $customer ?>">
+                                    <button class="dropdown-item" type="submit" name="acctNum" value="all">all</button>
                                 </form>
                             </div>
                         </span>
@@ -143,7 +145,7 @@ $data = getCustomerData($customer);
 
                             <?php
 
-                            if (isset($_GET['acctNum'])) {
+                            if ($acctNum != 'all') {
                                 $result = getTransactions($_GET['acctNum']);
                             } else {
                                 $result = getCustomerTransactions($customer);
