@@ -123,11 +123,25 @@ function createBankAcct($type, $deposit, $customer)
 {
     global $db;
 
-    $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', $deposit, '$customer', 'active')";
+    $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', '0.00', '$customer', 'active')";
     $result = $db->query($query);
 
     // checks for successful result
     if ($result) {
+
+        $query = "SELECT `acctNum` FROM `account` WHERE `customerID` = '$customer' ORDER BY `dateCreated` DESC LIMIT 1";
+        echo $query;
+        $result = $db->query($query);
+        $num_results = $result->num_rows;
+
+        if ($num_results == 0) {
+            return 'Error.';
+        } else {
+            $row = $result->fetch_assoc();
+            $acctNum = $row['acctNum'];
+            deposit($acctNum, $deposit, 'Initial deposit');
+        }
+
         header("Location: ../Pages/user-details.php?customerid=$customer");
     } else {
         echo '<p>Error. Your account could not be created.</p></br>';
@@ -136,12 +150,11 @@ function createBankAcct($type, $deposit, $customer)
 }
 
 // closes a bank account for a customer
-function closeBankAcct($acctNum, $transfer)
+function closeBankAcct($acctNum, $transfer, $customer)
 {
     global $db;
 
     $query = "UPDATE `account` SET `status` = 'closed' WHERE `account`.`acctNum` = '$acctNum'";
-    echo $query;
     $result = $db->query($query);
 
     // checks for successful result
@@ -149,8 +162,8 @@ function closeBankAcct($acctNum, $transfer)
         $balance = getBalance($acctNum);
         if ($balance != 0) {
             transfer($acctNum, $transfer, $balance);
-            // header("Location: ../Pages/user-details.php?customerid=$customer");
         }
+        header("Location: ../Pages/user-details.php?customerid=$customer");
     } else {
         echo '<p>Error. Your account could not be updated.</p></br>';
         echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
