@@ -24,6 +24,7 @@ $customer = $_GET['customerid'];
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select">
+                  <option disabled selected value> -- select an account -- </option>
                   <?php getAccountDropdown($customer); ?>
                 </select>
               </div>
@@ -59,6 +60,7 @@ $customer = $_GET['customerid'];
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select">
+                  <option disabled selected value> -- select an account -- </option>
                   <?php getAccountDropdown($customer); ?>
                 </select>
               </div>

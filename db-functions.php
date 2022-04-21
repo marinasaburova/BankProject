@@ -474,20 +474,27 @@ function deposit($acctNum, $amount, $vendor)
 function withdraw($acctNum, $amount, $vendor)
 {
     global $db;
-    $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
-    $result = $db->query($query);
+    $balance = getBalance($acctNum);
 
-    // checks for successful result
-    if ($result) {
-        $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
-        $result2 = $db->query($query2);
-        if (!$result2) {
-            echo 'Error updating your balance.';
+    if ($balance >= $amount) {
+        $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
+        $result = $db->query($query);
+
+        // checks for successful result
+        if ($result) {
+            $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
+            $result2 = $db->query($query2);
+            if (!$result2) {
+                echo 'Error updating your balance.';
+            }
+            echo 'Withdraw has been successfully made!';
+            header('Location: ../Pages/dashboard.php');
+        } else {
+            echo 'There was an error with your withdraw.';
+            exit;
         }
-        echo 'Withdraw has been successfully made!';
-        header('Location: ../Pages/dashboard.php');
     } else {
-        echo 'There was an error with your withdraw.';
+        echo 'You do not have enough money.';
         exit;
     }
 }

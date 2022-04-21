@@ -21,6 +21,7 @@ if (isset($_GET['acctNum'])) {
 $accts = getAccountOptions($customer);
 $data = getCustomerData($customer);
 
+
 ?>
 
 <!-- Main content -->
@@ -49,11 +50,15 @@ $data = getCustomerData($customer);
                     <div class="info-box-content">
                         <span class="info-box-text">Account
                             <?php
-                            $status = getAccountStatus($acctNum);
+                            if ($acctNum != "all") {
+                                $status = getAccountStatus($acctNum);
 
-                            if ($status == 'closed') {
-                                echo '<span class="text-danger">(Closed)</span>';
-                            } ?>
+                                if ($status == 'closed') {
+                                    echo '<span class="text-danger">(Closed)</span>';
+                                }
+                            }
+                            ?>
+
                         </span>
                         <span class="info-box-number">
                             <?php if ($acctNum != "all") {
