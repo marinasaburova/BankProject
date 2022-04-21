@@ -9,8 +9,6 @@ include '../view/navigation.php';
 
 $customer = $_GET['customerid'];
 $data = getCustomerData($customer);
-$accts = getAccountOptions($customer);
-
 ?>
 
 <!-- Main content -->
@@ -18,7 +16,7 @@ $accts = getAccountOptions($customer);
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Personal Information</h3>
@@ -67,18 +65,20 @@ $accts = getAccountOptions($customer);
             </div>
 
             <!-- Bank Account Details -->
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Bank Accounts</h3>
                         <div class="card-tools"></div>
                     </div>
                     <div class="row">
+                        <!-- Active accounts -->
                         <div class="col">
                             <div class="card-body">
                                 <h4 class="card-title"><b>Active</b></h4>
                                 <p class="card-text">
                                     <?php
+                                    $accts = getActiveAcctsCustomer($customer);
                                     if (sizeof($accts) == 0) {
                                         echo 'no active accounts <br>';
                                     }
@@ -94,6 +94,9 @@ $accts = getAccountOptions($customer);
                                 </p>
                             </div>
                         </div>
+                        <!-- ./active accounts -->
+
+                        <!-- Pending accounts -->
                         <div class="col">
                             <div class="card-body">
                                 <h4 class="card-title"><b>Pending</b></h4>
@@ -114,6 +117,32 @@ $accts = getAccountOptions($customer);
                                 </p>
                             </div>
                         </div>
+                        <!-- ./pending accounts -->
+
+                        <!-- Closed accounts -->
+                        <div class="col">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Closed</b></h4>
+                                <p class="card-text">
+                                    <?php
+                                    $closed = getClosedAcctsCustomer($customer);
+                                    if (sizeof($closed) == 0) {
+                                        echo 'no closed accounts <br>';
+                                    }
+                                    for ($i = 0; $i < sizeof($closed); $i++) {
+                                        echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $closed[$i] . '" class="text-reset">';
+                                        echo getAccountType($closed[$i]);
+                                        echo ' *';
+                                        echo getFourDigits($closed[$i]);
+                                        echo '</a><br>';
+                                    }
+
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- ./closed accounts -->
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -147,8 +176,6 @@ $accts = getAccountOptions($customer);
                                 if ($num_results == 0) {
                                     echo '<p class="text-center pt-3">This customer does not have any transactions.</p>';
                                 } else {
-                                    $acctNum = $accts[0];
-                                    $i = 0;
                                 ?>
                                     <thead>
                                         <tr>

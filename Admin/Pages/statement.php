@@ -47,10 +47,17 @@ $data = getCustomerData($customer);
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-university"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Account</span>
+                        <span class="info-box-text">Account
+                            <?php
+                            $status = getAccountStatus($acctNum);
+
+                            if ($status == 'closed') {
+                                echo '<span class="text-danger">(Closed)</span>';
+                            } ?>
+                        </span>
                         <span class="info-box-number">
-                            <?php if ($acctNum != "all") { ?>
-                                <?php echo getAccountType($acctNum) ?>
+                            <?php if ($acctNum != "all") {
+                                echo getAccountType($acctNum) ?>
                                 <small> *<?php echo getFourDigits($acctNum) ?></small>
                             <?php } else {
                                 echo '<small>Viewing all accounts</small>';
@@ -88,6 +95,7 @@ $data = getCustomerData($customer);
                         <span class="info-box-text">Balance</span>
                         <span class="info-box-number">
                             <?php
+
                             if ($acctNum != "all") {
                                 echo 'Available: <small> $' . getBalance($acctNum) . '</small>';
                             } else {

@@ -285,7 +285,7 @@ function getAllCustomers()
 function getAccountDropdown($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND `status` = 'active'";
+    $query = "SELECT `acctNum` FROM `account` WHERE `customerID` = '$customer' AND `status` = 'active'";
     $result = $db->query($query);
     $num_results = $result->num_rows;
     while ($row = $result->fetch_assoc()) {
@@ -297,7 +297,7 @@ function getAccountDropdown($customer)
 function getAccountOptions($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND status = 'active'";
+    $query = "SELECT `acctNum` FROM `account` WHERE `customerID` = '$customer' AND (`status` = 'active' OR `status` = 'closed')";
     $result = $db->query($query);
     $accts = array();
     while ($row = $result->fetch_assoc()) {
@@ -338,6 +338,19 @@ function getPendingAccts()
     return $result;
 }
 
+function getActiveAcctsCustomer($customer)
+{
+    global $db;
+    $query = "SELECT `acctNum` FROM `account` WHERE `customerID` = '$customer' AND `status` = 'active'";
+    $result = $db->query($query);
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
+}
+
 // gets all of the accounts waiting to be created for a specific customer
 function getPendingAcctsCustomer($customer)
 {
@@ -352,11 +365,41 @@ function getPendingAcctsCustomer($customer)
     return $accts;
 }
 
+// gets all of the accounts waiting to be created for a specific customer
+function getClosedAcctsCustomer($customer)
+{
+    global $db;
+    $query = "SELECT `acctNum` FROM `account` WHERE `status`='closed' AND `customerID` = $customer ORDER BY dateCreated";
+    $result = $db->query($query);
+    $accts = array();
+    while ($row = $result->fetch_assoc()) {
+        $accts[] = $row['acctNum'];
+    }
+    $result->free();
+    return $accts;
+}
+
+function getAccountStatus($acctNum)
+{
+    global $db;
+    $query = "SELECT `status` FROM `account` WHERE `acctNum` = $acctNum";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+
+    if ($num_results == 0) {
+        return 'Error. Account status was not found';
+    } else {
+        $row = $result->fetch_assoc();
+        $status = $row['status'];
+        return $status;
+    }
+}
+
 // gets balance for a specific account
 function getBalance($acctNum)
 {
     global $db;
-    $query = "SELECT balance FROM account WHERE acctNum = '$acctNum'";
+    $query = "SELECT `balance` FROM `account` WHERE `acctNum` = '$acctNum'";
     $result = $db->query($query);
     $num_results = $result->num_rows;
 
