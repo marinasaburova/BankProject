@@ -1,7 +1,7 @@
 <?php
 $title = "Register";
 include '../view/header-simple.php';
-?>
+?> 
 
 <body class="hold-transition login-page">
     <div class="login-box" style="width:500px">
