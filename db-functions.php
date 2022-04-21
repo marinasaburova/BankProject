@@ -190,7 +190,29 @@ function updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr
             exit;
         }
         if (isset($_SESSION['emploggedin'])) {
-            header("Location: ../Pages/users-details.php?customerid=$customer");
+            header("Location: ../Pages/user-details.php?customerid=$customer");
+            exit;
+        }
+    }
+}
+
+function removeCustomer($customer)
+{
+    global $db;
+
+    $query = "UPDATE `customer` SET `status` = 'inactive' WHERE `customer`.`customerID` = '$customer'";
+    echo $query;
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating info.';
+    } else {
+        if (isset($_SESSION['loggedin'])) {
+            header('Location: ../Pages/users.php');
+            exit;
+        }
+        if (isset($_SESSION['emploggedin'])) {
+            header("Location: ../Pages/user-details.php?customerid=$customer");
             exit;
         }
     }

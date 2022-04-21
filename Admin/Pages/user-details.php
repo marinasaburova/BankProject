@@ -26,7 +26,16 @@ $accts = getAccountOptions($customer);
                     <div class="card-body">
 
                         <h4 class="card-title"><b><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></b></h4>
-                        <p class="card-text">Customer Since <?php echo $data['dateCreated'] ?> </p>
+                        <?php if ($data['status'] == 'inactive') {
+                        ?>
+                            <p class="card-text text-danger">Inactive Customer</p>
+                        <?php
+
+                        } else { ?>
+                            <p class="card-text">Customer Since <?php echo $data['dateCreated'] ?> </p>
+                        <?php
+                        }
+                        ?>
 
                         <h4 class="card-title"><b>Personal Details</b></h4>
                         <p class="card-text">
@@ -43,9 +52,14 @@ $accts = getAccountOptions($customer);
                         <a href="edit-info.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
                             Edit Info
                         </a>
-                        <a href="#" class="btn btn-sm btn-danger float-right">
-                            Remove Customer
-                        </a>
+
+                        <?php if ($data['status'] == 'active') { ?>
+                            <a href="../functions/remove-customer.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-danger float-right">
+                                Remove Customer
+                            </a>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <!-- /.card-footer -->
                 </div>
