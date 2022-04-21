@@ -78,16 +78,23 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
 
     // checks for successful result
     if ($result) {
-        session_start();
-
         $query = "SELECT * FROM customer WHERE username = '$uname'";
         $result = $db->query($query);
         $row = $result->fetch_assoc();
-        $_SESSION['customer'] = $row['customerID'];
-        $_SESSION['loggedin'] = TRUE;
-        $result->free();
-        header('Location: ../Pages/new-bankacct.php');
-        exit;
+
+        if (isset($_SESSION['emploggedin'])) {
+            $customer = $row['customerID'];
+            echo 'Employee.' . $customer;
+            header('Location: ../Pages/new-bankacct.php?customerid=' . $customer);
+        } else {
+            echo 'customer';
+            session_start();
+            $_SESSION['customer'] = $row['customerID'];
+            $_SESSION['loggedin'] = TRUE;
+            $result->free();
+            //     header('Location: ../Pages/new-bankacct.php');
+            exit;
+        }
     } else {
         echo '<p>Error. Your account could not be created.</p></br>';
         echo '<a class = "link" href="../register.php">Try again.</a>';

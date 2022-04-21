@@ -1,4 +1,11 @@
     <?php
+    session_start();
+
+    if (!isset($_SESSION['emploggedin'])) {
+        header('Location: ../Pages/login.php');
+        exit;
+    }
+
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $uname = $_POST['uname'];
