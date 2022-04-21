@@ -40,7 +40,7 @@ $data = getEmployeeData($employee);
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
+                                <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" value="<?php echo $data['phone']; ?>" class=" form-control" minlength="10" maxlength="10" required />
                             </div>
                             <div class="form-group">
                                 <label for="dateCreated">Employee Since</label>
@@ -63,7 +63,7 @@ $data = getEmployeeData($employee);
                         <div class="card-tools"></div>
                     </div>
                     <div class="card-body">
-                        <form action="../functions/update-employee.php" method="post">
+                        <form action="../functions/update-employee.php" method="post" oninput='newPwd2.setCustomValidity(newPwd2.value != newPwd.value ? "Passwords do not match." : "")'>
                             <div class="form-group">
                                 <label for="currPwd">Current Password</label>
                                 <input type="password" name="currPwd" id="currPwd" placeholder="Enter current password" class="form-control" maxlength="60" required />

@@ -18,7 +18,7 @@ include '../view/navigation.php';
                     </div>
                     <div class="card-body">
 
-                        <form action="../functions/register.php" method="post">
+                        <form action="../functions/register.php" method="post" oninput='pwd2.setCustomValidity(pwd2.value != pwd.value ? "Passwords do not match." : "")'>
 
                             <label for="fname">First Name</label>
                             <div class="input-group mb-3">
@@ -42,7 +42,7 @@ include '../view/navigation.php';
 
                             <label for="phone">Phone</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" maxlength="10" required />
+                                <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" pattern="[0-9]{10}" minlength="10" maxlength="10" required />
                             </div>
 
                             <label for="addr">Address</label>

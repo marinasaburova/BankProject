@@ -88,12 +88,11 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
             echo 'Employee.' . $customer;
             header('Location: ../Pages/new-bankacct.php?customerid=' . $customer);
         } else {
-            echo 'customer';
             session_start();
             $_SESSION['customer'] = $row['customerID'];
             $_SESSION['loggedin'] = TRUE;
             $result->free();
-            //     header('Location: ../Pages/new-bankacct.php');
+            header('Location: ../Pages/new-bankacct.php');
             exit;
         }
     } else {
