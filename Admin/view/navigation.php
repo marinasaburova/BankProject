@@ -9,9 +9,6 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="../Pages/dashboard.php" class="nav-link">Home</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="../Pages/contact-us.php" class="nav-link">Contact</a>
-            </li>
         </ul>
 
     </nav>
