@@ -121,22 +121,6 @@ $data = getCustomerData($customer);
         </div>
         <!-- /.row -->
 
-        <!--    <form action="statement.php" method="get">
-                                        <div class="form-group">
-                                            <input type="month" name="month" id="month" class="form-control custom-select" />
-                                        </div>
-                                        <div class="form-group">
-                                            <select id="acctNum" name="acctNum" class="form-control custom-select" required>
-                                                <?php getAccountDropdown($customer); ?>
-                                            </select>
-                                        </div>
-                                        <input type="hidden" name="customerid" value="<?php echo $customer ?>">
-                                        <div class="form-group">
-                                            <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>
-                                        </div>
-                                    </form> -->
-
-
         <div class="card card-solid">
             <br />
             <div class="row">

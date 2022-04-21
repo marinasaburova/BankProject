@@ -24,13 +24,13 @@ $customer = $_GET['customerid'];
                         <form action="../functions/transfer.php" method="post">
                             <div class="form-group">
                                 <label for="acctFrom">From Account</label>
-                                <select id="acctFrom" name="acctFrom" class="form-control custom-select">
+                                <select id="acctFrom" name="acctFrom" class="form-control custom-select" required>
                                     <?php getAccountDropdown($customer); ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="acctTo">To Account</label>
-                                <select id="acctTo" name="acctTo" class="form-control custom-select">
+                                <select id="acctTo" name="acctTo" class="form-control custom-select" required>
                                     <?php getAccountDropdown($customer); ?>
                                 </select>
                             </div>
@@ -39,7 +39,7 @@ $customer = $_GET['customerid'];
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
+                                <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" max="10000" aria-describedby="basic-addon3" required>
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Clear" class="btn btn-secondary" />

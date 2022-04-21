@@ -48,9 +48,6 @@ include '../view/header-simple.php';
                     </div>
                 </form>
 
-                <!--   <p class="mb-1">
-                    <a href="forgotpassword.html">I forgot my password</a>
-                </p> -->
                 <p class="mb-0">
                     <a href="../../customer/Pages/login.php" class="text-center">Customer login</a>
                 </p>

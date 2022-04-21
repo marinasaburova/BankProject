@@ -39,7 +39,7 @@ include '../view/navigation.php';
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
+                                <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01" max="10000" aria-describedby="basic-addon3" required>
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Clear" class="btn btn-secondary" />

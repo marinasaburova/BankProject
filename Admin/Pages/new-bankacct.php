@@ -22,7 +22,7 @@ $accts = getAccountOptions($customer);
             <div class="col-md-6">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Open New Account</h3>
+                        <h3 class="card-title">Create a Bank Account</h3>
                         <div class="card-tools"></div>
                     </div>
                     <div class="card-body">
@@ -45,7 +45,7 @@ $accts = getAccountOptions($customer);
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" id="deposit" name="deposit" class="form-control" min="0.01" step="0.01" aria-describedby="basic-addon3" required>
+                                <input type="number" id="deposit" name="deposit" class="form-control" min="0.01" step="0.01" max="10000" aria-describedby="basic-addon3" required>
                             </div>
 
                             <input type="hidden" name="customer" value="<?php echo $customer ?>">

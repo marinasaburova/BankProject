@@ -1,7 +1,7 @@
 <?php
 $title = "Register";
 include '../view/header-simple.php';
-?> 
+?>
 
 <body class="hold-transition login-page">
     <div class="login-box" style="width:500px">
@@ -37,7 +37,7 @@ include '../view/header-simple.php';
 
                     <label for="phone">Phone</label>
                     <div class="input-group mb-3">
-                        <input class="form-control" type="phone" placeholder="Enter Phone" name="phone" maxlength="10" required />
+                        <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" maxlength="10" required />
                     </div>
 
                     <label for="addr">Address</label>
