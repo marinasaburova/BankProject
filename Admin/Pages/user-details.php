@@ -79,6 +79,9 @@ $accts = getAccountOptions($customer);
                                 <h4 class="card-title"><b>Active</b></h4>
                                 <p class="card-text">
                                     <?php
+                                    if (sizeof($accts) == 0) {
+                                        echo 'no active accounts <br>';
+                                    }
                                     for ($i = 0; $i < sizeof($accts); $i++) {
                                         echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
                                         echo getAccountType($accts[$i]);

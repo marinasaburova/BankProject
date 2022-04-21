@@ -33,7 +33,7 @@
                     <!-- <img src="../dist/img/Saba.jpg" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <a href="../Pages/dashboard.php" class="d-block ">
+                    <a href="../Pages/employee.php" class="d-block ">
                         <?php $data = getEmployeeData($employee);
                         echo $data['firstName'] . ' ' . $data['lastName'] ?>
                     </a>

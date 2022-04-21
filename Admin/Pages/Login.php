@@ -51,9 +51,6 @@ include '../view/header-simple.php';
                 <!--   <p class="mb-1">
                     <a href="forgotpassword.html">I forgot my password</a>
                 </p> -->
-                <p class="mb-1">
-                    <a href="new-customer.php" class="text-center">Register a new account</a>
-                </p>
                 <p class="mb-0">
                     <a href="../../customer/Pages/login.php" class="text-center">Customer login</a>
                 </p>

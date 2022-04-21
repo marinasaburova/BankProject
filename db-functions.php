@@ -47,15 +47,16 @@ function emplogin($uname, $pwd)
     $query = "SELECT * FROM employee WHERE username = '$uname'";
     $result = $db->query($query);
     $row = $result->fetch_assoc();
+    $hash = $row['password'];
 
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
         header('Location: ../Pages/login.html');
         exit;
     }
-    if ($row['password'] !== $pwd) {
+    if (!password_verify($pwd, $hash)) {
         echo '<p>Incorrect credentials.</p></br>';
-        header('Location: ../Pages/login.html');
+        header('Location: ../Pages/login.php');
         $result->free();
         exit;
     } else {
@@ -470,6 +471,45 @@ function getEmployeeData($customer)
     } else {
         $data = $result->fetch_assoc();
         return $data;
+    }
+}
+
+// updates customer account info 
+function updateEmployee($employee, $fname, $lname, $uname, $email, $phone)
+{
+    global $db;
+
+    $query = "UPDATE `employee` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone' WHERE `employee`.`employeeID` = '$employee'";
+    echo $query;
+    $result = $db->query($query);
+
+    if (!$result) {
+        echo 'Error updating info.';
+    } else {
+        if (isset($_SESSION['emploggedin'])) {
+            header("Location: ../Pages/employee.php");
+            exit;
+        }
+    }
+}
+
+// changes customer password 
+function changeEmpPassword($employee, $newpwd)
+{
+    global $db;
+
+    $pwdHash = password_hash($newpwd, PASSWORD_BCRYPT);
+
+    $query = "UPDATE `employee` SET `password` = '$pwdHash' WHERE `employee`.`employeeID` = '$employee'";
+    $result = $db->query($query);
+    if (!$result) {
+        echo 'Error updating password.';
+    } else {
+        if (isset($_SESSION['emploggedin'])) {
+            echo 'employee';
+            header("Location: ../Pages/employee.php");
+            exit;
+        }
     }
 }
 
