@@ -41,7 +41,7 @@ $data = getCustomerData($customer);
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="phone" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
+                                <input type="tel" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
                             </div>
                             <div class="form-group">
                                 <label for="addr">Home Address</label>
@@ -52,6 +52,7 @@ $data = getCustomerData($customer);
                                 <input type="text" name="dateCreated" id="dateCreated" readonly value="<?php echo $data['dateCreated']; ?>" class=" form-control" />
                             </div>
                             <div class="form-group">
+                                <input type="hidden" name="customer" value="<?php echo $customer ?>">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />
                                 <input type="submit" name="updateInfo" value="Update" class="btn btn-success float-right" />
                             </div>

@@ -40,7 +40,7 @@ $data = getCustomerData($customer);
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="phone" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
+                                <input type="tel" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
                             </div>
                             <div class="form-group">
                                 <label for="addr">Home Address</label>
