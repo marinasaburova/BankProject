@@ -24,23 +24,23 @@ $data = getEmployeeData($employee);
                         <form action="../functions/update-employee.php" method="post">
                             <div class="form-group">
                                 <label for="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" />
+                                <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" maxlength="30" required />
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" id="lname" value="<?php echo $data['lastName']; ?>" class=" form-control" />
+                                <input type="text" name="lname" id="lname" value="<?php echo $data['lastName']; ?>" class=" form-control" maxlength="30" required />
                             </div>
                             <div class="form-group">
                                 <label for="uname">Username</label>
-                                <input type="text" name="uname" id="uname" value="<?php echo $data['username']; ?>" class=" form-control" />
+                                <input type="text" name="uname" id="uname" value="<?php echo $data['username']; ?>" class=" form-control" maxlength="20" required />
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" name="email" id="email" value="<?php echo $data['email']; ?>" class=" form-control" />
+                                <input type="email" name="email" id="email" value="<?php echo $data['email']; ?>" class=" form-control" maxlength="60" required />
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" />
+                                <input type="tel" name="phone" id="phone" value="<?php echo $data['phone']; ?>" class=" form-control" maxlength="10" required />
                             </div>
                             <div class="form-group">
                                 <label for="dateCreated">Employee Since</label>
@@ -66,15 +66,15 @@ $data = getEmployeeData($employee);
                         <form action="../functions/update-employee.php" method="post">
                             <div class="form-group">
                                 <label for="currPwd">Current Password</label>
-                                <input type="password" name="currPwd" id="currPwd" placeholder="Enter current password" class="form-control" />
+                                <input type="password" name="currPwd" id="currPwd" placeholder="Enter current password" class="form-control" maxlength="60" required />
                             </div>
                             <div class="form-group">
                                 <label for="newPwd">New Password</label>
-                                <input type="password" name="newPwd" id="newPwd" class="form-control" />
+                                <input type="password" name="newPwd" id="newPwd" class="form-control" maxlength="60" required />
                             </div>
                             <div class="form-group">
                                 <label for="newPwd2">Confirm New Password</label>
-                                <input type="password" name="newPwd2" id="newPwd2" class="form-control" />
+                                <input type="password" name="newPwd2" id="newPwd2" class="form-control" maxlength="60" required />
                             </div>
                             <input type="hidden" name="customer" value="<?php echo $customer ?>">
                             <div class="form-group">

@@ -15,7 +15,7 @@ include '../view/header-simple.php';
 
                 <form action="../functions/verify.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Username">
+                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Username" maxlength="20" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user-circle"></span>
@@ -23,7 +23,7 @@ include '../view/header-simple.php';
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password">
+                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password" maxlength="60" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

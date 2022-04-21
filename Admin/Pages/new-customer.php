@@ -22,42 +22,42 @@ include '../view/navigation.php';
 
                             <label for="fname">First Name</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="text" placeholder="Enter First Name" name="fname" required />
+                                <input class="form-control" type="text" placeholder="Enter First Name" name="fname" maxlength="30" required />
                             </div>
 
                             <label for="lname">Last Name</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="text" placeholder="Enter Last Name" name="lname" required />
+                                <input class="form-control" type="text" placeholder="Enter Last Name" name="lname" maxlength="30" required />
                             </div>
 
                             <label for="uname">Username</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="text" placeholder="Enter Username" name="uname" required />
+                                <input class="form-control" type="text" placeholder="Enter Username" name="uname" maxlength="20" required />
                             </div>
 
                             <label for="email">Email</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="email" placeholder="Enter Email" name="email" required />
+                                <input class="form-control" type="email" placeholder="Enter Email" name="email" maxlength="60" required />
                             </div>
 
                             <label for="phone">Phone</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" required />
+                                <input class="form-control" type="tel" placeholder="Enter Phone" name="phone" maxlength="10" required />
                             </div>
 
                             <label for="addr">Address</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="text" placeholder="Enter Home Address" name="addr" required />
+                                <input class="form-control" type="text" placeholder="Enter Home Address" name="addr" maxlength="60" required />
                             </div>
 
                             <label for="pwd">Password</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="password" placeholder="Enter Password" name="pwd" required />
+                                <input class="form-control" type="password" placeholder="Enter Password" name="pwd" maxlength="60" required />
                             </div>
 
                             <label for="pwd2">Confirm Password</label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="password" placeholder="Confirm Password" name="pwd2" required />
+                                <input class="form-control" type="password" placeholder="Confirm Password" name="pwd2" maxlength="60" required />
                             </div>
 
                             <div class="row">
