@@ -140,8 +140,10 @@ function closeBankAcct($acctNum, $transfer)
     // checks for successful result
     if ($result) {
         $balance = getBalance($acctNum);
-        transfer($acctNum, $transfer, $balance);
-        // header("Location: ../Pages/user-details.php?customerid=$customer");
+        if ($balance != 0) {
+            transfer($acctNum, $transfer, $balance);
+            // header("Location: ../Pages/user-details.php?customerid=$customer");
+        }
     } else {
         echo '<p>Error. Your account could not be updated.</p></br>';
         echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
@@ -207,14 +209,26 @@ function removeCustomer($customer)
     if (!$result) {
         echo 'Error updating info.';
     } else {
-        if (isset($_SESSION['loggedin'])) {
-            header('Location: ../Pages/users.php');
-            exit;
+
+        $accts = getAccountOptions($customer);
+
+        foreach ($accts as $acctNum) {
+            $query = "UPDATE `account` SET `status` = 'closed' WHERE `account`.`acctNum` = '$acctNum'";
+            echo $query;
+            $result = $db->query($query);
+
+            if ($result) {
+                $balance = getBalance($acctNum);
+                if ($balance != 0) {
+                    withdraw($acctNum, $balance, 'Closing account withdrawal');
+                }
+            } else {
+                echo '<p>Error. Your account could not be updated.</p></br>';
+            }
         }
-        if (isset($_SESSION['emploggedin'])) {
-            header("Location: ../Pages/user-details.php?customerid=$customer");
-            exit;
-        }
+
+        header("Location: ../Pages/user-details.php?customerid=$customer");
+        exit;
     }
 }
 
@@ -263,7 +277,7 @@ function getAllCustomers()
 function getAccountDropdown($customer)
 {
     global $db;
-    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND status = 'active'";
+    $query = "SELECT acctNum FROM account WHERE customerID = '$customer' AND `status` = 'active'";
     $result = $db->query($query);
     $num_results = $result->num_rows;
     while ($row = $result->fetch_assoc()) {
