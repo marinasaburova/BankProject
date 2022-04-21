@@ -30,6 +30,8 @@ $data = getEmployeeData($employee)
                         <ul class="ml-4 mb-0 fa-ul">
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Employee ID: <?php echo $data['employeeID'] ?></li>
                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?php echo $data['email'] ?></li>
+                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: <?php echo $data['phone'] ?></li>
+
                         </ul>
                         </p>
                     </div>
