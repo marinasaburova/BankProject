@@ -1,21 +1,36 @@
-<?php
-$title = "Login";
-include '../view/header-simple.php';
-?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Customer Login</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+</head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Customer</b>Login</a>
+                <a href="login.html" class="h1"><b>Customer</b>Login</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form action="../functions/verify.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Username">
+                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Username" maxlength="20" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user-circle"></span>
@@ -23,7 +38,7 @@ include '../view/header-simple.php';
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password">
+                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password" maxlength="60" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -48,15 +63,11 @@ include '../view/header-simple.php';
                     </div>
                 </form>
 
-                <!--     <p class="mb-1">
-                    <a href="forgotpassword.html">I forgot my password</a>
-                </p> -->
                 <p class="mb-1">
-                    <a href="new-customer.php" class="text-center">Register a new account</a>
+                    <a href="forgotpassword.html">I forgot my password</a>
                 </p>
-
                 <p class="mb-0">
-                    <a href="../../Admin/Pages/login.php" class="text-center">Admin login</a>
+                    <a href="new-customer.php" class="text-center">Register a new account</a>
                 </p>
             </div>
             <!-- /.card-body -->
