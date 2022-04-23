@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$title = "Customer Login";
+include '../view/header-simple.php';
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
+    $login_error = 'Your credentials were not recognized.';
+}
 
-    <title>Customer Login</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-</head>
+?>
 
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -27,7 +17,9 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
+                <?php if (isset($login_error)) {
+                    echo '<p class="text-danger text-center">' . $login_error . '</p>';
+                } ?>
                 <form action="../functions/verify.php" method="post">
                     <div class="input-group mb-3">
                         <input type="text" name="uname" id="uname" class="form-control" placeholder="Username" maxlength="20" required>

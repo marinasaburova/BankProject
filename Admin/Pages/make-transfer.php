@@ -21,7 +21,7 @@ $customer = $_GET['customerid'];
                         <h3 class="card-title">Transfer</h3>
                     </div>
                     <div class="card-body">
-                        <form action="../functions/transfer.php" method="post">
+                        <form action="../functions/transfer.php" method="post" oninput='acctTo.setCustomValidity(acctTo.value == acctFrom.value ? "Pick two different accounts." : "")'>
                             <div class="form-group">
                                 <label for="acctFrom">From Account</label>
                                 <select id="acctFrom" name="acctFrom" class="form-control custom-select" required>

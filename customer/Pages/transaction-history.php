@@ -29,8 +29,12 @@ include '../view/navigation.php';
                 </div>
                 <div class="form-group">
                   <select id="acctNum" name="acctNum" class="form-control custom-select" required>
-                    <?php getAccountDropdown($customer); ?>
-                  </select>
+                    <?php
+                    $accts = getAccountOptions($customer);
+                    foreach ($accts as $acctNum)
+                      echo '<option value="' . $acctNum . '">' . getAccountType($acctNum) . ' - *' . getFourDigits($acctNum) . ' (' . getAccountStatus($acctNum) .  ')</option>';
+
+                    ?> </select>
                 </div>
                 <div class="form-group">
                   <button type="submit" name="submit" class="btn btn-success">Generate Statement</button>

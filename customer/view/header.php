@@ -10,7 +10,8 @@ if (!isset($_SESSION['loggedin'])) {
 
 // Set commonly used variables
 $customer = $_SESSION['customer'];
-$accts = getAccountOptions($customer);
+$accts = getActiveAcctsCustomer($customer);
+
 if (empty($accts)) {
     header('Location: new-bankacct.php');
 }

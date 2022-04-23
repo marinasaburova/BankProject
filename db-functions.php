@@ -22,15 +22,11 @@ function login($uname, $pwd)
     $hash = $row['password'];
 
     if (mysqli_num_rows($result) == 0) {
-        echo '<p>Incorrect credentials.</p></br>';
-        echo '<a class = "link" href=login.php>Try again.</a>';
-        header('Location: ../Pages/login.php');
+        header('Location: ../Pages/login.php?msg=error');
         exit;
     }
     if (!password_verify($pwd, $hash)) {
-        echo '<p>Incorrect credentials.</p></br>';
-        echo '<a class = "link" href=login.php>Try again.</a>';
-        header('Location: ../Pages/login.php');
+        header('Location: ../Pages/login.php?msg=error');
         $result->free();
     } else {
         $_SESSION['customer'] = $row['customerID'];
@@ -39,6 +35,7 @@ function login($uname, $pwd)
         header('Location: ../Pages/dashboard.php');
     }
 }
+
 
 // Employee login
 function emplogin($uname, $pwd)
@@ -51,12 +48,12 @@ function emplogin($uname, $pwd)
 
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
-        header('Location: ../Pages/login.html');
+        header('Location: ../Pages/login.html?msg=error');
         exit;
     }
     if (!password_verify($pwd, $hash)) {
         echo '<p>Incorrect credentials.</p></br>';
-        header('Location: ../Pages/login.php');
+        header('Location: ../Pages/login.php?msg=error');
         $result->free();
         exit;
     } else {
@@ -167,6 +164,7 @@ function closeBankAcct($acctNum, $transfer, $customer)
     } else {
         echo '<p>Error. Your account could not be updated.</p></br>';
         echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
+        //errormsg      header("Location: ../Pages/user-details.php?msg=error&customerid=$customer");
     }
 }
 
@@ -497,16 +495,16 @@ function withdraw($acctNum, $amount, $vendor)
             $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
             $result2 = $db->query($query2);
             if (!$result2) {
-                echo 'Error updating your balance.';
+                header("Location: ../Pages/bank-transaction.php?msg=error");
             }
             echo 'Withdraw has been successfully made!';
             header('Location: ../Pages/dashboard.php');
         } else {
-            echo 'There was an error with your withdraw.';
+            header("Location: ../Pages/bank-transaction.php?msg=error");
             exit;
         }
     } else {
-        echo 'You do not have enough money.';
+        header("Location: ../Pages/bank-transaction.php?msg=nobalance");
         exit;
     }
 }

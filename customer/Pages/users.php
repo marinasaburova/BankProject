@@ -15,7 +15,7 @@ $data = getCustomerData($customer)
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Your Information</h3>
@@ -47,7 +47,7 @@ $data = getCustomerData($customer)
             </div>
 
             <!-- Bank Account Details -->
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Your Bank Accounts</h3>
@@ -59,6 +59,9 @@ $data = getCustomerData($customer)
                                 <h4 class="card-title"><b>Active</b></h4>
                                 <p class="card-text">
                                     <?php
+                                    if (sizeof($accts) == 0) {
+                                        echo 'no active accounts <br>';
+                                    }
                                     for ($i = 0; $i < sizeof($accts); $i++) {
                                         echo getAccountType($accts[$i]);
                                         echo ' *';
@@ -70,6 +73,8 @@ $data = getCustomerData($customer)
                                 </p>
                             </div>
                         </div>
+
+                        <!-- Pending accounts -->
                         <div class="col">
                             <div class="card-body">
                                 <h4 class="card-title"><b>Pending</b></h4>
@@ -90,6 +95,31 @@ $data = getCustomerData($customer)
                                 </p>
                             </div>
                         </div>
+                        <!-- ./pending accounts -->
+
+                        <!-- Closed accounts -->
+                        <div class="col">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Closed</b></h4>
+                                <p class="card-text">
+                                    <?php
+                                    $closed = getClosedAcctsCustomer($customer);
+                                    if (sizeof($closed) == 0) {
+                                        echo 'no closed accounts <br>';
+                                    }
+                                    for ($i = 0; $i < sizeof($closed); $i++) {
+                                        echo getAccountType($closed[$i]);
+                                        echo ' *';
+                                        echo getFourDigits($closed[$i]);
+                                        echo '<br>';
+                                    }
+
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- ./closed accounts -->
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

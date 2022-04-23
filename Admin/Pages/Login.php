@@ -1,6 +1,11 @@
 <?php
 $title = "Admin Login";
 include '../view/header-simple.php';
+
+if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
+    $login_error = 'Your credentials were not recognized.';
+}
+
 ?>
 
 <body class="hold-transition login-page">
@@ -12,7 +17,9 @@ include '../view/header-simple.php';
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
+                <?php if (isset($login_error)) {
+                    echo '<p class="text-danger text-center">' . $login_error . '</p>';
+                } ?>
                 <form action="../functions/verify.php" method="post">
                     <div class="input-group mb-3">
                         <input type="text" name="uname" id="uname" class="form-control" placeholder="Username" maxlength="20" required>
