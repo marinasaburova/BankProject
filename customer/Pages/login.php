@@ -13,7 +13,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="login.html" class="h1"><b>Customer</b>Login</a>
+                <a href="../../index.html" class="h1"><b>Customer</b>Login</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -39,27 +39,20 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
+                            <p class="mb-0">
+                                <a href="new-customer.php">Register a new account</a>
+                            </p>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button id="SignIn" type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            <!--onclick="SignInFunction()"-->
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <p class="mb-1">
-                    <a href="forgotpassword.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                    <a href="new-customer.php" class="text-center">Register a new account</a>
+                <p class=" mb-0">
+                    <a href="../../Admin/Pages/Login.php">Admin login</a>
                 </p>
             </div>
             <!-- /.card-body -->
