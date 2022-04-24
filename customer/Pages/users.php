@@ -123,9 +123,14 @@ $data = getCustomerData($customer)
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="edit-info.php" class="btn btn-sm btn-success">
-                            <i class="fas fa-pen"></i> Open a New Account
-                        </a>
+                        <?php
+                        if ($accts) {
+                        ?>
+                            <a href="new-bankacct.php" class="btn btn-sm btn-success">
+                                <i class="fas fa-pen"></i> Open a New Account
+                            </a><?php
+                            }
+                                ?>
                     </div>
                     <!-- /.card-footer -->
                 </div>

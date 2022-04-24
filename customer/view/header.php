@@ -11,8 +11,9 @@ if (!isset($_SESSION['loggedin'])) {
 // Set commonly used variables
 $customer = $_SESSION['customer'];
 $accts = getActiveAcctsCustomer($customer);
+$pending = getPendingAcctsCustomer($customer);
 
-if (empty($accts)) {
+if (empty($accts) && empty($pending)) {
     header('Location: new-bankacct.php');
 }
 if (isset($_POST['change_acct'])) {

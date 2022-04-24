@@ -1,6 +1,10 @@
 <?php
 $title = "Register";
 include '../view/header-simple.php';
+
+if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
+    $error = 'An account with this username and/or email already exists.';
+}
 ?>
 
 <body class="hold-transition login-page">
@@ -12,7 +16,9 @@ include '../view/header-simple.php';
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register for a new account</p>
-
+                <?php if (isset($error)) {
+                    echo '<p class="text-danger text-center">' . $error . '</p>';
+                } ?>
                 <form action="../functions/register.php" method="post" oninput='pwd2.setCustomValidity(pwd2.value != pwd.value ? "Passwords do not match." : "")'>
 
                     <label for="fname">First Name</label>

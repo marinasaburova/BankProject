@@ -71,8 +71,15 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
     global $db;
     // finds matching credentials
     $pwdHash = password_hash($pwd, PASSWORD_BCRYPT);
-    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
-    $result = $db->query($query);
+
+    try {
+        $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
+        $result = $db->query($query);
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
+        echo $error_message;
+        header('Location: ../Pages/new-customer.php?msg=error');
+    }
 
     // checks for successful result
     if ($result) {
@@ -93,8 +100,7 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
             exit;
         }
     } else {
-        echo '<p>Error. Your account could not be created.</p></br>';
-        echo '<a class = "link" href="../register.php">Try again.</a>';
+        header('Location: ../Pages/new-customer.php?msg=error');
     }
 }
 

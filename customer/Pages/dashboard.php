@@ -6,6 +6,11 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+if (empty($accts) && $pending) {
+    include 'pending.php';
+    exit;
+}
+
 ?>
 
 <!-- Main content -->
