@@ -2,4 +2,4 @@
 session_start();
 session_destroy();
 // Redirect to the login page:
-header('Location: ../Pages/login.php');
+header('Location: ../../index.html');
