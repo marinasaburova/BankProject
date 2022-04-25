@@ -71,9 +71,9 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
     global $db;
     // finds matching credentials
     $pwdHash = password_hash($pwd, PASSWORD_BCRYPT);
+    $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
 
     try {
-        $query = "INSERT INTO customer (`firstName`, `lastName`, `username`, `email`, `phone`, `addr`, `password`, `pin`) VALUES ('$fname', '$lname', '$uname', '$email', '$phone', '$addr', '$pwdHash', $pin)";
         $result = $db->query($query);
     } catch (Exception $e) {
         $error_message = $e->getMessage();
@@ -132,29 +132,48 @@ function createBankAcct($type, $deposit, $customer)
     global $db;
 
     $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', '0.00', '$customer', 'active')";
-    $result = $db->query($query);
+
+    try {
+        $result = $db->query($query);
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
+        echo $error_message;
+        header('Location: ../Pages/new-bankacct.php?customerid=' . $customer . '&msg=error');
+        exit;
+    }
 
     // checks for successful result
     if ($result) {
 
         $query = "SELECT `acctNum` FROM `account` WHERE `customerID` = '$customer' ORDER BY `dateCreated` DESC LIMIT 1";
-        echo $query;
-        $result = $db->query($query);
+
+        try {
+            $result = $db->query($query);
+        } catch (Exception $e) {
+            $error_message = $e->getMessage();
+            echo $error_message;
+            header("Location: ../Pages/new-bankacct.php?customerid=$customer&msg=error");
+            exit;
+        }
+
         $num_results = $result->num_rows;
 
         if ($num_results == 0) {
-            return 'Error.';
+            header("Location: ../Pages/new-bankacct.php?customerid=$customer&msg=error");
+            exit;
         } else {
             $row = $result->fetch_assoc();
             $acctNum = $row['acctNum'];
             deposit($acctNum, $deposit, 'Initial deposit');
         }
 
-        header("Location: ../Pages/user-details.php?customerid=$customer");
+        header("Location: ../Pages/user-details.php?customerid=$customer&msg=success");
+        exit;
     } else {
-        echo '<p>Error. Your account could not be created.</p></br>';
-        echo '<a class = "link" href="new-bankacct.php">Try again.</a>';
+        header("Location: ../Pages/new-bankacct.php?customerid=$customer&msg=error");
+        exit;
     }
+    exit;
 }
 
 // closes a bank account for a customer
@@ -451,6 +470,15 @@ function getCustomerTransactions($customer)
     return $result;
 }
 
+// gets all transactions for a customer by name
+function getTransactionsByName($fname, $lname)
+{
+    global $db;
+    $query = "SELECT customerID FROM customer WHERE firstName = '$fname' and lastName = '$lname'";
+    $result = $db->query($query);
+    return $result;
+}
+
 // get all transactions amongst all customers
 function getAllTransactions()
 {
@@ -474,21 +502,40 @@ function deposit($acctNum, $amount, $vendor)
 {
     global $db;
     $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','deposit','$vendor','$acctNum')";
-    $result = $db->query($query);
+
+    try {
+        $result = $db->query($query);
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
+        echo $error_message;
+        header('Location: ../Pages/bank-transaction.php?msg=error');
+        exit;
+    }
 
     // checks for successful result
     if ($result) {
         $query2 = "UPDATE `account` SET `balance` = `balance` + '$amount' WHERE `account`.`acctNum` = '$acctNum'";
-        $result2 = $db->query($query2);
-        if (!$result2) {
-            echo 'Error updating your balance.';
+
+        try {
+            $result2 = $db->query($query2);
+        } catch (Exception $e) {
+            $error_message = $e->getMessage();
+            echo $error_message;
+            header('Location: ../Pages/bank-transaction.php?msg=error');
+            exit;
         }
-        echo 'Deposit has been successfully made!';
+
+        if (!$result2) {
+            header('Location: ../Pages/bank-transaction.php?msg=error');
+            exit;
+        }
         header('Location: ../Pages/dashboard.php');
+        exit;
     } else {
-        echo 'There was an error with your deposit';
+        header('Location: ../Pages/bank-transaction.php?msg=error');
         exit;
     }
+    exit;
 }
 
 // Withdraw money
@@ -499,17 +546,35 @@ function withdraw($acctNum, $amount, $vendor)
 
     if ($balance >= $amount) {
         $query = "INSERT INTO `transaction`(`amount`, `type`, `vendor`, `acctNum`) VALUES ('$amount','withdraw','$vendor','$acctNum')";
-        $result = $db->query($query);
+
+        try {
+            $result = $db->query($query);
+        } catch (Exception $e) {
+            $error_message = $e->getMessage();
+            echo $error_message;
+            header('Location: ../Pages/bank-transaction.php?msg=error');
+            exit;
+        }
 
         // checks for successful result
         if ($result) {
             $query2 = "UPDATE `account` SET `balance` = `balance` - '$amount' WHERE `account`.`acctNum` = '$acctNum'";
-            $result2 = $db->query($query2);
+
+            try {
+                $result2 = $db->query($query2);
+            } catch (Exception $e) {
+                $error_message = $e->getMessage();
+                echo $error_message;
+                header('Location: ../Pages/bank-transaction.php?msg=error');
+                exit;
+            }
+
             if (!$result2) {
                 header("Location: ../Pages/bank-transaction.php?msg=error");
+                exit;
             }
-            echo 'Withdraw has been successfully made!';
             header('Location: ../Pages/dashboard.php');
+            exit;
         } else {
             header("Location: ../Pages/bank-transaction.php?msg=error");
             exit;
