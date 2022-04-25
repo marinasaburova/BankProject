@@ -109,15 +109,20 @@ function requestBankAcct($type, $customer)
     global $db;
 
     $query = "INSERT INTO account (`acctType`, `balance`, `customerID`, `status`) VALUES ('$type', '0.00', '$customer', 'pending')";
-    $result = $db->query($query);
+
+    try {
+        $result = $db->query($query);
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
+        echo $error_message;
+        header('Location: ../Pages/new-bankacct.php?msg=error');
+    }
 
     // checks for successful result
     if ($result) {
-        echo '<p>Your account request has been submitted. Please wait for an employee to approve it.';
-        echo '<a href="../Pages/dashboard.php">Go back to dashboard</a>';
+        header('Location: ../Pages/new-bankacct.php?msg=success');
     } else {
-        echo '<p>Error. Your account could not be created.</p></br>';
-        echo '<a class = "link" href="../newaccount.php">Try again.</a>';
+        header('Location: ../Pages/new-bankacct.php?msg=error');
     }
 }
 

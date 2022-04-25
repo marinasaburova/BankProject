@@ -14,6 +14,15 @@ include '../functions/db.php';
 
 $title = "Open Bank Account";
 include '../view/header-simple.php';
+
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 'error') {
+        $error = 'Your account could not be created. Please try again.';
+    }
+    if ($_GET['msg'] == 'success') {
+        $success = 'Your account request has been submitted. Please wait for an employee to approve it.';
+    }
+}
 ?>
 
 <body class="hold-transition login-page">
@@ -25,6 +34,14 @@ include '../view/header-simple.php';
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Open a New Bank Account</p>
+                <?php if (isset($error)) {
+                    echo '<p class="text-danger text-center">' . $error . '</p>';
+                } ?>
+                <?php if (isset($success)) {
+                    echo '<p class="text-success text-center">' . $success . '</p>';
+                    echo '<div class="text-center"><a href="dashboard.php" class="btn btn-primary">View your Dashboard</a></div>';
+                    exit;
+                } ?>
 
                 <form action="../functions/openacct.php" method="post">
 

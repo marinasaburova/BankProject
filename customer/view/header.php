@@ -18,7 +18,7 @@ if (empty($accts) && empty($pending)) {
 }
 if (isset($_POST['change_acct'])) {
     $acctNum = $_POST['change_acct'];
-} else {
+} else if ($accts) {
     $acctNum = $accts[0];
 }
 ?>
