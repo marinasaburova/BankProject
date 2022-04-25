@@ -616,7 +616,6 @@ function updateEmployee($employee, $fname, $lname, $uname, $email, $phone)
     global $db;
 
     $query = "UPDATE `employee` SET `firstName` = '$fname', `lastName` = '$lname', `username` = '$uname', `email` = '$email', `phone` = '$phone' WHERE `employee`.`employeeID` = '$employee'";
-    echo $query;
     $result = $db->query($query);
 
     if (!$result) {
@@ -642,7 +641,6 @@ function changeEmpPassword($employee, $newpwd)
         echo 'Error updating password.';
     } else {
         if (isset($_SESSION['emploggedin'])) {
-            echo 'employee';
             header("Location: ../Pages/employee.php");
             exit;
         }
