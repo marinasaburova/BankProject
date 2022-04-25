@@ -132,6 +132,25 @@ include '../view/navigation.php';
             <!-- /.col -->
         </div>
         <!-- /.row -->
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <form id="SearchForm" action="transactions-by-name.php" method="post">
+                            <div class="input-group">
+                                <input type="search" name="searchedName" id="searchedName" class="form-control form-control-lg" placeholder="Search Transactions By Customer Name">
+                                <input type="hidden" name="FirstName" id="FirstName">
+                                <input type="hidden" name="LastName" id="LastName">
+                                
+                                <div class="input-group-append">
+                            <button type="button" onclick="SubmitSearchForm()" class="btn btn-lg btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         <!-- Main row -->
         <div class="row">
@@ -210,6 +229,20 @@ include '../view/navigation.php';
 </section>
 <!-- /.content -->
 
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<script>
+    function SubmitSearchForm() {
+        var searchValue = $('#searchedName').val();
+        var splitValues = searchValue.split(' ');
+        if(splitValues[0] !== '')
+            $('#FirstName').val(splitValues[0]);
+        if(splitValues.length > 1)
+            if(splitValues[1] !== '')
+                $('#LastName').val(splitValues[1]);
+        $('#SearchForm').submit();
+    }
+</script>
 
 <!-- footer -->
 <?php include '../view/footer.php'; ?>
