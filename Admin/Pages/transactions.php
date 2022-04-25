@@ -18,7 +18,7 @@ include '../view/navigation.php';
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="input-group">
-                        <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Search transactions">
+                        <input type="search" id="TransSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Search Transactions By Date">
                         <div class="input-group-append">
                             <button type="button" onclick="Searchfunction()" class="btn btn-lg btn-default">
                                 <i class="fa fa-search"></i>
@@ -55,11 +55,11 @@ include '../view/navigation.php';
                                 $data = getCustomerData($cid);
                                 $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
-                                echo '<tr>';
+                                echo '<tr class = "dataRows">';
                                 echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
                                 echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
 
-                                echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                echo '<td class = "dateCol">' .  $row['date'] . ' ' . $row['time'] . '</td>';
                                 echo '<td>' . $row['vendor'] . '</td>';
                                 if ($row['type'] == 'withdraw') {
                                     echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
@@ -91,18 +91,22 @@ include '../view/navigation.php';
 <script src="../plugins/jquery/jquery.min.js"></script>
 <script>
     function Searchfunction() {
-        var searchValue = $('#UserSearch').val();
-        var UserDivs = $('.UserDiv');
-        var divLength = UserDivs.length;
-        for (var i = 0; i < divLength; i++) {
-            var UserDivi = UserDivs[i];
-            var UserName = UserDivi.getElementsByClassName('UserName');
-            var UserNameValue = $(UserName).text();
-            if (!UserNameValue.toLowerCase().startsWith(searchValue.toLowerCase())) {
-                $(UserDivi).hide();
+        var searchValue = $('#TransSearch').val();
+        var TransRows = $('.dataRows');
+        var rowsLength = TransRows.length;
+        for (var i = 0; i < rowsLength; i++) {
+           var singleRow = TransRows[i];
+            var DateTime = singleRow.getElementsByClassName('dateCol');
+            var DateTimeValue = $(DateTime).text();
+            debugger;
+            var splitDateTime = DateTimeValue.split(' ');
+            var date = splitDateTime[0];
+            if (!date.toLowerCase().startsWith(searchValue.toLowerCase())) {
+                $(singleRow).hide();
             } else {
-                $(UserDivi).show();
+                $(singleRow).show();
             }
+            
         }
 
     }
