@@ -5,7 +5,8 @@ $title = "All Transactions";
 include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
-
+$searchedFirstName = $_POST['FirstName'];
+$searchedLastName = $_POST['LastName'];
 ?>
 
 <!-- Main content -->
@@ -32,7 +33,8 @@ include '../view/navigation.php';
                     <table class="table m-0 table-hover">
 
                         <?php
-                        $result = getAllTransactions();
+                        
+                        $result = getTransactionsByName($searchedFirstName,$searchedLastName);
                         if (!$result) {
                             echo '<p class="text-center">There are no transactions.</p>';
                         } else {
@@ -50,27 +52,34 @@ include '../view/navigation.php';
                             </thead>
                             <tbody>
                             <?php
-                            while (($row = $result->fetch_assoc())) {
-                                $cid = getCustomerUsingAcct($row['acctNum']);
-                                $data = getCustomerData($cid);
-                                $customerName = $data['firstName'] . ' ' . $data['lastName'];
-
-                                echo '<tr class = "dataRows">';
-                                echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
-                                echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
-
-                                echo '<td class = "dateCol">' .  $row['date'] . ' ' . $row['time'] . '</td>';
-                                echo '<td>' . $row['vendor'] . '</td>';
-                                if ($row['type'] == 'withdraw') {
-                                    echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
-                                }
-                                if ($row['type'] == 'deposit') {
-                                    echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
-                                }
-                                echo '</tr>';
-                                $i++;
+                            $selectedCustomerID = '';
+                            while (($rowCustomerID = $result->fetch_assoc())) {
+                                $selectedCustomerID = $rowCustomerID['customerID'];
                             }
                             $result->free();
+                            $result2 = getCustomerTransactions($selectedCustomerID);
+                                while (($row = $result2->fetch_assoc())) { 
+                                    $cid = getCustomerUsingAcct($row['acctNum']);
+                                    $data = getCustomerData($cid);
+                                    $customerName = $data['firstName'] . ' ' . $data['lastName'];
+
+                                    echo '<tr class = "dataRows">';
+                                    echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
+                                    echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
+
+                                    echo '<td class = "dateCol">' .  $row['date'] . ' ' . $row['time'] . '</td>';
+                                    echo '<td>' . $row['vendor'] . '</td>';
+                                    if ($row['type'] == 'withdraw') {
+                                        echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
+                                    }
+                                    if ($row['type'] == 'deposit') {
+                                        echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
+                                    }
+                                    echo '</tr>';
+                                    $i++;
+                                }
+                            $result2->free();
+                            
                         }
 
                             ?>
