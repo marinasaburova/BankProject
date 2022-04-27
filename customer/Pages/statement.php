@@ -8,6 +8,7 @@ include '../view/header.php';
 include '../view/navigation.php';
 
 $acctNum = $_GET['acctNum'];
+$data = getCustomerData($customer)
 
 ?>
 
@@ -19,10 +20,25 @@ $acctNum = $_GET['acctNum'];
             <!-- Left col -->
             <div class="col-md-12">
 
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Account Info</h3>
+                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right mx-2">Switch Month</a>
+
+                        <a href="#" class="btn btn-sm btn-info float-right" onclick="window.print();return false;">Print Statement</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p class="my-0"><b>Name:</b> <?php echo $data['firstName'] . ' ' . $data['lastName'] ?></p>
+                            <p class="my-0"><b>Account:</b> <?php echo getAccountType($acctNum) ?> *<?php echo getFourDigits($acctNum) ?></p>
+                            <p class="my-0"><b>Month:</b> <?php echo $month ?></p>
+                        </div>
+                    </div>
+                </div>
                 <!-- TABLE: LATEST TRANSACTIONS -->
                 <div class="card">
                     <div class="card-header border-transparent">
-                        <h3 class="card-title">Monthly Transactions</h3>
+                        <h3 class="card-title">Transactions</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0">
@@ -69,8 +85,6 @@ $acctNum = $_GET['acctNum'];
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
-                        <a href="transaction-history.php" class="btn btn-sm btn-secondary float-right">Switch Month</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
