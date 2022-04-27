@@ -1,12 +1,22 @@
 <?php
+
 $title = "Make a Transaction";
 
 // include functions & files 
 include '../functions/db.php';
 include '../view/header.php';
+
+if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
+  echo 'Session is: ' . $_SESSION['viewing'];
+  echo 'Post is: ' . $_POST['customerid'];
+  header('Location: users.php');
+  exit;
+}
+
 include '../view/navigation.php';
 
-$customer = $_GET['customerid'];
+$customer = $_SESSION['viewing'];
+$data = getCustomerData($customer);
 
 if (isset($_GET['msg'])) {
   if ($_GET['msg'] == 'nobalance') {
@@ -35,6 +45,10 @@ if (isset($_GET['msg'])) {
           </div>
           <div class="card-body">
             <form action="../functions/deposit.php" method="post">
+              <div class="form-group">
+                <label for="dateCreated">Customer</label>
+                <input type="text" name="customername" id="customername" readonly value="<?php echo $data['firstName'] . ' ' . $data['lastName']; ?>" class=" form-control" />
+              </div>
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select" required>
@@ -74,6 +88,10 @@ if (isset($_GET['msg'])) {
               echo '<p class="text-danger text-center">' . $withdraw_error . '</p>';
             } ?>
             <form action="../functions/withdraw.php" method="post">
+              <div class="form-group">
+                <label for="dateCreated">Customer</label>
+                <input type="text" name="customername" id="customername" readonly value="<?php echo $data['firstName'] . ' ' . $data['lastName']; ?>" class=" form-control" />
+              </div>
               <div class="form-group">
                 <label for="acctNum">Bank Account</label>
                 <select id="acctNum" name="acctNum" class="form-control custom-select" required>

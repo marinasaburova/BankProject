@@ -2,6 +2,7 @@
 $title = "Admin Login";
 include '../view/header-simple.php';
 
+
 if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
     $login_error = 'Your credentials were not recognized.';
 }

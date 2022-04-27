@@ -4,6 +4,9 @@ $title = "Register";
 include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
+
+unset($_SESSION['viewing']);
+
 ?>
 
 <section class="content">

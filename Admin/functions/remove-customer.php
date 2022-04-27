@@ -8,5 +8,5 @@ if (!isset($_SESSION['emploggedin'])) {
 
 include '../functions/db.php';
 
-$customer = $_GET['customerid'];
+$customer = $_SESSION['viewing'];
 removeCustomer($customer);

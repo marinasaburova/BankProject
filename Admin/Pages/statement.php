@@ -1,8 +1,8 @@
 <?php
+
 if (isset($_GET['month'])) {
     $month = $_GET['month'];
 }
-
 
 // include functions & files 
 include '../functions/db.php';
@@ -10,17 +10,28 @@ include '../functions/db.php';
 $title = "Transaction History";
 
 include '../view/header.php';
+
+if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
+    header('Location: users.php');
+    exit;
+}
 include '../view/navigation.php';
 
-$customer = $_GET['customerid'];
-if (isset($_GET['acctNum'])) {
-    $acctNum = $_GET['acctNum'];
+if (isset($_POST['customerid'])) {
+    $customer = $_POST['customerid'];
+    $_SESSION['viewing'] = $customer;
+}
+$customer = $_SESSION['viewing'];
+
+$customer = $_SESSION['viewing'];
+if (isset($_POST['acctNum'])) {
+    $acctNum = $_POST['acctNum'];
 } else {
     $acctNum = "all";
 }
+
 $accts = getAccountOptions($customer);
 $data = getCustomerData($customer);
-
 
 ?>
 
@@ -36,7 +47,7 @@ $data = getCustomerData($customer);
 
                     <div class="info-box-content">
                         <span class="info-box-text">Customer</span>
-                        <span class="info-box-number"><a href="user-details.php?customerid=<?php echo $customer ?>" class="text-reset stretched-link"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></a></span>
+                        <span class="info-box-number"><a href="user-details.php" class="text-reset stretched-link"><?php echo $data['firstName'] . ' ' . $data['lastName'] ?></a></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -74,13 +85,13 @@ $data = getCustomerData($customer);
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <?php
                                 for ($i = 0; $i < sizeof($accts); $i++) {
-                                    echo '<form action="#" method="get">';
+                                    echo '<form action="#" method="post">';
                                     echo '<input type="hidden" name="customerid" value="' . $customer . '">';
                                     echo '<button class="dropdown-item" type="submit" name="acctNum" value="' . $accts[$i] . '">' . getAccountType($accts[$i]) . ' - *' . getFourDigits($accts[$i]) . '</button>';
                                     echo '</form>';
                                 }
                                 ?>
-                                <form action="#" method="get">
+                                <form action="#" method="post">
                                     <input type="hidden" name="customerid" value="<?php echo $customer ?>">
                                     <button class="dropdown-item" type="submit" name="acctNum" value="all">all</button>
                                 </form>
@@ -143,7 +154,7 @@ $data = getCustomerData($customer);
                             <?php
 
                             if ($acctNum != 'all') {
-                                $result = getTransactions($_GET['acctNum']);
+                                $result = getTransactions($_POST['acctNum']);
                             } else {
                                 $result = getCustomerTransactions($customer);
                             }
@@ -165,7 +176,7 @@ $data = getCustomerData($customer);
                                 <?php
                                 while (($row = $result->fetch_assoc())) {
                                     echo '<tr>';
-                                    echo '<td><a href="statement.php?customerid=' . $customer . '&acctNum=' . $row['acctNum'] . '">' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
+                                    echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
                                     echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                     echo '<td>' . $row['vendor'] . '</td>';
                                     if ($row['type'] == 'withdraw') {

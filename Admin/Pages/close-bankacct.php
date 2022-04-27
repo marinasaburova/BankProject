@@ -3,11 +3,16 @@ $title = "User Info";
 
 // include functions & files 
 include '../functions/db.php';
-
 include '../view/header.php';
+
+if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
+    header('Location: users.php');
+    exit;
+}
+
 include '../view/navigation.php';
 
-$customer = $_GET['customerid'];
+$customer = $_SESSION['viewing'];
 $data = getCustomerData($customer);
 $accts = getAccountOptions($customer);
 
@@ -26,7 +31,7 @@ $accts = getAccountOptions($customer);
                         <div class="card-tools"></div>
                     </div>
                     <div class="card-body">
-                        <form action="../functions/closeacct.php" method="post">
+                        <form action="../functions/closeacct.php" method="post" oninput='transfer.setCustomValidity(close.value == transfer.value ? "Pick two different accounts." : "")'>
                             <div class="form-group">
                                 <label for="dateCreated">Customer</label>
                                 <input type="text" name="customername" id="customername" readonly value="<?php echo $data['firstName'] . ' ' . $data['lastName']; ?>" class=" form-control" />

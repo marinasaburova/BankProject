@@ -1,4 +1,5 @@
 <?php
+
 $title = "Employee Info";
 
 // include functions & files 
@@ -6,6 +7,7 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+unset($_SESSION['viewing']);
 $data = getEmployeeData($employee)
 
 ?>

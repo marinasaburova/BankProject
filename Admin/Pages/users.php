@@ -6,6 +6,8 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+unset($_SESSION['viewing']);
+
 ?>
 
 <!-- Main content -->
@@ -55,9 +57,15 @@ include '../view/navigation.php';
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-left">
-                                        <a href="user-details.php?customerid=<?php echo $row['customerID'] ?>" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-file"></i> View Account
-                                        </a>
+                                        <form action="user-details.php" method="post">
+                                            <input type="hidden" name="customerid" value="<?php echo $row['customerID'] ?>">
+                                            <button class="btn btn-sm btn-primary">
+                                                <i class="fas fa-file"></i> View Account
+                                            </button>
+                                            <!--      <a href="user-details.php?customerid=<?php echo $row['customerID'] ?>" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-file"></i> View Account
+                                            </a>-->
+                                        </form>
                                     </div>
                                 </div>
                             </div>

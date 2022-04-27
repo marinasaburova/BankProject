@@ -6,6 +6,8 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+unset($_SESSION['viewing']);
+
 ?>
 
 <!-- Main content -->
@@ -56,7 +58,7 @@ include '../view/navigation.php';
                                 $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
                                 echo '<tr class = "dataRows">';
-                                echo '<td><a href="statement.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
+                                echo '<td><form action="statement.php" method="post"><input type="hidden" name="customerid" value="' . $cid . '"><input class="btn btn-link py-0" type="submit" value="' . $customerName . '"></form></td>';
                                 echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</a></td>';
 
                                 echo '<td class = "dateCol">' .  $row['date'] . ' ' . $row['time'] . '</td>';
@@ -95,7 +97,7 @@ include '../view/navigation.php';
         var TransRows = $('.dataRows');
         var rowsLength = TransRows.length;
         for (var i = 0; i < rowsLength; i++) {
-           var singleRow = TransRows[i];
+            var singleRow = TransRows[i];
             var DateTime = singleRow.getElementsByClassName('dateCol');
             var DateTimeValue = $(DateTime).text();
             debugger;
@@ -106,7 +108,7 @@ include '../view/navigation.php';
             } else {
                 $(singleRow).show();
             }
-            
+
         }
 
     }

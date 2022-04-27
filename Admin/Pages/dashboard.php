@@ -6,6 +6,8 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
+unset($_SESSION['viewing']);
+
 ?>
 
 <!-- Main content -->
@@ -98,8 +100,8 @@ include '../view/navigation.php';
                                             $data = getCustomerData($row['customerID']);
                                             $customerName = $data['firstName'] . ' ' . $data['lastName'];
                                             echo '<tr>';
-                                            echo '<td>' . $row['acctNum'] . '</td>';
-                                            echo '<td><a href="user-details.php?customerid=' . $row['customerID'] . '">' . $customerName . '</td>';
+                                            echo '<td>*' .  getFourDigits($row['acctNum']) . '</td>';
+                                            echo '<td><form action="user-details.php" method="post"><input type="hidden" name="customerid" value="' . $row['customerID'] . '"><input class="btn btn-link py-0" type="submit" value="' . $customerName . '"></form></td>';
                                             echo '<td> ' . $row['acctType'] . '</td>';
                                             echo '<td>' . $row['dateCreated'] . '</td>'; ?>
                                             <td>
@@ -132,25 +134,6 @@ include '../view/navigation.php';
             <!-- /.col -->
         </div>
         <!-- /.row -->
-        <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <form id="SearchForm" action="transactions-by-name.php" method="post">
-                            <div class="input-group">
-                                <input type="search" name="searchedName" id="searchedName" class="form-control form-control-lg" placeholder="Search Transactions By Customer Name">
-                                <input type="hidden" name="FirstName" id="FirstName">
-                                <input type="hidden" name="LastName" id="LastName">
-                                
-                                <div class="input-group-append">
-                            <button type="button" onclick="SubmitSearchForm()" class="btn btn-lg btn-default">
-                                <i class="fa fa-search"></i>
-                            </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
 
         <!-- Main row -->
         <div class="row">
@@ -193,7 +176,7 @@ include '../view/navigation.php';
                                         $customerName = $data['firstName'] . ' ' . $data['lastName'];
 
                                         echo '<tr>';
-                                        echo '<td><a href="user-details.php?customerid=' . $data['customerID'] . '">' . $customerName . '</td>';
+                                        echo '<td><form action="user-details.php" method="post"><input type="hidden" name="customerid" value="' . $data['customerID'] . '"><input class="btn btn-link py-0" type="submit" value="' . $customerName . '"></form></td>';
                                         echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
                                         echo '<td>' . $row['vendor'] . '</td>';
                                         if ($row['type'] == 'withdraw') {
@@ -235,10 +218,10 @@ include '../view/navigation.php';
     function SubmitSearchForm() {
         var searchValue = $('#searchedName').val();
         var splitValues = searchValue.split(' ');
-        if(splitValues[0] !== '')
+        if (splitValues[0] !== '')
             $('#FirstName').val(splitValues[0]);
-        if(splitValues.length > 1)
-            if(splitValues[1] !== '')
+        if (splitValues.length > 1)
+            if (splitValues[1] !== '')
                 $('#LastName').val(splitValues[1]);
         $('#SearchForm').submit();
     }

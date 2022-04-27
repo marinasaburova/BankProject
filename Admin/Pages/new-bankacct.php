@@ -3,11 +3,16 @@ $title = "User Info";
 
 // include functions & files 
 include '../functions/db.php';
-
 include '../view/header.php';
+
+if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
+    header('Location: users.php');
+    exit;
+}
+
 include '../view/navigation.php';
 
-$customer = $_GET['customerid'];
+$customer = $_SESSION['viewing'];
 $data = getCustomerData($customer);
 $accts = getAccountOptions($customer);
 

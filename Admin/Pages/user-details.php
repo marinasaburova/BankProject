@@ -3,11 +3,21 @@ $title = "User Info";
 
 // include functions & files 
 include '../functions/db.php';
-
 include '../view/header.php';
+
+if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
+    header('Location: users.php');
+    exit;
+}
+
 include '../view/navigation.php';
 
-$customer = $_GET['customerid'];
+if (isset($_POST['customerid'])) {
+    $customer = $_POST['customerid'];
+    $_SESSION['viewing'] = $customer;
+}
+$customer = $_SESSION['viewing'];
+
 $data = getCustomerData($customer);
 ?>
 
@@ -47,12 +57,12 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="edit-info.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
+                        <a href="edit-info.php" class="btn btn-sm btn-success">
                             Edit Info
                         </a>
 
                         <?php if ($data['status'] == 'active') { ?>
-                            <a href="../functions/remove-customer.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-danger float-right">
+                            <a href="../functions/remove-customer.php" class="btn btn-sm btn-danger float-right">
                                 Remove Customer
                             </a>
                         <?php
@@ -76,22 +86,18 @@ $data = getCustomerData($customer);
                         <div class="col">
                             <div class="card-body">
                                 <h4 class="card-title"><b>Active</b></h4>
-                                <p class="card-text">
+                                <div class="card-text">
                                     <?php
                                     $accts = getActiveAcctsCustomer($customer);
                                     if (sizeof($accts) == 0) {
                                         echo 'no active accounts <br>';
                                     }
                                     for ($i = 0; $i < sizeof($accts); $i++) {
-                                        echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $accts[$i] . '" class="text-reset">';
-                                        echo getAccountType($accts[$i]);
-                                        echo ' *';
-                                        echo getFourDigits($accts[$i]);
-                                        echo '</a><br>';
+                                        echo '<form action="statement.php" method="post" class="pt-0 mt-0"><input type="hidden" name="acctNum" value="' . $accts[$i] . '"><input class="btn btn-link p-0 mt-0" type="submit" value="' . getAccountType($accts[$i]) . ' *' . getFourDigits($accts[$i]) . '"></form>';
                                     }
 
                                     ?>
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <!-- ./active accounts -->
@@ -123,22 +129,18 @@ $data = getCustomerData($customer);
                         <div class="col">
                             <div class="card-body">
                                 <h4 class="card-title"><b>Closed</b></h4>
-                                <p class="card-text">
+                                <div class="card-text">
                                     <?php
                                     $closed = getClosedAcctsCustomer($customer);
                                     if (sizeof($closed) == 0) {
                                         echo 'no closed accounts <br>';
                                     }
                                     for ($i = 0; $i < sizeof($closed); $i++) {
-                                        echo '<a href="statement.php?customerid=' . $customer . '&acctNum=' . $closed[$i] . '" class="text-reset">';
-                                        echo getAccountType($closed[$i]);
-                                        echo ' *';
-                                        echo getFourDigits($closed[$i]);
-                                        echo '</a><br>';
+                                        echo '<form action="statement.php" method="post" class="pt-0 mt-0"><input type="hidden" name="acctNum" value="' . $closed[$i] . '"><input class="btn btn-link p-0 mt-0" type="submit" value="' . getAccountType($closed[$i]) . ' *' . getFourDigits($closed[$i]) . '"></form>';
                                     }
 
                                     ?>
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <!-- ./closed accounts -->
@@ -146,10 +148,10 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="new-bankacct.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-success">
+                        <a href="new-bankacct.php" class="btn btn-sm btn-success">
                             Open a New Account
                         </a>
-                        <a href="close-bankacct.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-danger float-right">
+                        <a href="close-bankacct.php" class="btn btn-sm btn-danger float-right">
                             Close an Account
                         </a>
                     </div>
@@ -211,9 +213,9 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transaction.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
-                        <a href="make-transfer.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
-                        <a href="statement.php?customerid=<?php echo $customer ?>" class="btn btn-sm btn-secondary float-right">View All History</a>
+                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
+                        <a href="make-transfer.php" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
+                        <a href="statement.php" class="btn btn-sm btn-secondary float-right">View All History</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
