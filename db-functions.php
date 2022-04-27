@@ -316,6 +316,15 @@ function getCustomerUsingAcct($acctNum)
 function getAllCustomers()
 {
     global $db;
+    $query = "SELECT * FROM `customer` ORDER BY `lastName` ASC";
+    $result = $db->query($query);
+    return $result;
+}
+
+// returns a list of all customers
+function getAllActiveCustomers()
+{
+    global $db;
     $query = "SELECT * FROM `customer` WHERE `status` = 'active' ORDER BY `lastName` ASC";
     $result = $db->query($query);
     return $result;

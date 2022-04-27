@@ -57,9 +57,11 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="edit-info.php" class="btn btn-sm btn-success">
-                            Edit Info
-                        </a>
+                        <?php if ($data['status'] == 'active') { ?>
+                            <a href="edit-info.php" class="btn btn-sm btn-success">
+                                Edit Info
+                            </a>
+                        <?php } ?>
 
                         <?php if ($data['status'] == 'active') { ?>
                             <a href="../functions/remove-customer.php" class="btn btn-sm btn-danger float-right">
@@ -148,12 +150,19 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="new-bankacct.php" class="btn btn-sm btn-success">
-                            Open a New Account
-                        </a>
-                        <a href="close-bankacct.php" class="btn btn-sm btn-danger float-right">
-                            Close an Account
-                        </a>
+                        <?php if ($data['status'] == 'active') { ?>
+
+                            <a href="new-bankacct.php" class="btn btn-sm btn-success">
+                                Open a New Account
+                            </a>
+
+                            <?php if ($data['status'] == 'active') { ?>
+
+                            <?php } ?>
+                            <a href="close-bankacct.php" class="btn btn-sm btn-danger float-right">
+                                Close an Account
+                            </a>
+                        <?php }  ?>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -213,8 +222,11 @@ $data = getCustomerData($customer);
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
-                        <a href="make-transfer.php" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
+                        <?php if ($data['status'] == 'active') { ?>
+                            <a href="bank-transaction.php" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
+                            <a href="make-transfer.php" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
+                        <?php } ?>
+
                         <a href="statement.php" class="btn btn-sm btn-secondary float-right">View All History</a>
                     </div>
                     <!-- /.card-footer -->

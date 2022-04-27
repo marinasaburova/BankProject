@@ -48,10 +48,12 @@ unset($_SESSION['viewing']);
                                         <h2 class="lead"><b class="UserName"><?php echo $row['lastName'] . ', ' . $row['firstName'] ?></b></h2>
                                     </div>
                                     <div class="card-text">
-                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <ul class="ml-4 mb-0 fa-ul">
                                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email: <?php echo $row['email'] ?></li>
                                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: <?php echo $row['phone'] ?></li>
                                             <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?php echo $row['addr'] ?></li>
+                                            <li class="small <?php if ($row['status'] == 'inactive') echo 'text-danger';
+                                                                else echo 'text-success' ?>"><span class="fa-li"><i class="fas fa-exclamation-circle"></i></span> Status: <?php echo $row['status'] ?></li>
                                         </ul>
                                     </div>
                                 </div>
