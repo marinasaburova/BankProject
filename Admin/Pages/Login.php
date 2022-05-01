@@ -14,7 +14,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Admin</b>Login</a>
+                <a href="../../index.html" class="h1"><b>Admin</b>Login</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -40,25 +40,19 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
+                            <p class="mb-0">
+                                <a href="../../customer/Pages/login.php" class="text-center">Customer login</a>
+                            </p>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button id="SignIn" type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            <!--onclick="SignInFunction()"-->
                         </div>
                         <!-- /.col -->
                     </div>
+                    <!-- ./row -->
                 </form>
 
-                <p class="mb-0">
-                    <a href="../../customer/Pages/login.php" class="text-center">Customer login</a>
-                </p>
             </div>
             <!-- /.card-body -->
         </div>

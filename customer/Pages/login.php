@@ -49,6 +49,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
                         </div>
                         <!-- /.col -->
                     </div>
+                    <!-- ./row -->
                 </form>
 
                 <p class=" mb-0">
