@@ -198,7 +198,12 @@ $data = getCustomerData($customer);
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <a href="#" class="btn btn-sm btn-info float-left" onclick="window.print();return false;">Print Statement</a>
+                    <?php if ($data['status'] == 'active') { ?>
+                        <a href="bank-transaction.php" class="btn btn-sm btn-info float-left mr-2">Make a Transaction</a>
+                        <a href="make-transfer.php" class="btn btn-sm btn-info float-left ">Make a Transfer</a>
+                    <?php } ?>
+
+                    <a href="#" class="btn btn-sm btn-info float-right" onclick="window.print();return false;">Print Statement</a>
                 </div>
                 <!-- /.card-footer -->
             </div>
