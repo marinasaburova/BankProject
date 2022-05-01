@@ -137,7 +137,7 @@ $data = getCustomerData($customer);
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="input-group">
-                        <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Search transactions">
+                        <input type="search" id="TransSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Search transactions by name">
                         <div class="input-group-append">
                             <button type="button" onclick="Searchfunction()" class="btn btn-lg btn-default">
                                 <i class="fa fa-search"></i>
@@ -146,7 +146,7 @@ $data = getCustomerData($customer);
                     </div>
                 </div>
             </div>
-            <div class="card-body p-4">
+            <div class="card-body p-4 transactions">
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table m-0 table-hover">
@@ -175,10 +175,10 @@ $data = getCustomerData($customer);
                                 <tbody>
                                 <?php
                                 while (($row = $result->fetch_assoc())) {
-                                    echo '<tr>';
+                                    echo '<tr class="dataRows">';
                                     echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
                                     echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
-                                    echo '<td>' . $row['vendor'] . '</td>';
+                                    echo '<td class="nameCol">' . $row['vendor'] . '</td>';
                                     if ($row['type'] == 'withdraw') {
                                         echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
                                     }
@@ -212,6 +212,26 @@ $data = getCustomerData($customer);
 </section>
 <!-- /.content -->
 
+<script src="../plugins/jquery/jquery.min.js"></script>
+<script>
+    function Searchfunction() {
+        var searchValue = $('#TransSearch').val();
+        var TransRows = $('.dataRows');
+        var rowsLength = TransRows.length;
+        for (var i = 0; i < rowsLength; i++) {
+            var singleRow = TransRows[i];
+            var TransName = singleRow.getElementsByClassName('nameCol');
+            var TransNameValue = $(TransName).text();
+            if (!TransNameValue.toLowerCase().includes(searchValue.toLowerCase())) {
+                $(singleRow).hide();
+            } else {
+                $(singleRow).show();
+            }
+
+        }
+
+    }
+</script>
 
 <!-- footer -->
 <?php include '../view/footer.php'; ?>
