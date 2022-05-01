@@ -8,6 +8,15 @@ include '../view/navigation.php';
 
 unset($_SESSION['viewing']);
 
+if (isset($_GET['view'])) {
+    $status = filter_input(INPUT_GET, 'view');
+    if (($status != 'all') && ($status != 'active') && ($status != 'inactive')) {
+        $status = 'all';
+    }
+} else {
+    $status = 'all';
+}
+
 ?>
 
 <!-- Main content -->
@@ -16,9 +25,20 @@ unset($_SESSION['viewing']);
 
         <!-- Default box -->
         <div class="card card-solid">
-            <br />
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
+            <div class="row pt-3 px-3">
+                <div class="col-md-3 text-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Viewing <?php echo $status ?> customers
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="?view=all">All</a></li>
+                            <li><a class="dropdown-item" href="?view=active">Active</a></li>
+                            <li><a class="dropdown-item" href="?view=inactive">Inactive</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="input-group">
                         <input type="search" id="UserSearch" onkeyup="Searchfunction()" class="form-control form-control-lg" placeholder="Enter Customer Name">
                         <div class="input-group-append">
@@ -28,14 +48,27 @@ unset($_SESSION['viewing']);
                         </div>
                     </div>
                 </div>
-                <a href="new-customer.php">
-                    <p>register a new customer</p>
-                </a>
+                <div class="col-md-3">
+                    <a class="btn btn-success w-100" href="new-customer.php" role="button">Register a new customer</a>
+                </div>
             </div>
             <div class="card-body pb-0">
                 <div class="row d-flex align-items-stretch">
                     <?php
-                    $result = getAllCustomers();
+                    switch ($status) {
+                        case ('all'):
+                            $result = getAllCustomers();
+                            break;
+                        case ('active'):
+                            $result = getAllActiveCustomers();
+                            break;
+                        case ('inactive'):
+                            $result = getAllInactiveCustomers();
+                            break;
+                        default:
+                            $result = getAllCustomers();
+                            break;
+                    }
                     $num_results = $result->num_rows;
 
                     while ($row = $result->fetch_assoc()) {
@@ -82,7 +115,10 @@ unset($_SESSION['viewing']);
 </section>
 <!-- /.content -->
 <!-- jQuery -->
+
 <script src="../plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <script>
     function Searchfunction() {
         var searchValue = $('#UserSearch').val();

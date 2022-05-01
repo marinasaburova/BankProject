@@ -321,11 +321,20 @@ function getAllCustomers()
     return $result;
 }
 
-// returns a list of all customers
+// returns a list of all ACTIVE customers
 function getAllActiveCustomers()
 {
     global $db;
     $query = "SELECT * FROM `customer` WHERE `status` = 'active' ORDER BY `lastName` ASC";
+    $result = $db->query($query);
+    return $result;
+}
+
+// returns a list of all INACTIVE customers
+function getAllInactiveCustomers()
+{
+    global $db;
+    $query = "SELECT * FROM `customer` WHERE `status` = 'inactive' ORDER BY `lastName` ASC";
     $result = $db->query($query);
     return $result;
 }
