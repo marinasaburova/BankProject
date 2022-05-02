@@ -623,10 +623,10 @@ function editTransaction($transactionID, $amount, $type, $vendor, $acctNum)
         $transPreviousAmt = $transDetails['amount'];
     }
     if ($type == 'withdraw') {
-        $amountSigned = -1 * $amount;
+        $amount = -1 * $amount;
     }
 
-    $amountDifference = $transPreviousAmt - $amountSigned;
+    $amountDifference = $transPreviousAmt - $amount;
 
     // Checks for negative balance
     if (getBalance($acctNum) - $amountDifference < 0) {
@@ -647,6 +647,7 @@ function editTransaction($transactionID, $amount, $type, $vendor, $acctNum)
         exit;
     }
 
+    $amount = abs($amount);
     // Update transaction details
     $query = "UPDATE `transaction` SET `amount` = '$amount', `type` = '$type', `vendor` = '$vendor' WHERE `transaction`.`transactionID` = '$transactionID'";
     $result = $db->query($query);
