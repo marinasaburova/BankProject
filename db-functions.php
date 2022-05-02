@@ -611,6 +611,75 @@ function transfer($from, $to, $amount)
     exit;
 }
 
+function editTransaction($transactionID, $amount, $type, $vendor, $acctNum)
+{
+    global $db;
+
+    $transDetails = getTransactionDetails($transactionID);
+    if ($transDetails['type'] == 'withdraw') {
+        $transPreviousAmt = -1 * $transDetails['amount'];
+    }
+    if ($transDetails['type'] == 'deposit') {
+        $transPreviousAmt = $transDetails['amount'];
+    }
+    if ($type == 'withdraw') {
+        $amountSigned = -1 * $amount;
+    }
+
+    $amountDifference = $transPreviousAmt - $amountSigned;
+
+    // Checks for negative balance
+    if (getBalance($acctNum) - $amountDifference < 0) {
+        $_POST['acctNum'] = $acctNum;
+        header('Location: ../Pages/statement.php?msg=error');
+        exit;
+    }
+
+    // Update balance
+    $query = "UPDATE `account` SET `balance` = `balance` - '$amountDifference' WHERE `account`.`acctNum` = '$acctNum'";
+    try {
+        $result = $db->query($query);
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
+        echo $error_message;
+        $_POST['acctNum'] = $acctNum;
+        header('Location: ../Pages/statement.php?msg=error');
+        exit;
+    }
+
+    // Update transaction details
+    $query = "UPDATE `transaction` SET `amount` = '$amount', `type` = '$type', `vendor` = '$vendor' WHERE `transaction`.`transactionID` = '$transactionID'";
+    $result = $db->query($query);
+
+    echo $query;
+    if (!$result) {
+        echo 'Error updating info.';
+    } else {
+
+        if (isset($_SESSION['emploggedin'])) {
+            $_POST['acctNum'] = $acctNum;
+            //      header("Location: ../Pages/statement.php");
+            //       exit;
+        }
+    }
+}
+
+function getTransactionDetails($transactionID)
+{
+    global $db;
+    $query = "SELECT * FROM `transaction` WHERE `transactionID` = '$transactionID'";
+    $result = $db->query($query);
+    $num_results = $result->num_rows;
+    if ($num_results == 0) {
+        return 'Transaction has not been found.';
+    } elseif ($num_results != 1) {
+        return 'Error.';
+    } else {
+        $data = $result->fetch_assoc();
+        return $data;
+    }
+}
+
 // gets all info for a customer
 function getEmployeeData($customer)
 {

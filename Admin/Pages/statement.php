@@ -1,11 +1,33 @@
 <?php
 
+// include functions & files 
+include '../functions/db.php';
+
+if (isset($_POST['edit'])) {
+    if (isset($_POST['transaction'])) {
+        $editTransaction = filter_input(INPUT_POST, 'transaction');
+    }
+}
+
+if (isset($_POST['cancelEditTrans'])) {
+    if (isset($editTransaction)) {
+        $editTransaction = '';
+    }
+}
+
+if (isset($_POST['editTransSubmit'])) {
+    $transactionID = filter_input(INPUT_POST, 'transactionID');
+    $vendor = filter_input(INPUT_POST, 'vendor');
+    $amount = filter_input(INPUT_POST, 'amount');
+    $type = filter_input(INPUT_POST, 'type');
+    $acctNum = filter_input(INPUT_POST, 'acctNum');
+
+    editTransaction($transactionID, $amount, $type, $vendor, $acctNum);
+}
+
 if (isset($_GET['month'])) {
     $month = $_GET['month'];
 }
-
-// include functions & files 
-include '../functions/db.php';
 
 $title = "Transaction History";
 
@@ -23,12 +45,13 @@ if (isset($_POST['customerid'])) {
 }
 $customer = $_SESSION['viewing'];
 
-$customer = $_SESSION['viewing'];
 if (isset($_POST['acctNum'])) {
     $acctNum = $_POST['acctNum'];
 } else {
     $acctNum = "all";
 }
+
+
 
 $accts = getAccountOptions($customer);
 $data = getCustomerData($customer);
@@ -147,6 +170,7 @@ $data = getCustomerData($customer);
                 </div>
             </div>
             <div class="card-body p-4 transactions">
+                <?php if (isset($_GET['msg']) && $_GET['msg'] == 'error') echo '<div class="alert-danger">There was an error updating the transaction</div>' ?>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table m-0 table-hover">
@@ -170,27 +194,79 @@ $data = getCustomerData($customer);
                                         <th>Date</th>
                                         <th>Title</th>
                                         <th>Amount</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                                while (($row = $result->fetch_assoc())) {
-                                    echo '<tr class="dataRows">';
-                                    echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
-                                    echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
-                                    echo '<td class="nameCol">' . $row['vendor'] . '</td>';
-                                    if ($row['type'] == 'withdraw') {
-                                        echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
-                                    }
-                                    if ($row['type'] == 'deposit') {
-                                        echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
-                                    }
-                                    echo '</tr>';
-                                    $i++;
-                                }
-                            }
-                            $result->free();
-                                ?>
+                                    <?php
+                                    while (($row = $result->fetch_assoc())) {
+
+                                        if (isset($editTransaction) && $editTransaction == $row['transactionID']) {
+                                    ?>
+                                            <tr>
+                                                <form action="#" method="post">
+                                                    <td><?php echo getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) ?></td>
+                                                    <td><?php echo $row['date'] . ' ' . $row['time'] ?></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <input type="text" name="vendor" class="form-control" placeholder="Enter transaction name" value="<?php echo $row['vendor'] ?>" required>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <input type="number" name="amount" class="form-control" placeholder="Enter amount" value="<?php echo $row['amount'] ?>" required>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="type" id="type1" value="deposit" <?php if ($row['type'] == 'deposit') echo 'checked' ?>>
+                                                            <label class="form-check-label text-success" for="type1">Deposit</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" class="btn-check" name="type" id="type2" value="withdraw" <?php if ($row['type'] == 'withdraw') echo 'checked' ?>>
+                                                            <label class="form-check-label text-danger" for="type2">Withdraw</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="editTransSubmit" class="btn btn-sm btn-success"> <i class="fas fa-check-circle"></i></button>
+                                                        <br>
+                                                        <button type="submit" name="cancelEditTrans" class="btn btn-sm btn-danger mt-2"> <i class="fas fa-times-circle"></i></button>
+                                                    </td>
+
+                                                    <input type="hidden" name="acctNum" value="<?php echo $acctNum ?>">
+                                                    <input type="hidden" name="transactionID" value="<?php echo $editTransaction ?>">
+
+                                                </form>
+
+
+                                            </tr>
+
+                                        <?php
+                                        } else {
+
+                                            echo '<tr class="dataRows">';
+                                            echo '<td>' . getAccountType($row['acctNum']) . ' *' . getFourDigits($row['acctNum']) . '</td>';
+                                            echo '<td>' . $row['date'] . ' ' . $row['time'] . '</td>';
+                                            echo '<td class="nameCol">' . $row['vendor'] . '</td>';
+                                            if ($row['type'] == 'withdraw') {
+                                                echo '<td><div class="sparkbar text-danger" data-color="#00a65a" data-height="20">-$' . $row['amount'] . '</div></td>';
+                                            }
+                                            if ($row['type'] == 'deposit') {
+                                                echo '<td><div class="sparkbar text-success" data-color="#00a65a" data-height="20">+$' . $row['amount'] . '</div></td>';
+                                            } ?>
+                                            <td>
+                                                <form action="#" method="post">
+                                                    <input type="hidden" name="transaction" value="<?php echo $row['transactionID'] ?>">
+                                                    <input type="hidden" name="acctNum" value="<?php echo $acctNum ?>">
+                                                    <button type="submit" name="edit" class="btn btn-sm btn-primary"> <i class="fas fa-pencil-alt"></i></button>
+                                                </form>
+                                            </td> <?php
+                                                    echo '</tr>';
+                                                    $i++;
+                                                }
+                                            }
+                                        }
+                                        $result->free();
+                                                    ?>
                                 </tbody>
                         </table>
                     </div>
@@ -218,6 +294,8 @@ $data = getCustomerData($customer);
 <!-- /.content -->
 
 <script src="../plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <script>
     function Searchfunction() {
         var searchValue = $('#TransSearch').val();
