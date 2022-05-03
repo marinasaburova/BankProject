@@ -43,7 +43,7 @@ include '../view/navigation.php';
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Clear" class="btn btn-secondary" />
-                                <input type="submit" value="Submit Transaction" class="btn btn-success float-right" />
+                                <input type="submit" name="submitTransfer" value="Submit Transaction" class="btn btn-success float-right" />
                             </div>
                         </form>
                     </div>

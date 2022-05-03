@@ -19,3 +19,4 @@ if (isset($_POST['approve'])) {
     header('Location: ../Pages/dashboard.php');
     die;
 }
+exit;

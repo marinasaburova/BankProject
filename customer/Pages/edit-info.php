@@ -51,7 +51,7 @@ $data = getCustomerData($customer);
                                 <input type="text" name="dateCreated" id="dateCreated" readonly value="<?php echo $data['dateCreated']; ?>" class=" form-control" />
                             </div>
                             <div class="form-group">
-                                <small class="text-danger">To change the more sensitive data, please see a teller.</small>
+                                <small class="text-muted">To change the more sensitive data, please see a teller.</small>
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />

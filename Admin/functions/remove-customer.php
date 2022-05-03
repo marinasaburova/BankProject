@@ -1,4 +1,5 @@
 <?php
+// NEED TO FIX
 session_start();
 
 if (!isset($_SESSION['emploggedin'])) {
@@ -6,7 +7,9 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-include '../functions/db.php';
+include 'db.php';
 
 $customer = $_SESSION['viewing'];
 removeCustomer($customer);
+
+exit;

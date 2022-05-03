@@ -19,3 +19,4 @@ $acctNum = filter_input(INPUT_POST, 'acctNum', FILTER_SANITIZE_NUMBER_INT);
 
 include 'db.php';
 editTransaction($transactionID, $amount, $type, $vendor, $acctNum);
+exit;

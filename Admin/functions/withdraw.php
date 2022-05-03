@@ -6,9 +6,15 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
+if (!isset($_GET['submitDeposit'])) {
+    header('Location: ../Pages/bank-transaction');
+    exit;
+}
+
 $acctNum = filter_input(INPUT_POST, 'acctNum', FILTER_SANITIZE_NUMBER_INT);
 $amount = filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 $vendor = filter_input(INPUT_POST, 'vendor', FILTER_SANITIZE_ADD_SLASHES);
 
 include 'db.php';
 withdraw($acctNum, $amount, $vendor);
+exit;

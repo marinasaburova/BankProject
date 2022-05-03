@@ -49,7 +49,7 @@ $data = getEmployeeData($employee);
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />
-                                <input type="submit" name="updateInfo" value="Update" class="btn btn-success float-right" />
+                                <input type="submit" name="empUpdateInfo" value="Update" class="btn btn-success float-right" />
                             </div>
                         </form>
                     </div>
@@ -80,7 +80,7 @@ $data = getEmployeeData($employee);
                             <input type="hidden" name="customer" value="<?php echo $customer ?>">
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />
-                                <input type="submit" name="updatePWD" value="Update" class="btn btn-success float-right" />
+                                <input type="submit" name="empUpdatePWD" value="Update" class="btn btn-success float-right" />
                             </div>
                         </form>
                     </div>

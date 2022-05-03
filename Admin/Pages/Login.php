@@ -46,7 +46,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button id="SignIn" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button id="SignIn" type="submit" name="empSubmitLogin" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>

@@ -66,7 +66,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button id="register" type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button id="register" type="submit" name="registerCustomer" class="btn btn-primary btn-block">Register</button>
                             <!--onclick="SignInFunction()"-->
                         </div>
                         <!-- /.col -->

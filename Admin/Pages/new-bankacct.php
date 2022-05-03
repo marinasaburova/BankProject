@@ -56,7 +56,7 @@ $accts = getAccountOptions($customer);
                             <input type="hidden" name="customer" value="<?php echo $customer ?>">
 
                             <div class="form-group">
-                                <input type="submit" value="Register" class="btn btn-success float-right" />
+                                <input type="submit" name="openBankAcct" value="Register" class="btn btn-success float-right" />
                             </div>
                         </form>
                     </div>

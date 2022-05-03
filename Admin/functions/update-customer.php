@@ -6,6 +6,11 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
+if (!isset($_GET['updateInfo']) && !isset($_GET['updatePWD'])) {
+    header('Location: ../Pages/dashboard.php');
+    exit;
+}
+
 $customer = $_POST['customer'];
 include 'db.php';
 
@@ -19,6 +24,7 @@ if (isset($_POST['updateInfo'])) {
     $addr = trim(filter_input(INPUT_POST, 'addr', FILTER_SANITIZE_ADD_SLASHES));
 
     updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr);
+    exit;
 }
 
 if (isset($_POST['updatePWD'])) {
@@ -36,4 +42,7 @@ if (isset($_POST['updatePWD'])) {
     } else {
         changePassword($customer, $newPwd);
     }
+    exit;
 }
+
+exit;

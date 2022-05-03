@@ -61,7 +61,7 @@ $accts = getAccountOptions($customer);
                             <input type="hidden" name="customer" value="<?php echo $customer ?>">
 
                             <div class="form-group">
-                                <input type="submit" value="Delete" class="btn btn-success float-right" />
+                                <input type="submit" name="closeAccount" value="Delete" class="btn btn-success float-right" />
                             </div>
                         </form>
                     </div>

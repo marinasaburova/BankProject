@@ -70,8 +70,7 @@ unset($_SESSION['viewing']);
                                 <div class="col-4"></div>
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button id="register" type="submit" class="btn btn-primary btn-block">Register</button>
-                                    <!--onclick="SignInFunction()"-->
+                                    <button id="register" name="registerCustomer" type="submit" class="btn btn-primary btn-block">Register</button>
                                 </div>
                                 <!-- /.col -->
                             </div>

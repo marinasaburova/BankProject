@@ -53,7 +53,7 @@ if (isset($_GET['msg'])) {
               </div>
               <div class="form-group">
                 <input type="reset" value="Clear" class="btn btn-secondary" />
-                <input type="submit" value="Submit Transaction" class="btn btn-success float-right" />
+                <input type="submit" name="submitDeposit" value="Submit Transaction" class="btn btn-success float-right" />
               </div>
             </form>
           </div>
@@ -92,7 +92,7 @@ if (isset($_GET['msg'])) {
               </div>
               <div class="form-group">
                 <input type="reset" value="Clear" class="btn btn-secondary" />
-                <input type="submit" value="Submit Transaction" class="btn btn-success float-right" />
+                <input type="submit" name="submitWithdraw" value="Submit Transaction" class="btn btn-success float-right" />
               </div>
             </form>
           </div>

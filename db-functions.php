@@ -28,11 +28,13 @@ function login($uname, $pwd)
     if (!password_verify($pwd, $hash)) {
         header('Location: ../Pages/login.php?msg=error');
         $result->free();
+        exit;
     } else {
         $_SESSION['customer'] = $row['customerID'];
         $_SESSION['loggedin'] = TRUE;
         $result->free();
         header('Location: ../Pages/dashboard.php');
+        exit;
     }
 }
 
@@ -78,6 +80,7 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
         $error_message = $e->getMessage();
         echo $error_message;
         header('Location: ../Pages/new-customer.php?msg=error');
+        exit;
     }
 
     // checks for successful result
@@ -90,6 +93,7 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
             $customer = $row['customerID'];
             echo 'Employee.' . $customer;
             header('Location: ../Pages/new-bankacct.php?customerid=' . $customer);
+            exit;
         } else {
             session_start();
             $_SESSION['customer'] = $row['customerID'];
@@ -100,6 +104,7 @@ function register($fname, $lname, $uname, $email, $phone, $addr, $pwd, $pin)
         }
     } else {
         header('Location: ../Pages/new-customer.php?msg=error');
+        exit;
     }
 }
 
@@ -115,13 +120,16 @@ function requestBankAcct($type, $customer)
         $error_message = $e->getMessage();
         echo $error_message;
         header('Location: ../Pages/new-bankacct.php?msg=error');
+        exit;
     }
 
     // checks for successful result
     if ($result) {
         header('Location: ../Pages/new-bankacct.php?msg=success');
+        exit;
     } else {
         header('Location: ../Pages/new-bankacct.php?msg=error');
+        exit;
     }
 }
 
@@ -190,6 +198,7 @@ function closeBankAcct($acctNum, $transfer, $customer)
             transfer($acctNum, $transfer, $balance);
         }
         header("Location: ../Pages/user-details.php?customerid=$customer");
+        exit;
     } else {
         echo '<p>Error. Your account could not be updated.</p></br>';
         echo '<a class = "link" href="new-bankacct.php">Try again.</a>';

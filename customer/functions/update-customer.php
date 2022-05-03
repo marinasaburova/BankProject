@@ -6,9 +6,14 @@ if (!isset($_SESSION['loggedin'])) {
     exit;
 }
 
+if (!isset($_POST['updateInfo']) && !isset($_POST['updatePWD'])) {
+    header('Location: ../Pages/edit-info.php');
+    exit;
+}
+
+
 $customer = $_SESSION['customer'];
 include 'db.php';
-
 
 if (isset($_POST['updateInfo'])) {
 
@@ -20,6 +25,7 @@ if (isset($_POST['updateInfo'])) {
     $addr = trim(filter_input(INPUT_POST, 'addr', FILTER_SANITIZE_ADD_SLASHES));
 
     updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr);
+    exit;
 }
 
 // NEED TO FIX
@@ -39,4 +45,6 @@ if (isset($_POST['updatePWD'])) {
     } else {
         changePassword($customer, $newPwd);
     }
+    exit;
 }
+exit;
