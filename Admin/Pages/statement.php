@@ -232,7 +232,7 @@ $data = getCustomerData($customer);
                                                         <button type="submit" name="cancelEditTrans" class="btn btn-sm btn-danger mt-2"> <i class="fas fa-times-circle"></i></button>
                                                     </td>
 
-                                                    <input type="hidden" name="acctNum" value="<?php echo $acctNum ?>">
+                                                    <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
                                                     <input type="hidden" name="transactionID" value="<?php echo $editTransaction ?>">
 
                                                 </form>
@@ -256,7 +256,7 @@ $data = getCustomerData($customer);
                                             <td>
                                                 <form action="#" method="post">
                                                     <input type="hidden" name="transaction" value="<?php echo $row['transactionID'] ?>">
-                                                    <input type="hidden" name="acctNum" value="<?php echo $acctNum ?>">
+                                                    <input type="hidden" name="acctNum" value="<?php echo $row['acctNum'] ?>">
                                                     <button type="submit" name="edit" class="btn btn-sm btn-primary"> <i class="fas fa-pencil-alt"></i></button>
                                                 </form>
                                             </td> <?php

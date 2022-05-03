@@ -646,7 +646,7 @@ function editTransaction($transactionID, $amount, $type, $vendor, $acctNum)
     $amountDifference = $transPreviousAmt - $amount;
 
     // Checks for negative balance
-    if (getBalance($acctNum) - $amountDifference < 0) {
+    if ((getBalance($acctNum) - $amountDifference) < 0) {
         $_POST['acctNum'] = $acctNum;
         header('Location: ../Pages/statement.php?msg=error');
         exit;
