@@ -36,7 +36,6 @@ function login($uname, $pwd)
     }
 }
 
-
 // Employee login
 function emplogin($uname, $pwd)
 {
