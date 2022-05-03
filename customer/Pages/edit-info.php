@@ -8,6 +8,12 @@ include '../view/navigation.php';
 
 $data = getCustomerData($customer);
 
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 'pwdError') {
+        $pwdError = 'Wrong current password.';
+    }
+}
+
 ?>
 
 <!-- Main content -->
@@ -67,9 +73,14 @@ $data = getCustomerData($customer);
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Change Password</h3>
-                        <div class="card-tools"></div>
+
+                        <div class="card-tools">
+                        </div>
                     </div>
                     <div class="card-body">
+                        <?php if (isset($pwdError)) {
+                            echo "<p class='text-danger'>$pwdError</p>";
+                        } ?>
                         <form action="../functions/update-customer.php" method="post" oninput='newPwd2.setCustomValidity(newPwd2.value != newPwd.value ? "Passwords do not match." : "")'>
                             <div class="form-group">
                                 <label for="currPwd">Current Password</label>

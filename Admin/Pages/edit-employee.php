@@ -9,6 +9,12 @@ include '../view/navigation.php';
 unset($_SESSION['viewing']);
 $data = getEmployeeData($employee);
 
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 'pwdError') {
+        $pwdError = 'Wrong current password.';
+    }
+}
+
 ?>
 
 <!-- Main content -->
@@ -64,6 +70,9 @@ $data = getEmployeeData($employee);
                         <div class="card-tools"></div>
                     </div>
                     <div class="card-body">
+                        <?php if (isset($pwdError)) {
+                            echo "<p class='text-danger'>$pwdError</p>";
+                        } ?>
                         <form action="../functions/update-employee.php" method="post" oninput='newPwd2.setCustomValidity(newPwd2.value != newPwd.value ? "Passwords do not match." : "")'>
                             <div class="form-group">
                                 <label for="currPwd">Current Password</label>

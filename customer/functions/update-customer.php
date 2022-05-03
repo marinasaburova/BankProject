@@ -28,20 +28,17 @@ if (isset($_POST['updateInfo'])) {
     exit;
 }
 
-// NEED TO FIX
 if (isset($_POST['updatePWD'])) {
 
     $currPwd = filter_input(INPUT_POST, 'currPwd', FILTER_SANITIZE_ADD_SLASHES);
     $newPwd = filter_input(INPUT_POST, 'newPwd', FILTER_SANITIZE_ADD_SLASHES);
-    $newPwd2 = filter_input(INPUT_POST, 'newPwd2', FILTER_SANITIZE_ADD_SLASHES);
 
     $data = getCustomerData($customer);
-    $dbPwd = $data['password'];
+    $hash = $data['password'];
 
-    if ($newPwd !== $newPwd2) {
-        echo 'Your new passwords do not match';
-    } else if ($currPwd !== $dbPwd) {
-        echo 'Incorrect current password.';
+    if (!password_verify($currPwd, $hash)) {
+        header('Location: ../Pages/edit-info.php?msg=pwdError');
+        exit;
     } else {
         changePassword($customer, $newPwd);
     }

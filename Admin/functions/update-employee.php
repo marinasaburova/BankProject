@@ -28,17 +28,15 @@ if (isset($_POST['empUpdateInfo'])) {
 if (isset($_POST['empUpdatePWD'])) {
     $currPwd = filter_input(INPUT_POST, 'currPwd', FILTER_SANITIZE_ADD_SLASHES);
     $newPwd = filter_input(INPUT_POST, 'newPwd', FILTER_SANITIZE_ADD_SLASHES);
-    $newPwd2 = filter_input(INPUT_POST, 'newPwd2', FILTER_SANITIZE_ADD_SLASHES);
 
-    $data = getEmployeeData($employee);
-    $dbPwd = $data['password'];
+    $data = getEmployeeData($customer);
+    $hash = $data['password'];
 
-    if ($newPwd !== $newPwd2) {
-        echo 'Your new passwords do not match';
-    } else if ($currPwd !== $dbPwd) {
-        echo 'Incorrect current password.';
+    if (!password_verify($currPwd, $hash)) {
+        header('Location: ../Pages/edit-employee.php?msg=pwdError');
+        exit;
     } else {
-        changeEmpPassword($employee, $newPwd);
+        changeEmpPassword($customer, $newPwd);
     }
     exit;
 }

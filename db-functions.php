@@ -225,7 +225,7 @@ function changePassword($customer, $newpwd)
         }
         if (isset($_SESSION['emploggedin'])) {
             echo 'employee';
-            header("Location: ../Pages/user-details.php?customerid=$customer");
+            header("Location: ../Pages/user-details.php");
             exit;
         }
     }
