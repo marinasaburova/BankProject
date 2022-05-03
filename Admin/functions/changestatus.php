@@ -10,10 +10,10 @@ if (!isset($_SESSION['emploggedin'])) {
 include 'db.php';
 
 if (isset($_POST['approve'])) {
-    $acctNum = $_POST['acctNum'];
+    $acctNum = filter_input(INPUT_POST, 'acctNum', FILTER_SANITIZE_NUMBER_INT);
     changeStatus($acctNum, 'active');
 } else if (isset($_POST['deny'])) {
-    $acctNum = $_POST['acctNum'];
+    $acctNum = filter_input(INPUT_POST, 'acctNum', FILTER_SANITIZE_NUMBER_INT);
     changeStatus($_POST['acctNum'], 'denied');
 } else {
     header('Location: ../Pages/dashboard.php');

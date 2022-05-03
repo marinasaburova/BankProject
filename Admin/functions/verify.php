@@ -1,6 +1,7 @@
 <?php
 
-$uname = $_POST['uname'];
-$pwd = $_POST['pwd'];
+$uname = filter_input(INPUT_POST, 'uname', FILTER_SANITIZE_ADD_SLASHES);
+$pwd = filter_input(INPUT_POST, 'pwd');
+
 include '../functions/db.php';
 emplogin($uname, $pwd);

@@ -1,5 +1,6 @@
 <?php
-$month = $_GET['month'];
+$month = trim(filter_input(INPUT_GET, 'month', FILTER_SANITIZE_SPECIAL_CHARS));
+
 $title = "Statement for $month";
 
 // include functions & files 
@@ -7,7 +8,7 @@ include '../functions/db.php';
 include '../view/header.php';
 include '../view/navigation.php';
 
-$acctNum = $_GET['acctNum'];
+$acctNum = trim(filter_input(INPUT_GET, 'acctNum', FILTER_SANITIZE_NUMBER_INT));
 $data = getCustomerData($customer)
 
 ?>

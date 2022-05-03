@@ -17,7 +17,7 @@ if (empty($accts)) {
     header('Location: new-bankacct.php');
 }
 if (isset($_POST['change_acct'])) {
-    $acctNum = $_POST['change_acct'];
+    $acctNum = filter_input(INPUT_POST, 'change_acct', FILTER_SANITIZE_NUMBER_INT);
 } else {
     $acctNum = $accts[0];
 }

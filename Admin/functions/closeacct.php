@@ -6,9 +6,9 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-$customer = $_POST['customer'];
-$acctNum = $_POST['close'];
-$transfer = $_POST['transfer'];
+$customer = filter_input(INPUT_POST, 'customer', FILTER_SANITIZE_NUMBER_INT);
+$acctNum = filter_input(INPUT_POST, 'close', FILTER_SANITIZE_NUMBER_INT);
+$transfer = filter_input(INPUT_POST, 'transfer', FILTER_SANITIZE_NUMBER_INT);
 include 'db.php';
 
 closeBankAcct($acctNum, $transfer, $customer);

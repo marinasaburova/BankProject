@@ -6,8 +6,9 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-$acctNum = $_POST['acctNum'];
-$amount = $_POST['amount'];
-$vendor = $_POST['vendor'];
+$acctNum = filter_input(INPUT_POST, 'acctNum', FILTER_SANITIZE_NUMBER_INT);
+$amount = filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+$vendor = filter_input(INPUT_POST, 'vendor', FILTER_SANITIZE_ADD_SLASHES);
+
 include 'db.php';
 withdraw($acctNum, $amount, $vendor);

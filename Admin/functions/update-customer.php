@@ -11,19 +11,20 @@ include 'db.php';
 
 
 if (isset($_POST['updateInfo'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $uname = $_POST['uname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $addr = $_POST['addr'];
+    $fname = trim(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_ADD_SLASHES));
+    $lname = trim(filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_ADD_SLASHES));
+    $uname = trim(filter_input(INPUT_POST, 'uname', FILTER_SANITIZE_ADD_SLASHES));
+    $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
+    $addr = trim(filter_input(INPUT_POST, 'addr', FILTER_SANITIZE_ADD_SLASHES));
+
     updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr);
 }
 
 if (isset($_POST['updatePWD'])) {
-    $currPwd = $_POST['currPwd'];
-    $newPwd = $_POST['newPwd'];
-    $newPwd2 = $_POST['newPwd2'];
+    $currPwd = filter_input(INPUT_POST, 'currPwd', FILTER_SANITIZE_ADD_SLASHES);
+    $newPwd = filter_input(INPUT_POST, 'newPwd', FILTER_SANITIZE_ADD_SLASHES);
+    $newPwd2 = filter_input(INPUT_POST, 'newPwd2', FILTER_SANITIZE_ADD_SLASHES);
 
     $data = getCustomerData($customer);
     $dbPwd = $data['password'];

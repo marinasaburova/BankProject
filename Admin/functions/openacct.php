@@ -6,9 +6,10 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-$type = $_POST['type'];
-$customer = $_POST['customer'];
-$deposit = $_POST['deposit'];
+$type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_ADD_SLASHES);
+$customer = filter_input(INPUT_POST, 'customer', FILTER_SANITIZE_NUMBER_INT);
+$deposit = filter_input(INPUT_POST, 'deposit', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
 include 'db.php';
 
 createBankAcct($type, $deposit, $customer);

@@ -19,12 +19,6 @@ if (isset($_POST['updateInfo'])) {
     $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
     $addr = trim(filter_input(INPUT_POST, 'addr', FILTER_SANITIZE_ADD_SLASHES));
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $uname = $_POST['uname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $addr = $_POST['addr'];
     updateCustomer($customer, $fname, $lname, $uname, $email, $phone, $addr);
 }
 

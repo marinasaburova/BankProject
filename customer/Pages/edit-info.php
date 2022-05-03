@@ -24,15 +24,15 @@ $data = getCustomerData($customer);
                         <form action="../functions/update-customer.php" method="post">
                             <div class="form-group">
                                 <label for="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" maxlength="30" required />
+                                <input type="text" name="fname" id="fname" value="<?php echo $data['firstName']; ?>" class="form-control" maxlength="30" readonly />
                             </div>
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" name="lname" id="lname" value="<?php echo $data['lastName']; ?>" class=" form-control" maxlength="30" required />
+                                <input type="text" name="lname" id="lname" value="<?php echo $data['lastName']; ?>" class=" form-control" maxlength="30" readonly />
                             </div>
                             <div class="form-group">
                                 <label for="uname">Username</label>
-                                <input type="text" name="uname" id="uname" value="<?php echo $data['username']; ?>" class=" form-control" maxlength="20" required />
+                                <input type="text" name="uname" id="uname" value="<?php echo $data['username']; ?>" class=" form-control" maxlength="20" readonly />
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address</label>
@@ -49,6 +49,9 @@ $data = getCustomerData($customer);
                             <div class="form-group">
                                 <label for="dateCreated">Member Since</label>
                                 <input type="text" name="dateCreated" id="dateCreated" readonly value="<?php echo $data['dateCreated']; ?>" class=" form-control" />
+                            </div>
+                            <div class="form-group">
+                                <small class="text-danger">To change the more sensitive data, please see a teller.</small>
                             </div>
                             <div class="form-group">
                                 <input type="reset" value="Reset" class="btn btn-secondary" />

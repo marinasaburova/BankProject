@@ -10,19 +10,19 @@ include 'db.php';
 $employee = $_SESSION['employee'];
 
 if (isset($_POST['updateInfo'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $uname = $_POST['uname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $addr = $_POST['addr'];
-    updateEmployee($employee, $fname, $lname, $uname, $email, $phone, $addr);
+    $fname = trim(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_ADD_SLASHES));
+    $lname = trim(filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_ADD_SLASHES));
+    $uname = trim(filter_input(INPUT_POST, 'uname', FILTER_SANITIZE_ADD_SLASHES));
+    $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
+
+    updateEmployee($employee, $fname, $lname, $uname, $email, $phone);
 }
 
 if (isset($_POST['updatePWD'])) {
-    $currPwd = $_POST['currPwd'];
-    $newPwd = $_POST['newPwd'];
-    $newPwd2 = $_POST['newPwd2'];
+    $currPwd = filter_input(INPUT_POST, 'currPwd', FILTER_SANITIZE_ADD_SLASHES);
+    $newPwd = filter_input(INPUT_POST, 'newPwd', FILTER_SANITIZE_ADD_SLASHES);
+    $newPwd2 = filter_input(INPUT_POST, 'newPwd2', FILTER_SANITIZE_ADD_SLASHES);
 
     $data = getEmployeeData($employee);
     $dbPwd = $data['password'];
