@@ -9,7 +9,7 @@ if (!isset($_SESSION['emploggedin'])) {
 include 'db.php';
 $employee = $_SESSION['employee'];
 
-if (!isset($_GET['empUpdateInfo']) && !isset($_GET['empUpdatePWD'])) {
+if (!isset($_POST['empUpdateInfo']) && !isset($_POST['empUpdatePWD'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }

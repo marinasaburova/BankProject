@@ -42,14 +42,14 @@ function login($uname, $pwd)
 function emplogin($uname, $pwd)
 {
     global $db;
-    $query = "SELECT * FROM employee WHERE username = '$uname'";
+    $query = "SELECT * FROM `employee` WHERE `username` = '$uname'";
     $result = $db->query($query);
     $row = $result->fetch_assoc();
     $hash = $row['password'];
 
     if (mysqli_num_rows($result) == 0) {
         echo '<p>Incorrect credentials.</p></br>';
-        header('Location: ../Pages/login.html?msg=error');
+        header('Location: ../Pages/login.php?msg=error');
         exit;
     }
     if (!password_verify($pwd, $hash)) {
@@ -555,6 +555,10 @@ function deposit($acctNum, $amount, $vendor)
             header('Location: ../Pages/bank-transaction.php?msg=error');
             exit;
         }
+        if (isset($_SESSION['emploggedin'])) {
+            header('Location: ../Pages/statement.php');
+            exit;
+        }
         header('Location: ../Pages/dashboard.php');
         exit;
     } else {
@@ -599,6 +603,11 @@ function withdraw($acctNum, $amount, $vendor)
                 header("Location: ../Pages/bank-transaction.php?msg=error");
                 exit;
             }
+            if (isset($_SESSION['emploggedin'])) {
+                header('Location: ../Pages/statement.php');
+                exit;
+            }
+
             header('Location: ../Pages/dashboard.php');
             exit;
         } else {

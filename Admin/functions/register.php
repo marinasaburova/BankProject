@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['registerCustomer'])) {
+if (!isset($_POST['registerCustomer'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }

@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['submitTransfer'])) {
+if (!isset($_POST['submitTransfer'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }

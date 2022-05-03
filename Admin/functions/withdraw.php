@@ -6,8 +6,8 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['submitDeposit'])) {
-    header('Location: ../Pages/bank-transaction');
+if (!isset($_POST['submitWithdraw'])) {
+    header('Location: ../Pages/dashboard.php');
     exit;
 }
 

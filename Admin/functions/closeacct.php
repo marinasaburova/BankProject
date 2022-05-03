@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['closeAccount'])) {
+if (!isset($_POST['closeAccount'])) {
     header('Location: ../Pages/users.php');
     exit;
 }

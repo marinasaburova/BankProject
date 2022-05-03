@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['updateInfo']) && !isset($_GET['updatePWD'])) {
+if (!isset($_POST['updateInfo']) && !isset($_POST['updatePWD'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }

@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['openBankAcct'])) {
+if (!isset($_POST['openBankAcct'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }

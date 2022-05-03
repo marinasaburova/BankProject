@@ -6,7 +6,7 @@ if (!isset($_SESSION['emploggedin'])) {
     exit;
 }
 
-if (!isset($_GET['submitDeposit'])) {
+if (!isset($_POST['submitDeposit'])) {
     header('Location: ../Pages/dashboard.php');
     exit;
 }
