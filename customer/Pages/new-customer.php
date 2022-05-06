@@ -53,7 +53,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
 
                     <label for="pwd">Password</label>
                     <div class="input-group mb-3">
-                        <input class="form-control" type="password" placeholder="Enter Password" name="pwd" maxlength="60" required />
+                        <input class="form-control" type="password" placeholder="Enter Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" name="pwd" maxlength="60" required oninvalid="setCustomValidity('Password has to be a minimum of 8 characters, with a lowercase letter, uppercase letter, number, and special character')" oninput="setCustomValidity('')" />
                     </div>
 
                     <label for="pwd2">Confirm Password</label>
