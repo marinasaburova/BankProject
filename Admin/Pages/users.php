@@ -8,7 +8,7 @@ include '../view/navigation.php';
 
 unset($_SESSION['viewing']);
 
-if (isset($_GET['view'])) {
+if addslashes(isset($_GET['view'])) {
     $status = filter_input(INPUT_GET, 'view');
     if (($status != 'all') && ($status != 'active') && ($status != 'inactive')) {
         $status = 'all';
