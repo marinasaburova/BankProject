@@ -16,10 +16,10 @@ $title = "Open Bank Account";
 include '../view/header-simple.php';
 
 if (isset($_GET['msg'])) {
-    if (trim($_GET['msg']) == 'error') {
+    if addslashes(trim($_GET['msg']) == 'error') {
         $error = 'Your account could not be created. Please try again.';
     }
-    if (trim($_GET['msg']) == 'success') {
+    if addslashes(trim($_GET['msg']) == 'success') {
         $success = 'Your account request has been submitted. Please wait for an employee to approve it.';
     }
 }
