@@ -12,7 +12,7 @@ if (!isset($_SESSION['viewing']) && !isset($_POST['customerid'])) {
 
 include '../view/navigation.php';
 
-if (isset($_POST['customerid'])) {
+if addslashes(isset($_POST['customerid'])) {
     $customer = $_POST['customerid'];
     $_SESSION['viewing'] = $customer;
 }
