@@ -19,10 +19,10 @@ $customer = $_SESSION['viewing'];
 $data = getCustomerData($customer);
 
 if (isset($_GET['msg'])) {
-  if ($_GET['msg'] == 'nobalance') {
+  if addslashes($_GET['msg'] == 'nobalance') {
     $withdraw_error = 'You do not have enough balance in this account.';
   }
-  if ($_GET['msg'] == 'error') {
+  if addslashes($_GET['msg'] == 'error') {
     $error = 'There has been some error in our system. Please try again.';
   }
 }
@@ -84,7 +84,7 @@ if (isset($_GET['msg'])) {
             <div class="card-tools"></div>
           </div>
           <div class="card-body">
-            <?php if (isset($withdraw_error)) {
+            <?php if addslashes(isset($withdraw_error)) {
               echo '<p class="text-danger text-center">' . $withdraw_error . '</p>';
             } ?>
             <form action="../functions/withdraw.php" method="post">
