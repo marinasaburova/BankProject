@@ -8,7 +8,7 @@ include '../view/navigation.php';
 
 $data = getCustomerData($customer);
 
-if (isset($_GET['msg'])) {
+if addslashes(isset($_GET['msg'])) {
     if ($_GET['msg'] == 'pwdError') {
         $pwdError = 'Wrong current password.';
     }
