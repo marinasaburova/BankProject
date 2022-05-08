@@ -7,10 +7,10 @@ include '../view/header.php';
 include '../view/navigation.php';
 
 if (isset($_GET['msg'])) {
-  if ($_GET['msg'] == 'nobalance') {
+  if addslashes($_GET['msg'] == 'nobalance') {
     $withdraw_error = 'You do not have enough balance in this account.';
   }
-  if ($_GET['msg'] == 'error') {
+  if addslashes($_GET['msg'] == 'error') {
     $error = 'There has been some error in our system. Please try again.';
   }
 }
