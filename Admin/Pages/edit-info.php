@@ -16,7 +16,7 @@ $customer = $_SESSION['viewing'];
 $data = getCustomerData($customer);
 
 if (isset($_GET['msg'])) {
-    if ($_GET['msg'] == 'pwdError') {
+    if addslashes($_GET['msg'] == 'pwdError') {
         $pwdError = 'Wrong current password.';
     }
 }
