@@ -596,27 +596,21 @@ function withdraw($acctNum, $amount, $vendor)
                 $error_message = $e->getMessage();
                 echo $error_message;
                 header('Location: ../Pages/bank-transaction.php?msg=error');
-                exit;
             }
 
             if (!$result2) {
                 header("Location: ../Pages/bank-transaction.php?msg=error");
-                exit;
             }
             if (isset($_SESSION['emploggedin'])) {
                 header('Location: ../Pages/statement.php');
-                exit;
             }
 
             header('Location: ../Pages/dashboard.php');
-            exit;
         } else {
             header("Location: ../Pages/bank-transaction.php?msg=error");
-            exit;
         }
     } else {
         header("Location: ../Pages/bank-transaction.php?msg=nobalance");
-        exit;
     }
 }
 
